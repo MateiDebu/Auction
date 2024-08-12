@@ -55,7 +55,7 @@ namespace DomainModel.Models
         /// <value>
         /// The name.
         /// </value>
-        [Required(ErrorMessage = "[Name] cannot be null")]
+        [Required(ErrorMessage = "[Name] cannot be null.")]
         [StringLength(maximumLength:250, MinimumLength = 1, ErrorMessage ="[Name] must be between 1 and 250 characters.")]
         public string Name { get; set; }
 
@@ -105,7 +105,7 @@ namespace DomainModel.Models
         /// <value>
         /// The seller.
         /// </value>
-        [Required(ErrorMessage = "[Seller] cannot be null")]
+        [Required(ErrorMessage = "[Seller] cannot be null.")]
         [ObjectValidation(ErrorMessage = "[Seller] must be a valid user.")]
         public virtual User Seller { get; set; }
 
@@ -124,7 +124,7 @@ namespace DomainModel.Models
         /// <value>
         /// The start date.
         /// </value>
-        [Required(ErrorMessage = "[StartDate] cannot be null")]
+        [Required(ErrorMessage = "[StartDate] cannot be null.")]
         public virtual DateTime StartDate { get; set; }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace DomainModel.Models
         /// <value>
         /// The termination date.
         /// </value>
-        [Required(ErrorMessage = "[TerminationDate] cannot be null")]
+        [Required(ErrorMessage = "[TerminationDate] cannot be null.")]
 
         public virtual DateTime  TerminationDate { get; set; }
 
