@@ -133,7 +133,7 @@ namespace DomainModel.Models
             Regex hasLowerCaseLetter = new Regex(@"[a-z]+");
             Regex hasSpecialCharacter = new Regex(@"[!?@#$%&_]+");
 
-            bool isValid = hasNumber.IsMatch(password) && hasUpperCaseLetter.IsMatch(password) && hasSpecialCharacter.IsMatch(password);
+            bool isValid = hasLowerCaseLetter.IsMatch(password) && hasNumber.IsMatch(password) && hasUpperCaseLetter.IsMatch(password) && hasSpecialCharacter.IsMatch(password);
 
             return (isValid == true) ? ValidationResult.Success : new ValidationResult(null);
         }

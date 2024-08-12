@@ -33,7 +33,7 @@ namespace TestDomainModel.TestData
         private string shortPassword = "A1!";
         private string longPassword = "A1!" + new string('a', 20);
         private string noUppercasePassword = "matei12344@";
-        private string noLowercasePassword = "P@SSWORD!1234";
+        private string noLowercasePassword = "P@SSWORD1234";
         private string noNumberPassword = "Mateidebu!";
         private string noSymbolPassword = "Mateidebu1234";
 
