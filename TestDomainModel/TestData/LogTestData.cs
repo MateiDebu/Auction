@@ -102,7 +102,7 @@ namespace TestDomainModel.TestData
         internal const string LogRatingWithInvalidRatedUser = "[RatedUser] must be a valid user.";
 
         /// <summary>Invalid grade log message.</summary>
-        internal const string LogRatingWithInvalidGrade = "[Grade] must be between 1 and 10.";
+        internal const string LogRatingWithInvalidGrade = "[Grade] must be between 0 and 10.";
 
         // USER
 

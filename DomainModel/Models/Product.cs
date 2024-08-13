@@ -37,9 +37,7 @@ namespace DomainModel.Models
         /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         public Product()
-        {
-
-        }
+        {}
 
         /// <summary>
         /// Gets the identifier.

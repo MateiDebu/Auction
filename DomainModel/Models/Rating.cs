@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DomainModel.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace DomainModel.Models
 {
@@ -7,8 +8,19 @@ namespace DomainModel.Models
     /// </summary>
     public class Rating
     {
+        private object value;
+        private Category category;
+        private int v1;
+        private ECurrency eUR;
+        private User user1;
+        private DateTime dateTime1;
+        private DateTime dateTime2;
+        private User user2;
+        private User user3;
+        private int v2;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Rating" /> class.
+        /// Initializes a new instance of the <see cref="Rating"/> class.
         /// </summary>
         /// <param name="product">The product that was sold.</param>
         /// <param name="ratingUser">The user that is giving the rating.</param>
@@ -24,68 +36,57 @@ namespace DomainModel.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Rating" /> class.
+        /// Initializes a new instance of the <see cref="Rating"/> class.
         /// </summary>
         public Rating()
         {
         }
 
-        /// <summary>
-        /// Gets the identifier.
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
+        public Rating(object value, Category category, int v1, ECurrency eUR, User user1, DateTime dateTime1, DateTime dateTime2, User user2, User user3, int v2)
+        {
+            this.value = value;
+            this.category = category;
+            this.v1 = v1;
+            this.eUR = eUR;
+            this.user1 = user1;
+            this.dateTime1 = dateTime1;
+            this.dateTime2 = dateTime2;
+            this.user2 = user2;
+            this.user3 = user3;
+            this.v2 = v2;
+        }
+
+        /// <summary>Gets the identifier.</summary>
+        /// <value>The identifier.</value>
         public virtual int Id { get; private set; }
 
-        /// <summary>
-        /// Gets the date and time.
-        /// </summary>
-        /// <value>
-        /// The date and time.
-        /// </value>
+        /// <summary>Gets the date and time.</summary>
+        /// <value>The date and time.</value>
         [Required(ErrorMessage = "[DateAndTime] cannot be null.")]
         public virtual DateTime DateAndTime { get; private set; }
 
-        /// <summary>
-        /// Gets the product.
-        /// </summary>
-        /// <value>
-        /// The product.
-        /// </value>
+        /// <summary>Gets the product.</summary>
+        /// <value>The product.</value>
         [Required(ErrorMessage = "[Product] cannot be null.")]
         [ObjectValidation(ErrorMessage = "[Product] must be a valid product.")]
         public virtual Product Product { get; private set; }
 
-        /// <summary>
-        /// Gets the rating user.
-        /// </summary>
-        /// <value>
-        /// The rating user.
-        /// </value>
+        /// <summary>Gets the rating user.</summary>
+        /// <value>The rating user.</value>
         [Required(ErrorMessage = "[RatingUser] cannot be null.")]
         [ObjectValidation(ErrorMessage = "[RatingUser] must be a valid user.")]
         public virtual User RatingUser { get; private set; }
 
-        /// <summary>
-        /// Gets the rated user.
-        /// </summary>
-        /// <value>
-        /// The rated user.
-        /// </value>
+        /// <summary>Gets the rated user.</summary>
+        /// <value>The rated user.</value>
         [Required(ErrorMessage = "[RatedUser] cannot be null.")]
         [ObjectValidation(ErrorMessage = "[RatedUser] must be a valid user.")]
         public virtual User RatedUser { get; private set; }
 
-        /// <summary>
-        /// Gets or sets the grade.
-        /// </summary>
-        /// <value>
-        /// The grade.
-        /// </value>
+        /// <summary>Gets or sets the grade.</summary>
+        /// <value>The grade.</value>
         [Required(ErrorMessage = "[Grade] cannot be null.")]
-        [Range(1, 10, ErrorMessage = "[Grade] must be between 1 and 10.")]
+        [Range(0, 10, ErrorMessage = "[Grade] must be between 0 and 10.")]
         public virtual int Grade { get; set; }
-
     }
 }
