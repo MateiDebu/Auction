@@ -1535,6 +1535,138 @@ namespace ModelValidationTests
         }
 
         [Test]
+        public void InvalidRating_InvalidRatedUser_FirstName_Empty()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User(String.Empty, "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_FirstName_TooLong()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User('X' + new string('s', 20), "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_FirstName_NoUpperCaseLetter()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("aaaaaa", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_FirstName_NoLowerCaseLetter()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("AAAAAA", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_FirstName_ContainsSymbol()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Mateia!", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_FirstName_ContainsNumber()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Matei1", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
         public void InvalidRating_InvalidRatedUser_LastName_Null()
         {
             Rating rating = new Rating(
@@ -1549,6 +1681,137 @@ namespace ModelValidationTests
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
                 new User("Matei", null, "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+        [Test]
+        public void InvalidRating_InvalidRatedUser_LastName_Empty()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Matei", String.Empty, "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_LastName_NoUpperCaseLetter()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Matei", "ddddddde", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_LastName_NoLowerCaseLetter()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Matei", "MMATEI", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_LastName_ContainsSymbol()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Matei", "Debu!", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_LastName_ContainsNumber()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Matei", "Debu2", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                7);
+
+            Assert.IsFalse(this.IsValidRating(rating));
+            Assert.That(this.results.Count, Is.EqualTo(1));
+            Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogRatingWithInvalidRatedUser));
+        }
+
+        [Test]
+        public void InvalidRating_InvalidRatedUser_LastName_TooLong()
+        {
+            Rating rating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Adrian", "Matei", "AdiMatei20", "0123456789", "adrian.matei@FakeEmail.com", "P@ssword123"),
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today.AddDays(10)),
+                new User("Andrei", "Vlad", "VldAndr3", null, "vladandrei@gmail.com", "Parola!123"),
+                new User("Matei", 'A'+new string('a', 20), "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
                 7);
 
             Assert.IsFalse(this.IsValidRating(rating));

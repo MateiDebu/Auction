@@ -42,19 +42,19 @@ namespace DomainModel.Models
         {
         }
 
-        public Rating(object value, Category category, int v1, ECurrency eUR, User user1, DateTime dateTime1, DateTime dateTime2, User user2, User user3, int v2)
-        {
-            this.value = value;
-            this.category = category;
-            this.v1 = v1;
-            this.eUR = eUR;
-            this.user1 = user1;
-            this.dateTime1 = dateTime1;
-            this.dateTime2 = dateTime2;
-            this.user2 = user2;
-            this.user3 = user3;
-            this.v2 = v2;
-        }
+        //public Rating(object value, Category category, int v1, ECurrency eUR, User user1, DateTime dateTime1, DateTime dateTime2, User user2, User user3, int v2)
+        //{
+        //    this.value = value;
+        //    this.category = category;
+        //    this.v1 = v1;
+        //    this.eUR = eUR;
+        //    this.user1 = user1;
+        //    this.dateTime1 = dateTime1;
+        //    this.dateTime2 = dateTime2;
+        //    this.user2 = user2;
+        //    this.user3 = user3;
+        //    this.v2 = v2;
+        //}
 
         /// <summary>Gets the identifier.</summary>
         /// <value>The identifier.</value>

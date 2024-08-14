@@ -10,35 +10,44 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Implementation
 {
-    public class BidServiceImplementation : IBidServices
+    public class ProductServicesImplementation : IProductServices
     {
         private ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
-        private IBidDataServices bidDataServices;
+        private IProductDataServices productDataServices;
         private IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices;
 
-        public BidServiceImplementation(ILog logger, IBidDataServices bidDataServices, IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices)
+        public ProductServicesImplementation(IProductDataServices productDataServices, IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices)
         {
-            this.logger = logger;
-            this.bidDataServices = bidDataServices;
+            this.productDataServices = productDataServices;
             this.userScoreAndLimitsDataServices = userScoreAndLimitsDataServices;
         }
 
-        public bool AddBid(Bid bid)
+        public bool AddProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Bid> GetAllBids()
+        public bool DeleteProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public Bid GetBidById(int id)
+        public IList<Product> GetAllProducts()
         {
             throw new NotImplementedException();
         }
 
-        public IList<Bid> GetBidsByProductId(int id)
+        public Product GetProductById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsTooSimilarToOtherProductDescriptions(string newProductDescription)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateProduct(Product product)
         {
             throw new NotImplementedException();
         }

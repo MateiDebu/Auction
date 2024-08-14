@@ -3,19 +3,20 @@ using DomainModel.Models;
 using Moq;
 using NUnit.Framework;
 using ServiceLayer.Implementation;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestServiceLayer.UserServiceTests
 {
+    /// <summary>
+    /// Test class for <see cref="UserServicesImplementation.DeleteUser(User)"/> method.
+    /// </summary>
     [TestFixture]
     [ExcludeFromCodeCoverage]
     internal class DeleteUserTests
     {
+        /// <summary>
+        /// Deletes the null user.
+        /// </summary>
         [Test]
         public void DELETE_NullUser()
         {
@@ -28,6 +29,9 @@ namespace TestServiceLayer.UserServiceTests
             Assert.IsFalse(userServices.DeleteUser(user));
         }
 
+        /// <summary>
+        /// Deletes the valid user non existing user.
+        /// </summary>
         [Test]
         public void DELETE_ValidUser_NonExistingUser()
         {
@@ -42,6 +46,9 @@ namespace TestServiceLayer.UserServiceTests
             Assert.IsFalse(userServices.DeleteUser(user));
         }
 
+        /// <summary>
+        /// Deletes the valid user.
+        /// </summary>
         [Test]
         public void DELETE_ValidUser()
         {
