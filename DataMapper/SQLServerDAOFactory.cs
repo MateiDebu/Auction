@@ -4,9 +4,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace DataMapper
 {
+    /// <summary>
+    /// The service factory.
+    /// </summary>
+    /// <seealso cref="DataMapper.IDAOFactory" />
     [ExcludeFromCodeCoverage]
     public class SQLServerDAOFactory : IDAOFactory
     {
+        /// <summary>
+        /// Gets the product data services.
+        /// </summary>
+        /// <value>
+        /// The product data services.
+        /// </value>
         public IProductDataServices ProductDataServices
         {
             get
@@ -15,6 +25,12 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Gets the category data services.
+        /// </summary>
+        /// <value>
+        /// The category data services.
+        /// </value>
         public ICategoryDataServices CategoryDataServices
         {
             get
@@ -23,6 +39,12 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Gets the bid data services.
+        /// </summary>
+        /// <value>
+        /// The bid data services.
+        /// </value>
         public IBidDataServices BidDataServices
         {
             get
@@ -31,6 +53,12 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Gets the user data services.
+        /// </summary>
+        /// <value>
+        /// The user data services.
+        /// </value>
         public IUserDataServices UserDataServices
         {
             get
@@ -39,6 +67,12 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Gets the rating data services.
+        /// </summary>
+        /// <value>
+        /// The rating data services.
+        /// </value>
         public IRatingDataServices RatingDataServices
         {
             get
@@ -47,6 +81,12 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Gets the condition data services.
+        /// </summary>
+        /// <value>
+        /// The condition data services.
+        /// </value>
         public IConditionDataServices ConditionDataServices
         {
             get
@@ -55,6 +95,12 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Gets the user score and limits data services.
+        /// </summary>
+        /// <value>
+        /// The user score and limits data services.
+        /// </value>
         public IUserScoreAndLimitsDataServices UserScoreAndLimitsDataServices
         {
             get

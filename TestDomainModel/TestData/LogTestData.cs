@@ -104,6 +104,8 @@ namespace TestDomainModel.TestData
         /// <summary>Invalid grade log message.</summary>
         internal const string LogRatingWithInvalidGrade = "[Grade] must be between 0 and 10.";
 
+        internal const string LogRatingWithNullGrade = "[Grade] cannot be null.";
+
         // USER
 
         /// <summary>Null first name log message.</summary>

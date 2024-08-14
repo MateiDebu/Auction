@@ -30,7 +30,7 @@ namespace TestDomainModel.TestData
         private string invalidPhoneNumber = "bbb";
         private string longEmail = new string('x', 30) + '@' + new string('x', 30);
         private string invalidEmail = "mateidebu";
-        private string shortPassword = "A1!";
+        private string shortPassword = "a!12A";
         private string longPassword = "A1!" + new string('a', 20);
         private string noUppercasePassword = "matei12344@";
         private string noLowercasePassword = "P@SSWORD1234";
