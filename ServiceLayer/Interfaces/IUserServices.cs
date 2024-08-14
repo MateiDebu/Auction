@@ -5,7 +5,7 @@ namespace ServiceLayer.Interfaces
     /// <summary>
     /// The user services.
     /// </summary>
-    public interface IUserRating
+    public interface IUserServices
     {
         /// <summary>
         /// Adds the user.

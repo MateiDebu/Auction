@@ -15,6 +15,14 @@ namespace ServiceLayer.Implementation
         private ILog logger;
         private IBidDataServices bidDataServices;
         private IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices;
+
+        public BidServiceImplementation(ILog logger, IBidDataServices bidDataServices, IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices)
+        {
+            this.logger = logger;
+            this.bidDataServices = bidDataServices;
+            this.userScoreAndLimitsDataServices = userScoreAndLimitsDataServices;
+        }
+
         public bool AddBid(Bid bid)
         {
             throw new NotImplementedException();
