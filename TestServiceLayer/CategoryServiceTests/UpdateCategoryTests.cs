@@ -1,22 +1,22 @@
 ﻿using DataMapper.Interfaces;
 using DomainModel.Models;
-using log4net;
 using Moq;
 using NUnit.Framework;
 using ServiceLayer.Implementation;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestServiceLayer.CategoryServiceTests
 {
+    /// <summary>
+    /// Test class for <see cref="CategoryServicesImplementation.UpdateCategory(Category)"/> method.
+    /// </summary>
     [TestFixture]
     [ExcludeFromCodeCoverage]
     internal class UpdateCategoryTests
     {
+        /// <summary>
+        /// Updates the null category.
+        /// </summary>
         [Test]
         public void UPDATE_NullCategory()
         {
@@ -28,6 +28,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.That(categoryDataServices.UpdateCategory(category), Is.False);
         }
 
+        /// <summary>
+        /// Updates the invalid category name null.
+        /// </summary>
         [Test]
         public void UPDATE_InvalidCategory_Name_Null()
         {
@@ -40,6 +43,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.IsFalse(categoryServices.UpdateCategory(category));
         }
 
+        /// <summary>
+        /// Updates the invalid category name empty.
+        /// </summary>
         [Test]
         public void UPDATE_InvalidCategory_Name_Empty()
         {
@@ -52,6 +58,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.That(categoryServices.UpdateCategory(category), Is.False);
         }
 
+        /// <summary>
+        /// Updates the invalid category name too long.
+        /// </summary>
         [Test]
         public void UPDATE_InvalidCategory_Name_TooLong()
         {
@@ -64,6 +73,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.That(categoryServices.UpdateCategory(category), Is.False);
         }
 
+        /// <summary>
+        /// Updates the valid category parent category null.
+        /// </summary>
         [Test]
         public void UPDATE_ValidCategory_ParentCategory_Null()
         {
@@ -80,6 +92,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.That(categoryServices.UpdateCategory(category), Is.True);
         }
 
+        /// <summary>
+        /// Updates the non existing category.
+        /// </summary>
         [Test]
         public void UPDATE_NonExistingCategory()
         {
@@ -94,6 +109,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.That(categoryServices.UpdateCategory(category), Is.False);
         }
 
+        /// <summary>
+        /// Updates the name of the valid category change name existing category.
+        /// </summary>
         [Test]
         public void UPDATE_ValidCategory_ChangeName_ExistingCategoryName()
         {
@@ -109,6 +127,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.That(categoryServices.UpdateCategory(category2), Is.False);
         }
 
+        /// <summary>
+        /// Updates the name of the valid category change.
+        /// </summary>
         [Test]
         public void UPDATE_ValidCategory_ChangeName()
         {
@@ -126,6 +147,9 @@ namespace TestServiceLayer.CategoryServiceTests
             Assert.That(categoryServices.UpdateCategory(category2), Is.True);
         }
 
+        /// <summary>
+        /// Updates the valid category.
+        /// </summary>
         [Test]
         public void UPDATE_ValidCategory()
         {
