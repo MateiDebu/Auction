@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Implementation
 {
-    public class BidServiceImplementation : IBidServices
+    public class BidServicesImplementation : IBidServices
     {
         private ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
         private IBidDataServices bidDataServices;
         private IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices;
 
-        public BidServiceImplementation(ILog logger, IBidDataServices bidDataServices, IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices)
+        public BidServicesImplementation(ILog logger, IBidDataServices bidDataServices, IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices)
         {
             this.logger = logger;
             this.bidDataServices = bidDataServices;

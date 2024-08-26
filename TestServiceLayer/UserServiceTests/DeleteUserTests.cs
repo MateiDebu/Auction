@@ -52,7 +52,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void DELETE_ValidUser()
         {
-            User user = new User("Matei", "Debu", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", "aaAAaaa1!");
+            User user = new User("Matei", "Debu", "MateiDebu", "0123456789", "mateidebu@yahoo.com", "aaAAaa81!");
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(user);
