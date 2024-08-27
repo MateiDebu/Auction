@@ -2,25 +2,39 @@
 using DomainModel.Models;
 using log4net;
 using ServiceLayer.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceLayer.Implementation
 {
+    /// <summary>
+    /// The user services.
+    /// </summary>
+    /// <seealso cref="ServiceLayer.Interfaces.IUserServices" />
     public class UserServicesImplementation : IUserServices
     {
+        /// <summary>
+        /// The logger
+        /// </summary>
         private ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
+        /// <summary>
+        /// The user data services
+        /// </summary>
         private IUserDataServices userDataServices;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserServicesImplementation"/> class.
+        /// </summary>
+        /// <param name="userDataServices">The user data services.</param>
         public UserServicesImplementation(IUserDataServices userDataServices)
         {
             this.userDataServices = userDataServices;
         }
 
+        /// <summary>
+        /// Adds the user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public bool AddUser(User user)
         {
             if(user == null)
@@ -46,6 +60,11 @@ namespace ServiceLayer.Implementation
             return this.userDataServices.AddUser(user);
         }
 
+        /// <summary>
+        /// Deletes the user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public bool DeleteUser(User user)
         {
            if(user == null)
@@ -63,21 +82,41 @@ namespace ServiceLayer.Implementation
             return this.userDataServices.DeleteUser(user);
         }
 
+        /// <summary>
+        /// Gets all users.
+        /// </summary>
+        /// <returns></returns>
         public IList<User> GetAllUsers()
         {
             return this.userDataServices.GetAllUsers();
         }
 
+        /// <summary>
+        /// Gets the user by email and password.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
         public User GetUserByEmailAndPassword(string email, string password)
         {
             return this.userDataServices.GetUserByEmailAndPassword(email, password);
         }
 
+        /// <summary>
+        /// Gets the user by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public User GetUserById(int id)
         {
             return this.userDataServices.GetUserById(id);
         }
 
+        /// <summary>
+        /// Updates the user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public bool UpdateUser(User user)
         {
             if(user == null)

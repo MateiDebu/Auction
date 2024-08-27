@@ -2,25 +2,39 @@
 using DomainModel.Models;
 using log4net;
 using ServiceLayer.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceLayer.Implementation
 {
+    /// <summary>
+    /// The condition services.
+    /// </summary>
+    /// <seealso cref="ServiceLayer.Interfaces.IConditionServices" />
     public class ConditionServicesImplementation : IConditionServices
     {
+        /// <summary>
+        /// The logger
+        /// </summary>
         private ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
+        /// <summary>
+        /// The condition data services
+        /// </summary>
         private IConditionDataServices conditionDataServices;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConditionServicesImplementation"/> class.
+        /// </summary>
+        /// <param name="conditionDataServices">The condition data services.</param>
         public ConditionServicesImplementation(IConditionDataServices conditionDataServices)
         {
             this.conditionDataServices = conditionDataServices;
         }
 
+        /// <summary>
+        /// Adds the condition.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <returns></returns>
         public bool AddCondition(Condition condition)
         {
             if(condition == null)
@@ -46,6 +60,11 @@ namespace ServiceLayer.Implementation
             return this.conditionDataServices.AddCondition(condition);
         }
 
+        /// <summary>
+        /// Deletes the condition.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <returns></returns>
         public bool DeleteCondition(Condition condition)
         {
             if(condition == null)
@@ -62,21 +81,40 @@ namespace ServiceLayer.Implementation
             return this.conditionDataServices.DeleteCondition(condition);
         }
 
+        /// <summary>
+        /// Gets all conditions.
+        /// </summary>
+        /// <returns></returns>
         public IList<Condition> GetAllConditions()
         {
             return this.conditionDataServices.GetAllConditions();
         }
 
+        /// <summary>
+        /// Gets the condition by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public Condition GetConditionById(int id)
         {
             return this.conditionDataServices.GetConditionById(id);
         }
 
+        /// <summary>
+        /// Gets the name of the condition by.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
         public Condition GetConditionByName(string name)
         {
             return this.conditionDataServices.GetConditionByName(name);
         }
 
+        /// <summary>
+        /// Updates the condition.
+        /// </summary>
+        /// <param name="condition">The condition.</param>
+        /// <returns></returns>
         public bool UpdateCondition(Condition condition)
         {
             if(condition == null)
