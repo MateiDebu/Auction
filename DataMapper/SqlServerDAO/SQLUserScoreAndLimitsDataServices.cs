@@ -7,12 +7,16 @@ namespace DataMapper.SqlServerDAO
     [ExcludeFromCodeCoverage]
     public class SQLUserScoreAndLimitsDataServices : IUserScoreAndLimitsDataServices
     {
+        private const double MinScore = 0;
+        private const double MaxScore = 10;
+        private const int InitialScore = 5;
+        private const double IncrementScore = 0.1;
         public int GetConditionalValueByName(string name)
         {
             Condition condition = null;
             using(AuctionContext context = new AuctionContext())
             {
-                condition = context.Conditions.Where((condition) => condition.Name == name).FirstOrDefault();
+                condition = context.Conditions.Where(condition => condition.Name == name).FirstOrDefault();
             }
 
             if(condition != null)
@@ -26,24 +30,20 @@ namespace DataMapper.SqlServerDAO
 
         public double GetUserLimitsByUserId(int id)
         {
-            int s;
-            double userScore, a, b, c, d, fx;
+            double userScore = GetUserScoreByUserId(id);
+            int s = GetConditionalValueByName("S");
+            double a = Math.Floor(s / 2.0);
+;           double b = s;
+            double c = 1;
+            double d = GetConditionalValueByName ("T");
 
-            userScore = GetUserScoreByUserId(id);
-            s = GetConditionalValueByName("s");
-            a = (double)Math.Floor((decimal)s / 2);
-            b = s;
-            c = 1;
-            d = GetConditionalValueByName ("T");
-            decimal threshold = s;
-            if((decimal) userScore < Math.Floor(threshold))
+            if (userScore < s)
             {
                 return 0;
-            }
-            else
+            }else
             {
-                fx = c + ((d - c) / (b - a) * (userScore - a));
-                return (int)Math.Round(fx);
+                double fx = c + ((d - c) / (b - a) * (userScore - a));
+                return Math.Round(fx);
             }
         }
 
@@ -65,17 +65,14 @@ namespace DataMapper.SqlServerDAO
 
             if(s == -1)
             {
-                s = 5;
+                s = InitialScore;
             }
 
-            if(grades.Count > 0)
-            {
-                return grades.Average();
-            }
-            else
-            {
-                return s;
-            }
+            double averageScore = grades.Any() ? grades.Average() : InitialScore;
+            return Math.Clamp(averageScore, MinScore, MaxScore);
         }
+
+       
+        
     }
 }
