@@ -1,11 +1,15 @@
-﻿using DataMapper.Interfaces;
-using DomainModel.Models;
-using log4net;
-using ServiceLayer.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="ConditionServicesImplementation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace ServiceLayer.Implementation
 {
+    using System.ComponentModel.DataAnnotations;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using log4net;
+    using ServiceLayer.Interfaces;
+
     /// <summary>
     /// The condition services.
     /// </summary>
@@ -13,11 +17,12 @@ namespace ServiceLayer.Implementation
     public class ConditionServicesImplementation : IConditionServices
     {
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
         private ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
+
         /// <summary>
-        /// The condition data services
+        /// The condition data services.
         /// </summary>
         private IConditionDataServices conditionDataServices;
 
@@ -34,24 +39,25 @@ namespace ServiceLayer.Implementation
         /// Adds the condition.
         /// </summary>
         /// <param name="condition">The condition.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool AddCondition(Condition condition)
         {
-            if(condition == null)
+            if (condition == null)
             {
                 this.logger.Warn("Attemped to add a null condition.");
                 return false;
             }
+
             var context = new ValidationContext(condition, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
-            if(!Validator.TryValidateObject(condition, context, results, true))
+            if (!Validator.TryValidateObject(condition, context, results, true))
             {
-                this.logger.Warn("Attemped to add an invalid condition. " + String.Join(' ', results));
+                this.logger.Warn("Attemped to add an invalid condition. " + string.Join(' ', results));
                 return false;
             }
 
-            if(this.conditionDataServices.GetConditionByName(condition.Name) != null)
+            if (this.conditionDataServices.GetConditionByName(condition.Name) != null)
             {
                 this.logger.Warn("Attemped to add an already existing condition.");
                 return false;
@@ -64,16 +70,16 @@ namespace ServiceLayer.Implementation
         /// Deletes the condition.
         /// </summary>
         /// <param name="condition">The condition.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool DeleteCondition(Condition condition)
         {
-            if(condition == null)
+            if (condition == null)
             {
                 this.logger.Warn("Attemped to delete a null condition.");
                 return false;
             }
 
-            if(this.conditionDataServices.GetConditionById(condition.Id) == null)
+            if (this.conditionDataServices.GetConditionById(condition.Id) == null)
             {
                 this.logger.Warn("Attemped to delete a nonexisting condition.");
             }
@@ -84,7 +90,7 @@ namespace ServiceLayer.Implementation
         /// <summary>
         /// Gets all conditions.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of conditions.</returns>
         public IList<Condition> GetAllConditions()
         {
             return this.conditionDataServices.GetAllConditions();
@@ -94,7 +100,7 @@ namespace ServiceLayer.Implementation
         /// Gets the condition by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a condition.</returns>
         public Condition GetConditionById(int id)
         {
             return this.conditionDataServices.GetConditionById(id);
@@ -104,7 +110,7 @@ namespace ServiceLayer.Implementation
         /// Gets the name of the condition by.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <returns></returns>
+        /// <returns>a condition by name.</returns>
         public Condition GetConditionByName(string name)
         {
             return this.conditionDataServices.GetConditionByName(name);
@@ -114,30 +120,31 @@ namespace ServiceLayer.Implementation
         /// Updates the condition.
         /// </summary>
         /// <param name="condition">The condition.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool UpdateCondition(Condition condition)
         {
-            if(condition == null)
+            if (condition == null)
             {
                 this.logger.Warn("Attempted to update a null condition.");
                 return false;
             }
+
             var context = new ValidationContext(condition, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
-            if(!Validator.TryValidateObject(condition, context, results, true))
+            if (!Validator.TryValidateObject(condition, context, results, true))
             {
-                this.logger.Warn("Attempted to update an invalid condition. " + String.Join(' ', results));
+                this.logger.Warn("Attempted to update an invalid condition. " + string.Join(' ', results));
                 return false;
             }
 
-            if(conditionDataServices.GetConditionById(condition.Id) == null)
+            if (this.conditionDataServices.GetConditionById(condition.Id) == null)
             {
                 this.logger.Warn("Attemped to update a nonexisting condition.");
                 return false;
             }
 
-            if(condition.Name != this.conditionDataServices.GetConditionById(condition.Id).Name && this.conditionDataServices.GetConditionByName(condition.Name) != null)
+            if (condition.Name != this.conditionDataServices.GetConditionById(condition.Id).Name && this.conditionDataServices.GetConditionByName(condition.Name) != null)
             {
                 this.logger.Warn("Attemped to update a condition by changing the name to an existing condtion name.");
                 return false;

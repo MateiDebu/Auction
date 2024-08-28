@@ -1,4 +1,8 @@
-﻿namespace DataMapper.Migrations
+﻿// <copyright file="202408281006406_AddDataBase.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace DataMapper.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

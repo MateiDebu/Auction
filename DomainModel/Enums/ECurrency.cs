@@ -1,4 +1,8 @@
-﻿namespace DomainModel.Enums
+﻿// <copyright file="ECurrency.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace DomainModel.Enums
 {
     /// <summary>The currency.</summary>
     public enum ECurrency

@@ -1,4 +1,8 @@
-﻿using DomainModel.Models;
+﻿// <copyright file="ConditionValidation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Models;
 using NUnit.Framework;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;

@@ -1,4 +1,8 @@
-﻿namespace DataMapper.Interfaces
+﻿// <copyright file="IUserScoreAndLimitsDataServices.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace DataMapper.Interfaces
 {
     /// <summary>
     /// The user score and limits data services.

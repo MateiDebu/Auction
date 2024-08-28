@@ -1,4 +1,8 @@
-﻿using System.Configuration;
+﻿// <copyright file="DAOFactoryMethod.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 

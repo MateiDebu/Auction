@@ -1,4 +1,8 @@
-﻿using DomainModel.Models;
+﻿// <copyright file="IBidDataServices.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Models;
 
 namespace DataMapper.Interfaces
 {

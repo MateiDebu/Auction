@@ -1,4 +1,8 @@
-﻿namespace ServiceLayer.Implementation
+﻿// <copyright file="UserServicesImplementation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace ServiceLayer.Implementation
 {
     using System.ComponentModel.DataAnnotations;
     using DataMapper.Interfaces;
@@ -48,7 +52,7 @@
             var results = new List<ValidationResult>();
             if (!Validator.TryValidateObject(user, context, results, true))
             {
-                this.logger.Warn("Attempted to add an invalid user. " + String.Join(' ', results));
+                this.logger.Warn("Attempted to add an invalid user. " + string.Join(' ', results));
                 return false;
             }
 

@@ -1,7 +1,11 @@
-﻿using DomainModel.Models;
+﻿// <copyright file="ICategoryServices.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace ServiceLayer.Interfaces
 {
+    using DomainModel.Models;
+
     /// <summary>
     /// The categories services.
     /// </summary>
@@ -11,36 +15,41 @@ namespace ServiceLayer.Interfaces
         /// Adds the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         bool AddCategory(Category category);
+
         /// <summary>
         /// Gets all categories.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of categoryes.</returns>
         IList<Category> GetAllCategories();
+
         /// <summary>
         /// Gets the category by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a category.</returns>
         Category GetCategoryById(int id);
+
         /// <summary>
         /// Gets the name of the category by.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <returns></returns>
+        /// <returns>a category by name.</returns>
         Category GetCategoryByName(string name);
+
         /// <summary>
         /// Updates the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         bool UpdateCategory(Category category);
+
         /// <summary>
         /// Deletes the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
-        bool DeleteCategory(Category category);    
+        /// <returns>bool.</returns>
+        bool DeleteCategory(Category category);
     }
 }

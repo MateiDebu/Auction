@@ -1,4 +1,8 @@
-﻿namespace ServiceLayer.Interfaces
+﻿// <copyright file="IBidServices.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace ServiceLayer.Interfaces
 {
     using DomainModel.Models;
 

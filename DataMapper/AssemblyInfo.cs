@@ -1,4 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿// <copyright file="AssemblyInfo.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 

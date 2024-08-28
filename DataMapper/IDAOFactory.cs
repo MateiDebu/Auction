@@ -1,4 +1,8 @@
-﻿using DataMapper.Interfaces;
+﻿// <copyright file="IDAOFactory.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DataMapper.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 
 namespace DataMapper

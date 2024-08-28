@@ -1,4 +1,8 @@
-﻿namespace DataMapper.SqlServerDAO
+﻿// <copyright file="SQLRatingDataServices.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace DataMapper.SqlServerDAO
 {
     using System.Data.Entity;
     using System.Diagnostics.CodeAnalysis;

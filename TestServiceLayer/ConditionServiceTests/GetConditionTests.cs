@@ -1,4 +1,8 @@
-﻿using DataMapper.Interfaces;
+﻿// <copyright file="GetConditionTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DataMapper.Interfaces;
 using DomainModel.Models;
 using Moq;
 using NUnit.Framework;

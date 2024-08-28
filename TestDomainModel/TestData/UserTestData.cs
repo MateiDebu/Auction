@@ -1,4 +1,8 @@
-﻿using DomainModel.Enums;
+﻿// <copyright file="UserTestData.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Enums;
 using DomainModel.Models;
 using System;
 using System.Collections.Generic;

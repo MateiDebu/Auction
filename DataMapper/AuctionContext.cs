@@ -1,4 +1,8 @@
-﻿using DomainModel.Models;
+﻿// <copyright file="AuctionContext.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Models;
 using System.Data.Entity;
 using System.Diagnostics.CodeAnalysis;
 

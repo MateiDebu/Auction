@@ -1,12 +1,16 @@
-﻿using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
+﻿// <copyright file="DeleteUserTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace TestServiceLayer.UserServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="UserServicesImplementation.DeleteUser(User)"/> method.
     /// </summary>
@@ -45,22 +49,5 @@ namespace TestServiceLayer.UserServiceTests
 
             Assert.IsFalse(userServices.DeleteUser(user));
         }
-
-        /// <summary>
-        /// Deletes the valid user.
-        /// </summary>
-        //[Test]
-        //public void DELETE_ValidUser()
-        //{
-        //    User user = new User("Matei", "Debu", "MateiDebu", "0123456789", "mateidebu@yahoo.com", "aaAAaa81!");
-
-        //    var userServiceMock = new Mock<IUserDataServices>();
-        //    userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(user);
-        //    userServiceMock.Setup(x => x.DeleteUser(user)).Returns(true);
-
-        //    var userServices = new UserServicesImplementation(userServiceMock.Object);
-
-        //    Assert.That(userServices.DeleteUser(user), Is.True);
-        //}
     }
 }

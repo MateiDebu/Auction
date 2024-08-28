@@ -1,4 +1,8 @@
-﻿using DataMapper.Interfaces;
+﻿// <copyright file="SQLConditionDataServices.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DataMapper.Interfaces;
 using DomainModel.Models;
 using log4net;
 using System.Data.Entity;

@@ -1,12 +1,16 @@
-﻿using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
+﻿// <copyright file="AddUserTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace TestServiceLayer.UserServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="UserServicesImplementation.AddUser(User)"/> method.
     /// </summary>
@@ -14,20 +18,18 @@ namespace TestServiceLayer.UserServiceTests
     [ExcludeFromCodeCoverage]
     internal class AddUserTests
     {
-
         /// <summary>
         /// Adds the null user.
         /// </summary>
         [Test]
         public void ADD_NullUser()
         {
-            User user = null;
+            User? user = null;
 
             var userServiceMock = new Mock<IUserDataServices>();
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
-            Assert.IsFalse(userServices.AddUser(user));
-           
+            Assert.That(userServices.AddUser(user), Is.False);
         }
 
         /// <summary>
@@ -49,11 +51,11 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void ADD_InvalidUser_FirstName_Empty()
         {
-            User user = new User(String.Empty, "Debu", "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
+            User user = new User(string.Empty, "Debu", "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
-            Assert.IsFalse(userServices.AddUser(user));
+            Assert.That(userServices.AddUser(user), Is.False);
         }
 
         /// <summary>
@@ -66,7 +68,7 @@ namespace TestServiceLayer.UserServiceTests
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
-            Assert.IsFalse(userServices.AddUser(user));
+            Assert.That(userServices.AddUser(user), Is.False);
         }
 
         /// <summary>
@@ -79,7 +81,7 @@ namespace TestServiceLayer.UserServiceTests
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
-            Assert.IsFalse(userServices.AddUser(user));
+            Assert.That(userServices.AddUser(user), Is.False);
         }
 
         /// <summary>
@@ -92,7 +94,7 @@ namespace TestServiceLayer.UserServiceTests
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
-            Assert.IsFalse(userServices.AddUser(user));
+            Assert.That(userServices.AddUser(user), Is.False);
         }
 
         /// <summary>
@@ -107,7 +109,6 @@ namespace TestServiceLayer.UserServiceTests
             var userServices = new UserServicesImplementation(userServiceMock.Object);
             Assert.IsFalse(userServices.AddUser(user));
         }
-
 
         /// <summary>
         /// Adds the invalid user first name contains number.
@@ -226,7 +227,6 @@ namespace TestServiceLayer.UserServiceTests
             Assert.IsFalse(userServices.AddUser(user));
         }
 
-
         /// <summary>
         /// Adds the invalid user user name empty.
         /// </summary>
@@ -304,7 +304,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void ADD_InvalidUser_Email_Empty()
         {
-            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789",String.Empty, "Matei!123");
+            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", string.Empty, "Matei!123");
             var userServiceMock = new Mock<IUserDataServices>();
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
@@ -330,7 +330,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void ADD_InvalidUser_Password_Empty()
         {
-            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", String.Empty);
+            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", string.Empty);
             var userServiceMock = new Mock<IUserDataServices>();
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
@@ -410,7 +410,7 @@ namespace TestServiceLayer.UserServiceTests
         {
             User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", "aaAAaaaa1!");
             var userServiceMock = new Mock<IUserDataServices>();
-            userServiceMock.Setup(x=>x.EmailAlreadyExists(user.Email)).Returns(true);
+            userServiceMock.Setup(x => x.EmailAlreadyExists(user.Email)).Returns(true);
             userServiceMock.Setup(x => x.UsernameAlreadyExists(user.UserName)).Returns(false);
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
@@ -450,6 +450,5 @@ namespace TestServiceLayer.UserServiceTests
 
             Assert.IsTrue(userServices.AddUser(user));
         }
-
     }
 }

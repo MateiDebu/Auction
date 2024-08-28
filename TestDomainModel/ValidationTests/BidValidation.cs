@@ -1,4 +1,8 @@
-﻿using DomainModel.Enums;
+﻿// <copyright file="BidValidation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Enums;
 using DomainModel.Models;
 using NUnit.Framework;
 using System.ComponentModel.DataAnnotations;

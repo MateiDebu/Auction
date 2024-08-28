@@ -1,4 +1,8 @@
-﻿using DomainModel.Models;
+﻿// <copyright file="EndDateAfterStartDateAttribute.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

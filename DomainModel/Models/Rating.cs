@@ -1,4 +1,8 @@
-﻿namespace DomainModel.Models
+﻿// <copyright file="Rating.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace DomainModel.Models
 {
     using System.ComponentModel.DataAnnotations;
     using DomainModel.Enums;

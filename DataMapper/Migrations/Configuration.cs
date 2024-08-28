@@ -1,4 +1,8 @@
-﻿namespace DataMapper.Migrations
+﻿// <copyright file="Configuration.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace DataMapper.Migrations
 {
     using System;
     using System.Data.Entity;

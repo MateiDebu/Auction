@@ -1,4 +1,8 @@
-﻿using DataMapper.Interfaces;
+﻿// <copyright file="UpdateProductTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DataMapper.Interfaces;
 using DomainModel.Enums;
 using DomainModel.Models;
 using Moq;

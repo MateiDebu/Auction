@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="RatingValidation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;

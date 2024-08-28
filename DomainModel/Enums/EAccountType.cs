@@ -1,4 +1,8 @@
-﻿namespace DomainModel.Enums
+﻿// <copyright file="EAccountType.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace DomainModel.Enums
 {
     /// <summary>
     /// The type of account.

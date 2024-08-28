@@ -1,4 +1,8 @@
-﻿namespace TestDataMapper
+﻿// <copyright file="SQLServerDAOFactoryTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace TestDataMapper
 {
     using System.Diagnostics.CodeAnalysis;
     using DataMapper;

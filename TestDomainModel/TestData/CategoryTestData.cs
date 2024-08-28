@@ -1,4 +1,8 @@
-﻿using DomainModel.Models;
+﻿// <copyright file="CategoryTestData.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Models;
 using System.Diagnostics.CodeAnalysis;
 
 namespace TestDomainModel.TestData

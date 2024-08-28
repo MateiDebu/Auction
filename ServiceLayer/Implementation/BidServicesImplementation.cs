@@ -1,11 +1,15 @@
-﻿using DataMapper.Interfaces;
-using DomainModel.Models;
-using log4net;
-using ServiceLayer.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="BidServicesImplementation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace ServiceLayer.Implementation
 {
+    using System.ComponentModel.DataAnnotations;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using log4net;
+    using ServiceLayer.Interfaces;
+
     /// <summary>
     /// The bid services.
     /// </summary>
@@ -13,15 +17,17 @@ namespace ServiceLayer.Implementation
     public class BidServicesImplementation : IBidServices
     {
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
-        private ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
+        private readonly ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
+
         /// <summary>
-        /// The bid data services
+        /// The bid data services.
         /// </summary>
         private IBidDataServices bidDataServices;
+
         /// <summary>
-        /// The user score and limits data services
+        /// The user score and limits data services.
         /// </summary>
         private IUserScoreAndLimitsDataServices userScoreAndLimitsDataServices;
 
@@ -40,7 +46,7 @@ namespace ServiceLayer.Implementation
         /// Adds the bid.
         /// </summary>
         /// <param name="bid">The bid.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool AddBid(Bid bid)
         {
             if (bid == null)
@@ -53,7 +59,7 @@ namespace ServiceLayer.Implementation
             var results = new List<ValidationResult>();
             if (!Validator.TryValidateObject(bid, context, results, true))
             {
-                this.logger.Warn("Attempted to add an invalid bid." + String.Join(' ', results));
+                this.logger.Warn("Attempted to add an invalid bid." + string.Join(' ', results));
                 return false;
             }
 
@@ -68,14 +74,14 @@ namespace ServiceLayer.Implementation
                 return false;
             }
 
-            if(bid.Currency != bid.Product.Currency)
+            if (bid.Currency != bid.Product.Currency)
             {
                 this.logger.Warn("Attempted to bid with different currency.");
                 return false;
             }
 
             var existingBids = this.bidDataServices.GetBidsByProductId(bid.Product.Id);
-            if((existingBids.Count == 0 && bid.Amount < bid.Product.StartingPrice) || (existingBids.Count > 0 && (bid.Amount < existingBids[0].Amount || bid.Buyer.Id == existingBids[0].Buyer.Id)))
+            if ((existingBids.Count == 0 && bid.Amount < bid.Product.StartingPrice) || (existingBids.Count > 0 && (bid.Amount < existingBids[0].Amount || bid.Buyer.Id == existingBids[0].Buyer.Id)))
             {
                 this.logger.Warn("Attempted to bid with not enough money or user already has the winning bid.");
                 return false;
@@ -87,7 +93,7 @@ namespace ServiceLayer.Implementation
         /// <summary>
         /// Gets all bids.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of bids.</returns>
         public IList<Bid> GetAllBids()
         {
             return this.bidDataServices.GetAllBids();
@@ -97,7 +103,7 @@ namespace ServiceLayer.Implementation
         /// Gets the bid by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidById(int id)
         {
             return this.bidDataServices.GetBidById(id);
@@ -107,7 +113,7 @@ namespace ServiceLayer.Implementation
         /// Gets the bids by product identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a list of bids by product id.</returns>
         public IList<Bid> GetBidsByProductId(int id)
         {
             return this.bidDataServices.GetBidsByProductId(id);

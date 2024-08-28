@@ -1,4 +1,8 @@
-﻿namespace TestDataMapper.TestSqlServerDAO
+﻿// <copyright file="SQLUserDataServicesTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+namespace TestDataMapper.TestSqlServerDAO
 {
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;

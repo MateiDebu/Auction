@@ -1,11 +1,15 @@
-﻿using DataMapper.Interfaces;
-using DomainModel.Models;
-using log4net;
-using ServiceLayer.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="RatingServicesImplementation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace ServiceLayer.Implementation
 {
+    using System.ComponentModel.DataAnnotations;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using log4net;
+    using ServiceLayer.Interfaces;
+
     /// <summary>
     /// The rating services.
     /// </summary>
@@ -13,11 +17,12 @@ namespace ServiceLayer.Implementation
     public class RatingServicesImplementation : IRatingServices
     {
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
         private ILog logger = LogManager.GetLogger(typeof(UserServicesImplementation));
+
         /// <summary>
-        /// The rating data services
+        /// The rating data services.
         /// </summary>
         private IRatingDataServices ratingDataServices;
 
@@ -25,7 +30,7 @@ namespace ServiceLayer.Implementation
         /// Initializes a new instance of the <see cref="RatingServicesImplementation"/> class.
         /// </summary>
         /// <param name="ratingDataServices">The rating data services.</param>
-        public RatingServicesImplementation( IRatingDataServices ratingDataServices)
+        public RatingServicesImplementation(IRatingDataServices ratingDataServices)
         {
             this.ratingDataServices = ratingDataServices;
         }
@@ -34,10 +39,10 @@ namespace ServiceLayer.Implementation
         /// Adds the rating.
         /// </summary>
         /// <param name="rating">The rating.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool AddRating(Rating rating)
         {
-            if(rating == null)
+            if (rating == null)
             {
                 this.logger.Warn("Attempted to add a null rating.");
                 return false;
@@ -45,13 +50,13 @@ namespace ServiceLayer.Implementation
 
             var context = new ValidationContext(rating, serviceProvider: null, items: null);
             var resutls = new List<ValidationResult>();
-            if(!Validator.TryValidateObject(rating, context, resutls, true))
+            if (!Validator.TryValidateObject(rating, context, resutls, true))
             {
-                this.logger.Warn("Attempted to add an invalid rating. " + String.Join(' ', resutls));
+                this.logger.Warn("Attempted to add an invalid rating. " + string.Join(' ', resutls));
                 return false;
             }
 
-            if(rating.DateAndTime < rating.Product.TerminationDate)
+            if (rating.DateAndTime < rating.Product.TerminationDate)
             {
                 this.logger.Warn("Attempted to add rating on an active auction. ");
                 return false;
@@ -62,6 +67,7 @@ namespace ServiceLayer.Implementation
                 this.logger.Warn("Attempted to add ranting again on an auction.");
                 return false;
             }
+
             User winningBidUser = this.ratingDataServices.GetWinningBidUserByProductId(rating.Product.Id);
 
             if ((rating.RatingUser.Id != rating.Product.Seller.Id && rating.RatingUser.Id != winningBidUser.Id)
@@ -79,26 +85,28 @@ namespace ServiceLayer.Implementation
         /// Deletes the rating.
         /// </summary>
         /// <param name="rating">The rating.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool DeleteRating(Rating rating)
         {
-            if(rating == null)
+            if (rating == null)
             {
                 this.logger.Warn("Attempted to delete a null rating");
                 return false;
             }
-            if(this.ratingDataServices.GetRatingById(rating.Id) == null)
+
+            if (this.ratingDataServices.GetRatingById(rating.Id) == null)
             {
                 this.logger.Warn("Attempted to delete a nonexisting rating.");
                 return false;
             }
+
             return this.ratingDataServices.DeleteRating(rating);
         }
 
         /// <summary>
         /// Gets all ratings.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of ratings.</returns>
         public IList<Rating> GetAllRatings()
         {
             return this.ratingDataServices.GetAllRatings();
@@ -108,7 +116,7 @@ namespace ServiceLayer.Implementation
         /// Gets the rating by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a rating.</returns>
         public Rating GetRatingById(int id)
         {
             return this.ratingDataServices.GetRatingById(id);
@@ -118,7 +126,7 @@ namespace ServiceLayer.Implementation
         /// Gets the ratings by user identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a list of rating.</returns>
         public IList<Rating> GetRatingsByUserId(int id)
         {
             return this.ratingDataServices.GetRatingByUserId(id);
@@ -128,10 +136,10 @@ namespace ServiceLayer.Implementation
         /// Updates the rating.
         /// </summary>
         /// <param name="rating">The rating.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool UpdateRating(Rating rating)
         {
-            if(rating == null)
+            if (rating == null)
             {
                 this.logger.Warn("Attempted to update a null string.");
                 return false;
@@ -139,13 +147,13 @@ namespace ServiceLayer.Implementation
 
             var context = new ValidationContext(rating, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
-            if(!Validator.TryValidateObject(rating, context, results, true))
+            if (!Validator.TryValidateObject(rating, context, results, true))
             {
-                this.logger.Warn("Attempted to update an invalid rating." + String.Join(' ', results));
+                this.logger.Warn("Attempted to update an invalid rating." + string.Join(' ', results));
                 return false;
             }
 
-            if(this.ratingDataServices.GetRatingById(rating.Id) == null)
+            if (this.ratingDataServices.GetRatingById(rating.Id) == null)
             {
                 this.logger.Warn("Attempted to update  a nonexisting rating.");
                 return false;

@@ -1,12 +1,16 @@
-﻿using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
+﻿// <copyright file="GetUserTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace TestServiceLayer.UserServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for
     ///  <see cref="UserServicesImplementation.GetAllUsers()"/>,
@@ -28,25 +32,23 @@ namespace TestServiceLayer.UserServiceTests
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetAllUsers()).Returns(users);
-            
-
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             var expected = users;
             var actual = userServices.GetAllUsers();
 
-            Assert.AreEqual(expected.Count, actual.Count);
+            Assert.That(actual.Count, Is.EqualTo(expected.Count));
 
             for (int i = 0; i < expected.Count; i++)
             {
-                Assert.AreEqual(expected[i].Id, actual[i].Id);
-                Assert.AreEqual(expected[i].FirstName, actual[i].FirstName);
-                Assert.AreEqual(expected[i].LastName, actual[i].LastName);
-                Assert.AreEqual(expected[i].UserName, actual[i].UserName);
-                Assert.AreEqual(expected[i].PhoneNumber, actual[i].PhoneNumber);
-                Assert.AreEqual(expected[i].Email, actual[i].Email);
-                Assert.AreEqual(expected[i].Password, actual[i].Password);
-                Assert.AreEqual(expected[i].AccountType, actual[i].AccountType);
+                Assert.That(actual[i].Id, Is.EqualTo(expected[i].Id));
+                Assert.That(actual[i].FirstName, Is.EqualTo(expected[i].FirstName));
+                Assert.That(actual[i].LastName, Is.EqualTo(expected[i].LastName));
+                Assert.That(actual[i].UserName, Is.EqualTo(expected[i].UserName));
+                Assert.That(actual[i].PhoneNumber, Is.EqualTo(expected[i].PhoneNumber));
+                Assert.That(actual[i].Email, Is.EqualTo(expected[i].Email));
+                Assert.That(actual[i].Password, Is.EqualTo(expected[i].Password));
+                Assert.That(actual[i].AccountType, Is.EqualTo(expected[i].AccountType));
             }
         }
 
@@ -60,8 +62,6 @@ namespace TestServiceLayer.UserServiceTests
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetAllUsers()).Returns(emptyUserList);
-            
-
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             Assert.IsEmpty(userServices.GetAllUsers());
@@ -77,21 +77,19 @@ namespace TestServiceLayer.UserServiceTests
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(user);
-            
-
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             var expected = user;
             var actual = userServices.GetUserById(user.Id);
 
-            Assert.AreEqual(expected.Id, actual.Id);
-            Assert.AreEqual(expected.FirstName, actual.FirstName);
-            Assert.AreEqual(expected.LastName, actual.LastName);
-            Assert.AreEqual(expected.UserName, actual.UserName);
-            Assert.AreEqual(expected.PhoneNumber, actual.PhoneNumber);
-            Assert.AreEqual(expected.Email, actual.Email);
-            Assert.AreEqual(expected.Password, actual.Password);
-            Assert.AreEqual(expected.AccountType, actual.AccountType);
+            Assert.That(actual.Id, Is.EqualTo(expected.Id));
+            Assert.That(actual.FirstName, Is.EqualTo(expected.FirstName));
+            Assert.That(actual.LastName, Is.EqualTo(expected.LastName));
+            Assert.That(actual.UserName, Is.EqualTo(expected.UserName));
+            Assert.That(actual.PhoneNumber, Is.EqualTo(expected.PhoneNumber));
+            Assert.That(actual.Email, Is.EqualTo(expected.Email));
+            Assert.That(actual.Password, Is.EqualTo(expected.Password));
+            Assert.That(actual.AccountType, Is.EqualTo(expected.AccountType));
         }
 
         /// <summary>
@@ -105,8 +103,6 @@ namespace TestServiceLayer.UserServiceTests
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(nullUser);
-            
-
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             Assert.IsNull(userServices.GetUserById(user.Id));
@@ -122,21 +118,19 @@ namespace TestServiceLayer.UserServiceTests
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetUserByEmailAndPassword(user.Email, user.Password)).Returns(user);
-            
-
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             var expected = user;
             var actual = userServices.GetUserByEmailAndPassword(user.Email, user.Password);
 
-            Assert.AreEqual(expected.Id, actual.Id);
-            Assert.AreEqual(expected.FirstName, actual.FirstName);
-            Assert.AreEqual(expected.LastName, actual.LastName);
-            Assert.AreEqual(expected.UserName, actual.UserName);
-            Assert.AreEqual(expected.PhoneNumber, actual.PhoneNumber);
-            Assert.AreEqual(expected.Email, actual.Email);
-            Assert.AreEqual(expected.Password, actual.Password);
-            Assert.AreEqual(expected.AccountType, actual.AccountType);
+            Assert.That(actual.Id, Is.EqualTo(expected.Id));
+            Assert.That(actual.FirstName, Is.EqualTo(expected.FirstName));
+            Assert.That(actual.LastName, Is.EqualTo(expected.LastName));
+            Assert.That(actual.UserName, Is.EqualTo(expected.UserName));
+            Assert.That(actual.PhoneNumber, Is.EqualTo(expected.PhoneNumber));
+            Assert.That(actual.Email, Is.EqualTo(expected.Email));
+            Assert.That(actual.Password, Is.EqualTo(expected.Password));
+            Assert.That(actual.AccountType, Is.EqualTo(expected.AccountType));
         }
 
         /// <summary>
@@ -150,8 +144,6 @@ namespace TestServiceLayer.UserServiceTests
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetUserByEmailAndPassword(user.Email, user.Password)).Returns(nullUser);
-           
-
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             Assert.IsNull(userServices.GetUserByEmailAndPassword(user.Email, user.Password));
@@ -160,23 +152,23 @@ namespace TestServiceLayer.UserServiceTests
         /// <summary>
         /// Gets the sample user.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>user.</returns>
         private static User GetSampleUser()
-        { 
+        {
             return new User("Matei", "Debu", "MateiDebu12", "0770463123", "mateidebu@yahoo.com", "Matei12!");
         }
 
         /// <summary>
         /// Gets the sample users.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of users.</returns>
         private static List<User> GetSampleUsers()
         {
             return new List<User>
             {
                 new User("Matei", "Debu", "MateiDebu12", "0770463123", "mateidebu@yahoo.com", "Matei12!"),
                 new User("Vadut", "Andrei", "Valdut3", null, "vld@yahoo.com", "Andrei12!"),
-                new User("Popescu", "Ana", "Ana12A",null, "anau@yahoo.com", "Parola!12")
+                new User("Popescu", "Ana", "Ana12A",null, "anau@yahoo.com", "Parola!12"),
             };
         }
     }

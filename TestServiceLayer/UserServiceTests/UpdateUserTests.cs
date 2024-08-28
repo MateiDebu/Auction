@@ -1,12 +1,16 @@
-﻿using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
+﻿// <copyright file="UpdateUserTests.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace TestServiceLayer.UserServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="UserServicesImplementation.UpdateUser(User)"/> method.
     /// </summary>
@@ -46,7 +50,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_InvalidUser_FirstName_Empty()
         {
-            User user = new User(String.Empty, "Debu", "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
+            User user = new User(string.Empty, "Debu", "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
@@ -223,7 +227,6 @@ namespace TestServiceLayer.UserServiceTests
             Assert.IsFalse(userServices.UpdateUser(user));
         }
 
-
         /// <summary>
         /// Adds the invalid user user name empty.
         /// </summary>
@@ -299,7 +302,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_InvalidUser_Email_Empty()
         {
-            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", String.Empty, "Matei!123");
+            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", string.Empty, "Matei!123");
             var userServiceMock = new Mock<IUserDataServices>();
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
@@ -325,7 +328,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_InvalidUser_Password_Empty()
         {
-            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", String.Empty);
+            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", string.Empty);
             var userServiceMock = new Mock<IUserDataServices>();
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 

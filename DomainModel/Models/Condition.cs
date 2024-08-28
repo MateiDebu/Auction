@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="Condition.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using System.ComponentModel.DataAnnotations;
 
 namespace DomainModel.Models
 {

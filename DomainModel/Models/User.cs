@@ -1,4 +1,8 @@
-﻿using DomainModel.Enums;
+﻿// <copyright file="User.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 

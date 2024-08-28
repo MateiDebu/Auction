@@ -1,4 +1,8 @@
-﻿using DomainModel.Models;
+﻿// <copyright file="CategoryValidation.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
+
+using DomainModel.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

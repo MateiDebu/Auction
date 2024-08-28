@@ -1,9 +1,13 @@
-﻿using DataMapper.Interfaces;
-using DataMapper.SqlServerDAO;
-using System.Diagnostics.CodeAnalysis;
+﻿// <copyright file="SQLServerDAOFactory.cs" company="Transilvania University of Brasov">
+// Debu Matei
+// </copyright>
 
 namespace DataMapper
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DataMapper.SqlServerDAO;
+
     /// <summary>
     /// The service factory.
     /// </summary>
