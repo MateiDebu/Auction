@@ -16,66 +16,49 @@ namespace DataMapper.SqlServerDAO
         /// <summary>
         /// The logger
         /// </summary>
+        private readonly AuctionContext context;
         private static readonly ILog Logger = LogManager.GetLogger(Environment.MachineName);
 
         /// <inheritdoc/>
+        
+        public SQLUserDataServices(AuctionContext context = null)
+        {
+            this.context = context ?? new AuctionContext();
+        }
         public bool AddUser(User user)
         {
-            using (AuctionContext context = new AuctionContext())
+            try
             {
-                try
-                {
-                    context.Users.Add(user);
-                    context.SaveChanges();
-                }
-                catch (Exception exception)
-                {
-                    Logger.Error("Error while adding new user: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
-                    return false;
-                }
+                context.Users.Add(user);
+                context.SaveChanges();
+                Logger.Info("User added successfully!");
+                return true;
             }
-
-            Logger.Info("User added successfully!");
-            return true;
+            catch (Exception exception)
+            {
+                Logger.Error("Error while adding new user: " + exception.Message + " " + exception.InnerException);
+                return false;
+            }
         }
 
         /// <inheritdoc/>
         public IList<User> GetAllUsers()
         {
             IList<User> users = new List<User>();
-
-            using (AuctionContext context = new AuctionContext())
-            {
-                users = context.Users.OrderBy((user) => user.Id).ToList();
-            }
-
+            users = context.Users.OrderBy((user) => user.Id).ToList();
             return users;
         }
 
         /// <inheritdoc/>
         public User GetUserById(int id)
         {
-            User user = null;
-
-            using (AuctionContext context = new AuctionContext())
-            {
-                user = context.Users.Where((user) => user.Id == id).FirstOrDefault();
-            }
-
-            return user;
+            return context.Users.Where((user) => user.Id == id).FirstOrDefault();   
         }
 
         /// <inheritdoc/>
         public User GetUserByEmailAndPassword(string email, string password)
         {
-            User user = null;
-
-            using (AuctionContext context = new AuctionContext())
-            {
-                user = context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
-            }
-
-            return user;
+            return context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
         }
 
         /// <inheritdoc/>
@@ -83,11 +66,8 @@ namespace DataMapper.SqlServerDAO
         {
             User user = null;
 
-            using (AuctionContext context = new AuctionContext())
-            {
-                user = context.Users.Where((user) => user.Email == email).FirstOrDefault();
-            }
-
+            user = context.Users.Where((user) => user.Email == email).FirstOrDefault();
+           
             if (user != null)
             {
                 return true;
@@ -103,11 +83,8 @@ namespace DataMapper.SqlServerDAO
         {
             User user = null;
 
-            using (AuctionContext context = new AuctionContext())
-            {
-                user = context.Users.Where((user) => user.UserName == username).FirstOrDefault();
-            }
-
+            user = context.Users.Where((user) => user.UserName == username).FirstOrDefault();
+            
             if (user != null)
             {
                 return true;
@@ -121,45 +98,37 @@ namespace DataMapper.SqlServerDAO
         /// <inheritdoc/>
         public bool UpdateUser(User user)
         {
-            using (AuctionContext context = new AuctionContext())
+            try
             {
-                try
-                {
-                    context.Users.Attach(user);
-                    context.Entry(user).State = EntityState.Modified;
-                    context.SaveChanges();
-                }
-                catch (Exception exception)
-                {
-                    Logger.Warn("Error while updating user: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
-                    return false;
-                }
+                context.Users.Attach(user);
+                context.Entry(user).State = EntityState.Modified;
+                context.SaveChanges();
+                Logger.Info("User updated successfully!");
+                return true;
             }
-
-            Logger.Info("User updated successfully!");
-            return true;
+            catch (Exception exception)
+            {
+                Logger.Warn("Error while updating user: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                return false;
+            }
         }
 
         /// <inheritdoc/>
         public bool DeleteUser(User user)
         {
-            using (AuctionContext context = new AuctionContext())
+            try
             {
-                try
-                {
-                    context.Users.Attach(user);
-                    context.Users.Remove(user);
-                    context.SaveChanges();
-                }
-                catch (Exception exception)
-                {
-                    Logger.Warn("Error while deleting user: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
-                    return false;
-                }
+                context.Users.Attach(user);
+                context.Users.Remove(user);
+                context.SaveChanges();
+                Logger.Info("User deleted successfully!");
+                return true;
             }
-
-            Logger.Info("User deleted successfully!");
-            return true;
+            catch (Exception exception)
+            {
+                Logger.Warn("Error while deleting user: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                return false;
+            }
         }
     }
 }

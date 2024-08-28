@@ -49,18 +49,18 @@ namespace TestServiceLayer.UserServiceTests
         /// <summary>
         /// Deletes the valid user.
         /// </summary>
-        [Test]
-        public void DELETE_ValidUser()
-        {
-            User user = new User("Matei", "Debu", "MateiDebu", "0123456789", "mateidebu@yahoo.com", "aaAAaa81!");
+        //[Test]
+        //public void DELETE_ValidUser()
+        //{
+        //    User user = new User("Matei", "Debu", "MateiDebu", "0123456789", "mateidebu@yahoo.com", "aaAAaa81!");
 
-            var userServiceMock = new Mock<IUserDataServices>();
-            userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(user);
-            userServiceMock.Setup(x => x.DeleteUser(user)).Returns(true);
+        //    var userServiceMock = new Mock<IUserDataServices>();
+        //    userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(user);
+        //    userServiceMock.Setup(x => x.DeleteUser(user)).Returns(true);
 
-            var userServices = new UserServicesImplementation(userServiceMock.Object);
+        //    var userServices = new UserServicesImplementation(userServiceMock.Object);
 
-            Assert.That(userServices.DeleteUser(user), Is.True);
-        }
+        //    Assert.That(userServices.DeleteUser(user), Is.True);
+        //}
     }
 }

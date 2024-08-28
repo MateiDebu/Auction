@@ -11,17 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataLayer", "DataLayer", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainLayer", "DomainLayer", "{D8093356-D6BF-45B3-AB2F-EB7D26FCE7CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMapper", "DataMapper\DataMapper.csproj", "{95FDEF96-3A4F-48E4-B8F1-8DF778C9DB0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMapper", "DataMapper\DataMapper.csproj", "{95FDEF96-3A4F-48E4-B8F1-8DF778C9DB0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{C22DDDB7-5262-490A-9077-D40B54F8F83F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel", "DomainModel\DomainModel.csproj", "{C22DDDB7-5262-490A-9077-D40B54F8F83F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDomainModel", "TestDomainModel\TestDomainModel.csproj", "{74B99DCD-EFA9-4675-A38B-80BC7600009F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDomainModel", "TestDomainModel\TestDomainModel.csproj", "{74B99DCD-EFA9-4675-A38B-80BC7600009F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceLayer", "ServiceLayer", "{26EDF146-D40B-4F7B-820C-70DA9C13D681}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{1498C2E2-E672-4B1B-9E2F-4F02CB2574DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{1498C2E2-E672-4B1B-9E2F-4F02CB2574DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServiceLayer", "TestServiceLayer\TestServiceLayer.csproj", "{BDB917EC-9928-468B-B911-429AECD08709}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestServiceLayer", "TestServiceLayer\TestServiceLayer.csproj", "{BDB917EC-9928-468B-B911-429AECD08709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDataMapper", "TestDataMapper\TestDataMapper.csproj", "{0673FBD6-BACD-4B6A-9804-4B57F3597BB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{BDB917EC-9928-468B-B911-429AECD08709}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB917EC-9928-468B-B911-429AECD08709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB917EC-9928-468B-B911-429AECD08709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0673FBD6-BACD-4B6A-9804-4B57F3597BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0673FBD6-BACD-4B6A-9804-4B57F3597BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0673FBD6-BACD-4B6A-9804-4B57F3597BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0673FBD6-BACD-4B6A-9804-4B57F3597BB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{26EDF146-D40B-4F7B-820C-70DA9C13D681} = {124C7038-62A6-4859-BB05-80EED1C329A3}
 		{1498C2E2-E672-4B1B-9E2F-4F02CB2574DC} = {26EDF146-D40B-4F7B-820C-70DA9C13D681}
 		{BDB917EC-9928-468B-B911-429AECD08709} = {26EDF146-D40B-4F7B-820C-70DA9C13D681}
+		{0673FBD6-BACD-4B6A-9804-4B57F3597BB5} = {5151CC3B-932A-4D1E-B92C-9D38706EBDFE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0C7AB1E3-2720-4150-A053-1B7FD9817E59}

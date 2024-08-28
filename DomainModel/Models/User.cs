@@ -43,7 +43,7 @@ namespace DomainModel.Models
         /// <value>
         /// The identifier.
         /// </value>
-        public virtual int Id { get; private set; }
+        public virtual int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the first name.

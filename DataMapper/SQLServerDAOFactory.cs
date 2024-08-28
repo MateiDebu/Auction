@@ -8,7 +8,6 @@ namespace DataMapper
     /// The service factory.
     /// </summary>
     /// <seealso cref="DataMapper.IDAOFactory" />
-    [ExcludeFromCodeCoverage]
     public class SQLServerDAOFactory : IDAOFactory
     {
         /// <summary>
