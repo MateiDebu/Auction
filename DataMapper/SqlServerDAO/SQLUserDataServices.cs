@@ -10,13 +10,15 @@ namespace DataMapper.SqlServerDAO
     /// The user data services.
     /// </summary>
     /// <seealso cref="DataMapper.Interfaces.IUserDataServices" />
-    [ExcludeFromCodeCoverage]
     public class SQLUserDataServices : IUserDataServices
     {
         /// <summary>
         /// The logger
         /// </summary>
         private readonly AuctionContext context;
+        /// <summary>
+        /// The logger
+        /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(Environment.MachineName);
 
         /// <inheritdoc/>
@@ -25,6 +27,11 @@ namespace DataMapper.SqlServerDAO
         {
             this.context = context ?? new AuctionContext();
         }
+        /// <summary>
+        /// Adds the user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public bool AddUser(User user)
         {
             try

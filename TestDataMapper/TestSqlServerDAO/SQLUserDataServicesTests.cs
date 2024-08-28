@@ -1,30 +1,31 @@
-﻿using DataMapper;
-using DataMapper.SqlServerDAO;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using System.Data.Entity;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TestDataMapper.TestSqlServerDAO
+﻿namespace TestDataMapper.TestSqlServerDAO
 {
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper;
+    using DataMapper.SqlServerDAO;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
     [ExcludeFromCodeCoverage]
     internal class SQLUserDataServicesTests
     {
-        private Mock<AuctionContext> _mockContext;
-        private Mock<DbSet<User>> _mockDbSet;
-        private SQLUserDataServices _userDataServices;
+        private Mock<AuctionContext> mockContext;
+        private Mock<DbSet<User>> mockDbSet;
+        private SQLUserDataServices userDataServices;
 
         [SetUp]
         public void SetUp()
         {
-            _mockContext = new Mock<AuctionContext>();
-            _mockDbSet = new Mock<DbSet<User>>();
+            this.mockContext = new Mock<AuctionContext>();
+            this.mockDbSet = new Mock<DbSet<User>>();
 
-            _mockContext.Setup(m => m.Users).Returns(_mockDbSet.Object);
+            this.mockContext.Setup(m => m.Users).Returns(this.mockDbSet.Object);
 
-            _userDataServices = new SQLUserDataServices(_mockContext.Object);
+            this.userDataServices = new SQLUserDataServices(this.mockContext.Object);
         }
 
         [Test]
@@ -32,12 +33,12 @@ namespace TestDataMapper.TestSqlServerDAO
         {
             var user = new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12");
 
-            _mockDbSet.Setup(m => m.Add(It.IsAny<User>())).Returns((User u) => u);
+            mockDbSet.Setup(m => m.Add(It.IsAny<User>())).Returns((User u) => u);
 
-            var result = _userDataServices.AddUser(user);
+            var result = userDataServices.AddUser(user);
 
-            _mockDbSet.Verify(m=>m.Add(It.Is<User>(u => u == user)), Times.Once());
-            _mockContext.Verify(m=>m.SaveChanges(), Times.Once());
+            mockDbSet.Verify(m=>m.Add(It.Is<User>(u => u == user)), Times.Once());
+            mockContext.Verify(m=>m.SaveChanges(), Times.Once());
 
             Assert.IsTrue(result);
         }
@@ -47,31 +48,33 @@ namespace TestDataMapper.TestSqlServerDAO
         {
             var user = new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12");
 
-            _mockDbSet.Setup(m => m.Add(It.IsAny<User>())).Returns((User u) => u);
-            _mockContext.Setup(m => m.SaveChanges()).Throws(new Exception());
+            mockDbSet.Setup(m => m.Add(It.IsAny<User>())).Returns((User u) => u);
+            mockContext.Setup(m => m.SaveChanges()).Throws(new Exception());
 
-            var result = _userDataServices.AddUser(user);
+            var result = userDataServices.AddUser(user);
 
-            _mockDbSet.Verify(m => m.Add(It.Is<User>(u => u == user)), Times.Once());
-            _mockContext.Verify(m => m.SaveChanges(), Times.Once());
+            mockDbSet.Verify(m => m.Add(It.Is<User>(u => u == user)), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
 
             Assert.IsFalse(result);
         }
+        
+
 
         [Test]
         public void DeleteUser_ShouldRemoveUserFromContextAndSaveChanges()
         {
             var user = new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12");
 
-            _mockDbSet.Setup(m => m.Attach(It.IsAny<User>())).Returns((User u) => u);
-            _mockDbSet.Setup(m => m.Remove(It.IsAny<User>())).Returns((User u) => u);
-            _mockContext.Setup(m => m.SaveChanges()).Returns(1);
+            mockDbSet.Setup(m => m.Attach(It.IsAny<User>())).Returns((User u) => u);
+            mockDbSet.Setup(m => m.Remove(It.IsAny<User>())).Returns((User u) => u);
+            mockContext.Setup(m => m.SaveChanges()).Returns(1);
 
-            var result = _userDataServices.DeleteUser(user);
+            var result = userDataServices.DeleteUser(user);
 
-            _mockDbSet.Verify(m => m.Attach(It.Is<User>(u => u == user)), Times.Once());
-            _mockDbSet.Verify(m => m.Remove(It.Is<User>(u => u == user)), Times.Once());
-            _mockContext.Verify(m => m.SaveChanges(), Times.Once());
+            mockDbSet.Verify(m => m.Attach(It.Is<User>(u => u == user)), Times.Once());
+            mockDbSet.Verify(m => m.Remove(It.Is<User>(u => u == user)), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
 
             Assert.IsTrue(result);
         }
@@ -91,9 +94,9 @@ namespace TestDataMapper.TestSqlServerDAO
             mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(users.ElementType);
             mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(users.GetEnumerator());
 
-            _mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+            mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
-            var result = _userDataServices.UsernameAlreadyExists(username);
+            var result = userDataServices.UsernameAlreadyExists(username);
 
             Assert.IsTrue(result);
         }
@@ -110,9 +113,9 @@ namespace TestDataMapper.TestSqlServerDAO
             mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(users.ElementType);
             mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(users.GetEnumerator());
 
-            _mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+            mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
-            var result = _userDataServices.UsernameAlreadyExists(username);
+            var result = userDataServices.UsernameAlreadyExists(username);
 
             Assert.IsFalse(result);
         }
@@ -132,9 +135,9 @@ namespace TestDataMapper.TestSqlServerDAO
             mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(users.ElementType);
             mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(users.GetEnumerator());
 
-            _mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+            mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
-            var result = _userDataServices.EmailAlreadyExists(email);
+            var result = userDataServices.EmailAlreadyExists(email);
 
             Assert.IsTrue(result);
         }
@@ -151,11 +154,121 @@ namespace TestDataMapper.TestSqlServerDAO
             mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(users.ElementType);
             mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(users.GetEnumerator());
 
-            _mockContext.Setup(m => m.Users).Returns(mockSet.Object);
+            this.mockContext.Setup(m => m.Users).Returns(mockSet.Object);
 
-            var result = _userDataServices.EmailAlreadyExists(email);
+            var result = this.userDataServices.EmailAlreadyExists(email);
 
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void GetAllUsers_ShouldReturnListOfUsers()
+        {
+            var users = new List<User>
+        {
+            new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12"),
+            new User("Vladut", "Andrei", "VladAndrei", "0770234567", "vlad.andrei@mail.ro", "Parola!12"),
+        }.AsQueryable();
+
+            var mockDbSet = this.CreateDbSetMock(users);
+
+            this.mockContext.Setup(m => m.Users).Returns(mockDbSet.Object);
+
+            var result = this.userDataServices.GetAllUsers();
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result[0].FirstName, Is.EqualTo("Matei"));
+            Assert.That(result[1].FirstName, Is.EqualTo("Vladut"));
+        }
+
+        [Test]
+        public void GetUserById_ShouldReturnUser_WhenUserExists()
+        {
+            var users = new List<User>
+            {
+                 new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12") { Id = 1 },
+                 new User("Vladut", "Andrei", "VladAndrei", "0770234567", "vlad.andrei@mail.ro", "Parola!12") { Id = 2 },
+            }.AsQueryable();
+
+            var mockDbSet = this.CreateDbSetMock(users);
+
+            this.mockContext.Setup(m => m.Users).Returns(mockDbSet.Object);
+
+            var result = this.userDataServices.GetUserById(1);
+
+            Assert.IsNotNull(result);
+            Assert.That(result.Id, Is.EqualTo(1));
+            Assert.That(result.FirstName, Is.EqualTo("Matei"));
+        }
+
+        [Test]
+        public void GetUserById_ShouldReturnNull_WhenUserDoesNotExist()
+        {
+            var users = new List<User>
+            {
+                new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12") { Id = 1 },
+            }.AsQueryable();
+
+            var mockDbSet = this.CreateDbSetMock(users);
+
+            this.mockContext.Setup(m => m.Users).Returns(mockDbSet.Object);
+
+            var result = this.userDataServices.GetUserById(99);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void GetUserByEmailAndPassword_ShouldReturnUser_WhenCredentialsMatch()
+        {
+            var users = new List<User>
+            {
+                new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12"),
+                new User("Vladut", "Andrei", "VladAndrei", "0770234567", "vlad.andrei@mail.ro", "Parola!12"),
+            }.AsQueryable();
+
+            var mockDbSet = this.CreateDbSetMock(users);
+
+            this.mockContext.Setup(m => m.Users).Returns(mockDbSet.Object);
+
+            var result = this.userDataServices.GetUserByEmailAndPassword("matei.debu@mail.ro", "Parola!12");
+
+            Assert.IsNotNull(result);
+            Assert.That(result.FirstName, Is.EqualTo("Matei"));
+        }
+
+        [Test]
+        public void GetUserByEmailAndPassword_ShouldReturnNull_WhenCredentialsDoNotMatch()
+        {
+            var users = new List<User>
+            {
+                new User("Matei", "Debu", "MateiDebu", "0770234566", "matei.debu@mail.ro", "Parola!12"),
+            }.AsQueryable();
+
+            var mockDbSet = this.CreateDbSetMock(users);
+
+            this.mockContext.Setup(m => m.Users).Returns(mockDbSet.Object);
+
+            var result = this.userDataServices.GetUserByEmailAndPassword("matei.debu@mail.ro", "WrongPassword");
+
+            Assert.IsNull(result);
+        }
+
+        private Mock<DbSet<T>> CreateDbSetMock<T>(IQueryable<T> elements)
+            where T : class
+        {
+            var dbSetMock = new Mock<DbSet<T>>();
+
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.Provider).Returns(elements.Provider);
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.Expression).Returns(elements.Expression);
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(elements.ElementType);
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(elements.GetEnumerator());
+
+            dbSetMock.Setup(d => d.Add(It.IsAny<T>())).Callback<T>((s) => elements.ToList().Add(s));
+            dbSetMock.Setup(d => d.Remove(It.IsAny<T>())).Callback<T>((s) => elements.ToList().Remove(s));
+
+            return dbSetMock;
         }
     }
 }

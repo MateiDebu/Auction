@@ -1,10 +1,10 @@
-﻿using DataMapper;
-using DataMapper.SqlServerDAO;
-using NUnit.Framework;
-using System.Diagnostics.CodeAnalysis;
-
-namespace TestDataMapper
+﻿namespace TestDataMapper
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper;
+    using DataMapper.SqlServerDAO;
+    using NUnit.Framework;
+
     /// <summary>
     /// Test for <see cref="SQLServerDAOFactory"/> class.
     /// </summary>
@@ -13,9 +13,9 @@ namespace TestDataMapper
     internal class SQLServerDAOFactoryTests
     {
         /// <summary>
-        /// The factory
+        /// The factory.
         /// </summary>
-        private SQLServerDAOFactory _factory;
+        private SQLServerDAOFactory factory;
 
         /// <summary>
         /// Sets up.
@@ -23,7 +23,7 @@ namespace TestDataMapper
         [SetUp]
         public void SetUp()
         {
-            _factory = new SQLServerDAOFactory();
+            this.factory = new SQLServerDAOFactory();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace TestDataMapper
         [Test]
         public void ProductDataServices_ShouldReturnSQLProductDataServicesInstance()
         {
-            var service = _factory.ProductDataServices;
+            var service = this.factory.ProductDataServices;
 
             Assert.IsNotNull(service);
             Assert.IsInstanceOf<SQLProductDataServices>(service);
@@ -44,7 +44,7 @@ namespace TestDataMapper
         [Test]
         public void CategoryDataServices_ShouldReturnSQLCategoryDataServicesInstance()
         {
-            var service = _factory.CategoryDataServices;
+            var service = this.factory.CategoryDataServices;
 
             Assert.IsNotNull(service);
             Assert.IsInstanceOf<SQLCategoryDataServices>(service);
@@ -56,7 +56,7 @@ namespace TestDataMapper
         [Test]
         public void BidDataServices_ShouldReturnSQLBidDataServicesInstance()
         {
-            var service = _factory.BidDataServices;
+            var service = this.factory.BidDataServices;
 
             Assert.IsNotNull(service);
             Assert.IsInstanceOf<SQLBidDataServices>(service);
@@ -68,7 +68,7 @@ namespace TestDataMapper
         [Test]
         public void UserDataServices_ShouldReturnSQLUserDataServicesInstance()
         {
-            var service = _factory.UserDataServices;
+            var service = this.factory.UserDataServices;
 
             Assert.IsNotNull(service);
             Assert.IsInstanceOf<SQLUserDataServices>(service);
@@ -80,7 +80,7 @@ namespace TestDataMapper
         [Test]
         public void RatingDataServices_ShouldReturnSQLRatingDataServicesInstance()
         {
-            var service = _factory.RatingDataServices;
+            var service = this.factory.RatingDataServices;
 
             Assert.IsNotNull(service);
             Assert.IsInstanceOf<SQLRatingDataServices>(service);
@@ -92,7 +92,7 @@ namespace TestDataMapper
         [Test]
         public void ConditionDataServices_ShouldReturnSQLConditionDataServicesInstance()
         {
-            var service = _factory.ConditionDataServices;
+            var service = this.factory.ConditionDataServices;
 
             Assert.IsNotNull(service);
             Assert.IsInstanceOf<SQLConditionDataServices>(service);
@@ -104,7 +104,7 @@ namespace TestDataMapper
         [Test]
         public void UserScoreAndLimitsDataServices_ShouldReturnSQLUserScoreAndLimitsDataServicesInstance()
         {
-            var service = _factory.UserScoreAndLimitsDataServices;
+            var service = this.factory.UserScoreAndLimitsDataServices;
 
             Assert.IsNotNull(service);
             Assert.IsInstanceOf<SQLUserScoreAndLimitsDataServices>(service);
