@@ -25,7 +25,7 @@ namespace DomainModel.Models
         /// </summary>
         public Category()
         {
-            this.Name = string.Empty;
+            // this.Name = string.Empty;
         }
 
         /// <summary>Gets the identifier.</summary>

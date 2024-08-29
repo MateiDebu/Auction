@@ -107,7 +107,7 @@ namespace TestDomainModel.TestData
         public Product GetProductWithNullName()
         {
             return new Product(
-                null,
+                null!,
                 this.validDescription,
                 this.categoryTestData.GetValidCategory(),
                 this.validStartingPrice,
@@ -159,7 +159,7 @@ namespace TestDomainModel.TestData
         {
             return new Product(
                 this.validName,
-                null,
+                null!,
                 this.categoryTestData.GetValidCategory(),
                 this.validStartingPrice,
                 this.validCurrency,
@@ -211,7 +211,7 @@ namespace TestDomainModel.TestData
             return new Product(
                 this.validName,
                 this.validDescription,
-                null,
+                null!,
                 this.validStartingPrice,
                 this.validCurrency,
                 this.userTestData.GetValidUser(),
@@ -299,7 +299,7 @@ namespace TestDomainModel.TestData
                 this.categoryTestData.GetValidCategory(),
                 this.validStartingPrice,
                 this.validCurrency,
-                null,
+                null!,
                 this.validStartDate,
                 this.validEndDate);
         }

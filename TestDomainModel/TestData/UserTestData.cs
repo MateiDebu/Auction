@@ -174,7 +174,7 @@ namespace TestDomainModel.TestData
         public User GetUserWithNullFirstName()
         {
             return new User(
-                null,
+                null!,
                 this.validLastName,
                 this.validUsername,
                 this.validPhoneNumber,
@@ -280,7 +280,7 @@ namespace TestDomainModel.TestData
         {
             return new User(
                 this.validFirstName,
-                null,
+                null!,
                 this.validUsername,
                 this.validPhoneNumber,
                 this.validEmail,
@@ -386,7 +386,7 @@ namespace TestDomainModel.TestData
             return new User(
                 this.validFirstName,
                 this.validLastName,
-                null,
+                null!,
                 this.validPhoneNumber,
                 this.validEmail,
                 this.validPassword);
@@ -432,7 +432,7 @@ namespace TestDomainModel.TestData
                 this.validFirstName,
                 this.validLastName,
                 this.validUsername,
-                null,
+                null!,
                 this.validEmail,
                 this.validPassword);
         }
@@ -493,7 +493,7 @@ namespace TestDomainModel.TestData
                 this.validLastName,
                 this.validUsername,
                 this.validPhoneNumber,
-                null,
+                null!,
                 this.validPassword);
         }
 
@@ -554,7 +554,7 @@ namespace TestDomainModel.TestData
                 this.validUsername,
                 this.validPhoneNumber,
                 this.validEmail,
-                null);
+                null!);
         }
 
         /// <summary>

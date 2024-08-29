@@ -57,7 +57,7 @@ namespace TestDomainModel.TestData
         /// <returns>category.</returns>
         public Category GetCategoryWithNullName()
         {
-            return new Category(null, new Category(this.validParentCategoryName, null));
+            return new Category(null!, new Category(this.validParentCategoryName, null));
         }
 
         /// <summary>

@@ -27,6 +27,8 @@ namespace DomainModel.Models
         /// </summary>
         public Condition()
         {
+            // this.Name = string.Empty;
+            // this.Description = string.Empty;
         }
 
         /// <summary>Gets the identifier.</summary>

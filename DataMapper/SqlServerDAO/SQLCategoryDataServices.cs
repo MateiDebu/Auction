@@ -2,14 +2,14 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using log4net;
-using System.Data.Entity;
-using System.Diagnostics.CodeAnalysis;
-
 namespace DataMapper.SqlServerDAO
 {
+    using System.Data.Entity;
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using log4net;
+
     /// <summary>
     /// The category data services.
     /// </summary>
@@ -62,7 +62,8 @@ namespace DataMapper.SqlServerDAO
                     context.Categories.Attach(category);
                     context.Categories.Remove(category);
                     context.SaveChanges();
-                }catch(Exception exception)
+                }
+                catch (Exception exception)
                 {
                     Logger.Error("Error while deleting category: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
                     return false;

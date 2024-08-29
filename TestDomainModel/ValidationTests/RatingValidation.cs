@@ -99,8 +99,8 @@ namespace ModelValidationTests
         public void InvalidRating_NullProduct()
         {
             Rating rating = new Rating(
-                null,
-                new User("Andrei", "Vladut", "VldAndr", null, "vlad.andrei@gmail.com", "P@rola123"),
+                null!,
+                new User("Andrei", "Vladut", "VldAndr", "077045333", "vlad.andrei@gmail.com", "P@rola123"),
                 new User("Matei", "Debu", "DDMatei20", "0123456789", " mateidebu@yahoo.com", "P@ssword123"),
                 7);
 
@@ -117,7 +117,7 @@ namespace ModelValidationTests
         {
             Rating rating = new Rating(
                 new Product(
-                    null,
+                    null!,
                     "face poze",
                     new Category("Aparat foto", null),
                     100,
@@ -193,7 +193,7 @@ namespace ModelValidationTests
             Rating rating = new Rating(
                 new Product(
                     "Aparat foto CANNON",
-                    null,
+                    null!,
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
@@ -269,7 +269,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    null,
+                    null!,
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -294,7 +294,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category(null!, null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -397,7 +397,7 @@ namespace ModelValidationTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    null,
+                    null!,
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -422,7 +422,7 @@ namespace ModelValidationTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User(null, "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
+                    new User(null!, "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -469,7 +469,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User('X' + new string('x', 16), "Matei", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -494,7 +494,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User(new string('x', 10), "Matei", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -519,7 +519,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User(new string('X', 10), "Matei", "DDMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -544,7 +544,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Mate!i", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -569,7 +569,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei1", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -597,7 +597,7 @@ namespace ModelValidationTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User("Matei", null, "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
+                    new User("Matei", null!, "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -644,7 +644,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", 'X' + new string('x', 16), "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -669,7 +669,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", new string('x', 10), "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -694,7 +694,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Deb!", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -722,7 +722,7 @@ namespace ModelValidationTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User("Matei", "Debu", null, "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
+                    new User("Matei", "Debu", null!, "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -769,7 +769,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", new string('x', 31), "0123456789", "mateidebu@yahoo.com", "P@ssword123"),
@@ -797,7 +797,7 @@ namespace ModelValidationTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User("Matei", "Debu", "DebuMatei20", null, "mateidebu@yahoo.com", "P@ssword123"),
+                    new User("Matei", "Debu", "DebuMatei20", null!, "mateidebu@yahoo.com", "P@ssword123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -821,7 +821,7 @@ namespace ModelValidationTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User("Matei", "Debu", "DebuMatei20", "0123456789", null, "P@ssword123"),
+                    new User("Matei", "Debu", "DebuMatei20", "0123456789", null!, "P@ssword123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -868,7 +868,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", new string('x', 30) + '@' + new string('x', 30), "P@ssword123"),
@@ -893,7 +893,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateiyahoo.com", "P@ssword123"),
@@ -921,7 +921,7 @@ namespace ModelValidationTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", null),
+                    new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", null!),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -968,7 +968,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "A#a1"),
@@ -993,7 +993,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "A#a1" + new string('x', 20)),
@@ -1018,7 +1018,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "p@ssword123"),
@@ -1043,7 +1043,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@SSWORD123"),
@@ -1068,7 +1068,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "P@ssword"),
@@ -1093,10 +1093,10 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
+                    new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
@@ -1118,7 +1118,7 @@ namespace ModelValidationTests
                 new Product(
                     "Aparat foto CANNON",
                     "face poze",
-                    new Category(null, null),
+                    new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password1!23"),
@@ -1149,7 +1149,7 @@ namespace ModelValidationTests
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                null,
+                null!,
                 new User("Matei", "Debu", "DDMatei20", "0123456789", " mateidebu@yahoo.com", "P@ssword!123"),
                 7);
 
@@ -1174,7 +1174,7 @@ namespace ModelValidationTests
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                new User(null, "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
+                new User(null!, "Vladut", "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
                 new User("Matei", "Debu", "DDMatei20", "0123456789", " mateidebu@yahoo.com", "P@ssword!123"),
                 7);
 
@@ -1349,7 +1349,7 @@ namespace ModelValidationTests
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Passwor!d123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                new User("Andrei", null, "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
+                new User("Andrei", null!, "VldAndr", "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
                 new User("Matei", "Debu", "DDMatei20", "0123456789", " mateidebu@yahoo.com", "P@ssword!123"),
                 7);
 
@@ -1524,7 +1524,7 @@ namespace ModelValidationTests
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                new User("Andrei", "Vlad", null, "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
+                new User("Andrei", "Vlad", null!, "0770345122", "vlad.andrei@gmail.com", "P@rola123"),
                 new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                 7);
 
@@ -1598,7 +1598,7 @@ namespace ModelValidationTests
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                new User("Andrei", "Vlad", "VldAndr", "0770345122", null, "P@rola123"),
+                new User("Andrei", "Vlad", "VldAndr", "0770345122", null!, "P@rola123"),
                 new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                 7);
 
@@ -1623,7 +1623,7 @@ namespace ModelValidationTests
                     new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                new User("Andrei", "Vlad", "VldAndr", "0770345122", "vladAndrei@gmail.com", null),
+                new User("Andrei", "Vlad", "VldAndr", "0770345122", "vladAndrei@gmail.com", null!),
                 new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Password!123"),
                 7);
 
@@ -1649,7 +1649,7 @@ namespace ModelValidationTests
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vlad", "VldAndr3", "0770345122", "vladandrei@gmail.com", "Parola!123"),
-                null,
+                null!,
                 7);
 
             Assert.IsFalse(this.IsValidRating(rating));
@@ -1674,7 +1674,7 @@ namespace ModelValidationTests
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vlad", "VldAndr3", "0770345122", "vladandrei@gmail.com", "Parola!123"),
-                new User(null, "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                new User(null!, "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
                 7);
 
             Assert.IsFalse(this.IsValidRating(rating));
@@ -1849,7 +1849,7 @@ namespace ModelValidationTests
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vlad", "VldAndr3", "0770345122", "vladandrei@gmail.com", "Parola!123"),
-                new User("Matei", null, "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                new User("Matei", null!, "DebuMatei20", "0123456789", "mateidebu@yahoo.com", "Parola!123"),
                 7);
 
             Assert.IsFalse(this.IsValidRating(rating));
@@ -2024,7 +2024,7 @@ namespace ModelValidationTests
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vlad", "VldAndr3", "0770345122", "vladandrei@gmail.com", "Parola!123"),
-                new User("Matei", "Debu", null, "0123456789", "mateidebu@yahoo.com", "Parola!123"),
+                new User("Matei", "Debu", null!, "0123456789", "mateidebu@yahoo.com", "Parola!123"),
                 7);
 
             Assert.IsFalse(this.IsValidRating(rating));
@@ -2049,7 +2049,7 @@ namespace ModelValidationTests
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vlad", "VldAndr3", "0770345122", "vladandrei@gmail.com", "Parola!123"),
-                new User("Matei", "Debu", "DebuMatei20", "0123456789", null, "Parola!123"),
+                new User("Matei", "Debu", "DebuMatei20", "0123456789", null!, "Parola!123"),
                 7);
 
             Assert.IsFalse(this.IsValidRating(rating));
@@ -2074,7 +2074,7 @@ namespace ModelValidationTests
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
                 new User("Andrei", "Vlad", "VldAndr3", "0770345122", "vladandrei@gmail.com", "Parola!123"),
-                new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", null),
+                new User("Matei", "Debu", "DebuMatei20", "0123456789", "mateidebu@yahoo.com", null!),
                 7);
 
             Assert.IsFalse(this.IsValidRating(rating));

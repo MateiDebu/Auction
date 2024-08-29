@@ -42,6 +42,10 @@ namespace DomainModel.Models
         /// </summary>
         public Product()
         {
+            // this.Name = string.Empty;
+            // this.Category = new Category();
+            // this.Description = string.Empty;
+            // this.Seller = new User();
         }
 
         /// <summary>

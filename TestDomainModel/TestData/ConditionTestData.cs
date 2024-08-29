@@ -62,7 +62,7 @@ namespace TestDomainModel.TestData
         /// <returns>condition.</returns>
         public Condition GetConditionWithNullName()
         {
-            return new Condition(null, this.validDescription, this.validValue);
+            return new Condition(null!, this.validDescription, this.validValue);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace TestDomainModel.TestData
         /// <returns>condition.</returns>
         public Condition GetConditionWithNullDescription()
         {
-            return new Condition(this.validName, null, this.validValue);
+            return new Condition(this.validName, null!, this.validValue);
         }
 
         /// <summary>

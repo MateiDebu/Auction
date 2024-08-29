@@ -2,14 +2,14 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using log4net;
-using System.Data.Entity;
-using System.Diagnostics.CodeAnalysis;
-
 namespace DataMapper.SqlServerDAO
 {
+    using System.Data.Entity;
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using log4net;
+
     /// <summary>
     /// The condition data services.
     /// </summary>

@@ -38,26 +38,9 @@ namespace TestDomainModel.ValidationTests
         }
 
         /// <summary>
-        /// Determines whether [is valid bid] [the specified bid].
-        /// </summary>
-        /// <param name="bid">The bid.</param>
-        /// <returns>
-        ///   <c>true</c> if [is valid bid] [the specified bid]; otherwise, <c>false</c>.
-        /// </returns>
-        private bool IsValidBid(Bid bid)
-        {
-            var context = new ValidationContext(bid, serviceProvider: null, items: null);
-            var results = new List<ValidationResult>();
-            bool validationResult = Validator.TryValidateObject(bid, context, results, true);
-            this.results.AddRange(results);
-            return validationResult;
-        }
-
-        /// <summary>
         /// Tears down.
         /// </summary>
         [TearDown]
-
         public void TearDown()
         {
             this.results = new List<ValidationResult>();
@@ -831,7 +814,7 @@ namespace TestDomainModel.ValidationTests
                     new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                new User("Matei", "Debu", "MateiDebu", null, "mateidebu@yahoo.com", "Matei1234!"),
+                new User("Matei", "Debu", "MateiDebu", null!, "mateidebu@yahoo.com", "Matei1234!"),
                 1000,
                 ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
@@ -938,7 +921,7 @@ namespace TestDomainModel.ValidationTests
                    new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                    DateTime.Today.AddDays(5),
                    DateTime.Today.AddDays(10)),
-               new User("Matei", "Debu", "MateiDebu", "123456789102", null, "Matei1234!"),
+               new User("Matei", "Debu", "MateiDebu", "123456789102", null!, "Matei1234!"),
                1000,
                ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
@@ -967,8 +950,7 @@ namespace TestDomainModel.ValidationTests
                   DateTime.Today.AddDays(10)),
               new User("Matei", "Debu", "MateiDebu", "123456789102", string.Empty, "Matei1234!"),
               1000,
-              ECurrency.EUR
-                  );
+              ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1047,7 +1029,7 @@ namespace TestDomainModel.ValidationTests
                   new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                   DateTime.Today.AddDays(5),
                   DateTime.Today.AddDays(10)),
-              new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", null),
+              new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", null!),
               1000,
               ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
@@ -1272,6 +1254,22 @@ namespace TestDomainModel.ValidationTests
             Assert.IsFalse(Validator.TryValidateObject(bid, context, results, true));
             Assert.That(results.Count, Is.EqualTo(1));
             Assert.That(results[0].ErrorMessage, Is.EqualTo(LogTestData.LogBidWithNegativeAmount));
+        }
+
+        /// <summary>
+        /// Determines whether [is valid bid] [the specified bid].
+        /// </summary>
+        /// <param name="bid">The bid.</param>
+        /// <returns>
+        ///   <c>true</c> if [is valid bid] [the specified bid]; otherwise, <c>false</c>.
+        /// </returns>
+        private bool IsValidBid(Bid bid)
+        {
+            var context = new ValidationContext(bid, serviceProvider: null, items: null);
+            var results = new List<ValidationResult>();
+            bool validationResult = Validator.TryValidateObject(bid, context, results, true);
+            this.results.AddRange(results);
+            return validationResult;
         }
     }
 }

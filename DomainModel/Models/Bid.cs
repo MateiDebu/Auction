@@ -33,6 +33,8 @@ namespace DomainModel.Models
         /// </summary>
         public Bid()
         {
+            // this.Product = new Product();
+            // this.Buyer = new User();
         }
 
         /// <summary>

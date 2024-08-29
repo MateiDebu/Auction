@@ -2,14 +2,14 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using log4net;
-using System.Data.Entity;
-using System.Diagnostics.CodeAnalysis;
-
 namespace DataMapper.SqlServerDAO
 {
+    using System.Data.Entity;
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using log4net;
+
     /// <summary>
     /// The product data services.
     /// </summary>
@@ -18,7 +18,7 @@ namespace DataMapper.SqlServerDAO
     public class SQLProductDataServices: IProductDataServices
     {
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(Environment.MachineName);
 
@@ -26,10 +26,10 @@ namespace DataMapper.SqlServerDAO
         /// Adds the product.
         /// </summary>
         /// <param name="product">The product.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool AddProduct(Product product)
         {
-            using(AuctionContext context = new AuctionContext())
+            using (AuctionContext context = new AuctionContext())
             {
                 try
                 {
@@ -39,7 +39,8 @@ namespace DataMapper.SqlServerDAO
                     context.Users.Attach(product.Seller);
                     context.Products.Add(product);
                     context.SaveChanges();
-                }catch(Exception exception)
+                }
+                catch (Exception exception)
                 {
                     Logger.Error("Error while adding new product: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
                     return false;
@@ -54,7 +55,7 @@ namespace DataMapper.SqlServerDAO
         /// Deletes the product.
         /// </summary>
         /// <param name="product">The product.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool DeleteProduct(Product product)
         {
             using (AuctionContext context = new AuctionContext())
@@ -79,7 +80,7 @@ namespace DataMapper.SqlServerDAO
         /// <summary>
         /// Gets all product descriptions.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list with description of the products.</returns>
         public List<string> GetAllProductDescriptions()
         {
             List<string> productDescriptions = new List<string>();
@@ -95,12 +96,12 @@ namespace DataMapper.SqlServerDAO
         /// <summary>
         /// Gets all products.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of products.</returns>
         public IList<Product> GetAllProducts()
         {
             IList<Product> products = new List<Product>();
 
-            using(AuctionContext context = new AuctionContext())
+            using (AuctionContext context = new AuctionContext())
             {
                 products = context.Products.Include("Category").OrderBy((product) => product.Id).ToList();
             }
@@ -112,7 +113,7 @@ namespace DataMapper.SqlServerDAO
         /// Gets the no of active and future auctions by user identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>int.</returns>
         public int GetNoOfActiveAndFutureAuctionsByUserId(int id)
         {
             int noOfActiveAndFutureAuctions;
@@ -132,7 +133,7 @@ namespace DataMapper.SqlServerDAO
         /// <param name="category">The category.</param>
         /// <param name="newStart">The new start.</param>
         /// <param name="newEnd">The new end.</param>
-        /// <returns></returns>
+        /// <returns>int.</returns>
         public int GetNoOfActiveAuctionOfUserInCategory(int id, Category category, DateTime newStart, DateTime newEnd)
         {
             int noOfActiveAuctionsInIntervalInCategory;
@@ -151,7 +152,7 @@ namespace DataMapper.SqlServerDAO
         /// <param name="id">The identifier.</param>
         /// <param name="newStart">The new start.</param>
         /// <param name="newEnd">The new end.</param>
-        /// <returns></returns>
+        /// <returns>int.</returns>
         public int GetNoOfActiveAuctionsOfUserInInterval(int id, DateTime newStart, DateTime newEnd)
         {
             int noOfActiveAuctionsInInterval;
@@ -168,14 +169,15 @@ namespace DataMapper.SqlServerDAO
         /// Gets the product by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a product.</returns>
         public Product GetProductById(int id)
         {
-            Product product = null;
-            using(AuctionContext context = new AuctionContext())
+            Product? product = null;
+            using (AuctionContext context = new AuctionContext())
             {
                 product = context.Products.Include("Category").Include("Seller").Where((product) => product.Id == id).FirstOrDefault();
             }
+
             return product;
 
         }
@@ -184,7 +186,7 @@ namespace DataMapper.SqlServerDAO
         /// Updates the product.
         /// </summary>
         /// <param name="product">The product.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool UpdateProduct(Product product)
         {
             using (AuctionContext context = new AuctionContext())

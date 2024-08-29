@@ -63,7 +63,7 @@ namespace TestDomainModel.TestData
         public Bid GetBidWithNullProduct()
         {
             return new Bid(
-                null,
+                null!,
                 this.userTestData.GetAnotherValidUser(),
                 this.validAmount,
                 this.validCurrency);
@@ -675,7 +675,7 @@ namespace TestDomainModel.TestData
         {
             return new Bid(
                 this.productTestData.GetValidProduct(),
-                null,
+                null!,
                 this.validAmount,
                 this.validCurrency);
         }

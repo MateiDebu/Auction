@@ -13,9 +13,7 @@ namespace TestDomainModel.ValidationTests
     [TestFixture]
     [ExcludeFromCodeCoverage]
 
-    /// <summary>
-    /// Test class for <see cref="Category" /> validation.
-    /// </summary>
+    /// <summary>Test class for <see cref="Category" /> validation.</summary>
     internal class CategoryValidation
     {
         /// <summary>
