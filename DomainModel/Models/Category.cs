@@ -14,7 +14,7 @@ namespace DomainModel.Models
         /// </summary>
         /// <param name="name">The name of the category.</param>
         /// <param name="parentCategory">The parent category.</param>
-        public Category(string name, Category parentCategory)
+        public Category(string name, Category? parentCategory)
         {
             this.Name = name;
             this.ParentCategory = parentCategory;
@@ -25,6 +25,7 @@ namespace DomainModel.Models
         /// </summary>
         public Category()
         {
+            this.Name = string.Empty;
         }
 
         /// <summary>Gets the identifier.</summary>
@@ -39,6 +40,6 @@ namespace DomainModel.Models
 
         /// <summary>Gets or sets the parent category.</summary>
         /// <value>The parent category.</value>
-        public virtual Category ParentCategory { get; set; }
+        public virtual Category? ParentCategory { get; set; }
     }
 }

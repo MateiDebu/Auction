@@ -2,11 +2,11 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using System.Diagnostics.CodeAnalysis;
-
 namespace DataMapper
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+
     /// <summary>
     /// The services factory.
     /// </summary>
@@ -23,6 +23,7 @@ namespace DataMapper
         {
             get;
         }
+
         /// <summary>
         /// Gets the category data services.
         /// </summary>
@@ -34,6 +35,7 @@ namespace DataMapper
         {
             get;
         }
+
         /// <summary>
         /// Gets the bid data services.
         /// </summary>
@@ -45,6 +47,7 @@ namespace DataMapper
         {
             get;
         }
+
         /// <summary>
         /// Gets the user data services.
         /// </summary>
@@ -56,6 +59,7 @@ namespace DataMapper
         {
             get;
         }
+
         /// <summary>
         /// Gets the rating data services.
         /// </summary>
@@ -67,6 +71,7 @@ namespace DataMapper
         {
             get;
         }
+
         /// <summary>
         /// Gets the condition data services.
         /// </summary>

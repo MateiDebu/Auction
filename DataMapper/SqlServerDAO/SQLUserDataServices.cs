@@ -2,14 +2,13 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using log4net;
-using System.Data.Entity;
-using System.Diagnostics.CodeAnalysis;
-
 namespace DataMapper.SqlServerDAO
 {
+    using System.Data.Entity;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using log4net;
+
     /// <summary>
     /// The user data services.
     /// </summary>
@@ -17,31 +16,37 @@ namespace DataMapper.SqlServerDAO
     public class SQLUserDataServices : IUserDataServices
     {
         /// <summary>
-        /// The logger
-        /// </summary>
-        private readonly AuctionContext context;
-        /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(Environment.MachineName);
 
-        /// <inheritdoc/>
-        
-        public SQLUserDataServices(AuctionContext context = null)
+        /// <summary>
+        /// The logger.
+        /// </summary>
+        private readonly AuctionContext? context;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SQLUserDataServices"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        public SQLUserDataServices(AuctionContext? context = null)
         {
             this.context = context ?? new AuctionContext();
         }
+
         /// <summary>
         /// Adds the user.
         /// </summary>
         /// <param name="user">The user.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// bool.
+        /// </returns>
         public bool AddUser(User user)
         {
             try
             {
-                context.Users.Add(user);
-                context.SaveChanges();
+                this.context.Users.Add(user);
+                this.context.SaveChanges();
                 Logger.Info("User added successfully!");
                 return true;
             }
@@ -56,29 +61,32 @@ namespace DataMapper.SqlServerDAO
         public IList<User> GetAllUsers()
         {
             IList<User> users = new List<User>();
-            users = context.Users.OrderBy((user) => user.Id).ToList();
+            users = this.context.Users.OrderBy((user) => user.Id).ToList();
             return users;
         }
 
         /// <inheritdoc/>
         public User GetUserById(int id)
         {
-            return context.Users.Where((user) => user.Id == id).FirstOrDefault();   
+            return this.context.Users.Where((user) => user.Id == id).FirstOrDefault();
         }
 
         /// <inheritdoc/>
         public User GetUserByEmailAndPassword(string email, string password)
         {
-            return context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
+            return this.context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
         }
 
         /// <inheritdoc/>
         public bool EmailAlreadyExists(string email)
         {
-            User user = null;
+            User? user = null;
 
-            user = context.Users.Where((user) => user.Email == email).FirstOrDefault();
-           
+            if (this.context.Users != null)
+            {
+                user = this.context.Users.Where((user) => user.Email == email).FirstOrDefault();
+            }
+
             if (user != null)
             {
                 return true;
@@ -92,10 +100,13 @@ namespace DataMapper.SqlServerDAO
         /// <inheritdoc/>
         public bool UsernameAlreadyExists(string username)
         {
-            User user = null;
+            User? user = null;
 
-            user = context.Users.Where((user) => user.UserName == username).FirstOrDefault();
-            
+            if (this.context.Users != null)
+            {
+                user = this.context.Users.Where((user) => user.UserName == username).FirstOrDefault();
+            }
+
             if (user != null)
             {
                 return true;
@@ -111,9 +122,9 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                context.Users.Attach(user);
-                context.Entry(user).State = EntityState.Modified;
-                context.SaveChanges();
+                this.context.Users.Attach(user);
+                this.context.Entry(user).State = EntityState.Modified;
+                this.context.SaveChanges();
                 Logger.Info("User updated successfully!");
                 return true;
             }
@@ -129,9 +140,9 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                context.Users.Attach(user);
-                context.Users.Remove(user);
-                context.SaveChanges();
+                this.context.Users.Attach(user);
+                this.context.Users.Remove(user);
+                this.context.SaveChanges();
                 Logger.Info("User deleted successfully!");
                 return true;
             }

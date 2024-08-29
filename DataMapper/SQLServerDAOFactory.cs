@@ -4,7 +4,6 @@
 
 namespace DataMapper
 {
-    using System.Diagnostics.CodeAnalysis;
     using DataMapper.Interfaces;
     using DataMapper.SqlServerDAO;
 

@@ -6,12 +6,20 @@ namespace DataMapper.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
+    /// <summary>
+    /// The AddBataBase class.
+    /// </summary>
+    /// <seealso cref="System.Data.Entity.Migrations.DbMigration" />
+    /// <seealso cref="System.Data.Entity.Migrations.Infrastructure.IMigrationMetadata" />
     public partial class AddDataBase : DbMigration
     {
+        /// <summary>
+        /// Operations to be performed during the upgrade process.
+        /// </summary>
         public override void Up()
         {
-            CreateTable(
+            this.CreateTable(
                 "dbo.Bids",
                 c => new
                     {
@@ -27,8 +35,7 @@ namespace DataMapper.Migrations
                 .ForeignKey("dbo.Products", t => t.Product_Id, cascadeDelete: true)
                 .Index(t => t.Buyer_Id)
                 .Index(t => t.Product_Id);
-            
-            CreateTable(
+            this.CreateTable(
                 "dbo.Users",
                 c => new
                     {
@@ -42,8 +49,7 @@ namespace DataMapper.Migrations
                         AccountType = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+            this.CreateTable(
                 "dbo.Products",
                 c => new
                     {
@@ -64,8 +70,7 @@ namespace DataMapper.Migrations
                 .ForeignKey("dbo.Users", t => t.Seller_Id, cascadeDelete: true)
                 .Index(t => t.Category_Id)
                 .Index(t => t.Seller_Id);
-            
-            CreateTable(
+            this.CreateTable(
                 "dbo.Categories",
                 c => new
                     {
@@ -76,8 +81,7 @@ namespace DataMapper.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.ParentCategory_Id)
                 .Index(t => t.ParentCategory_Id);
-            
-            CreateTable(
+            this.CreateTable(
                 "dbo.Conditions",
                 c => new
                     {
@@ -87,8 +91,7 @@ namespace DataMapper.Migrations
                         Value = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+            this.CreateTable(
                 "dbo.Ratings",
                 c => new
                     {
@@ -106,33 +109,35 @@ namespace DataMapper.Migrations
                 .Index(t => t.Product_Id)
                 .Index(t => t.RatedUser_Id)
                 .Index(t => t.RatingUser_Id);
-            
         }
-        
+
+        /// <summary>
+        /// Operations to be performed during the downgrade process.
+        /// </summary>
         public override void Down()
         {
-            DropForeignKey("dbo.Ratings", "RatingUser_Id", "dbo.Users");
-            DropForeignKey("dbo.Ratings", "RatedUser_Id", "dbo.Users");
-            DropForeignKey("dbo.Ratings", "Product_Id", "dbo.Products");
-            DropForeignKey("dbo.Bids", "Product_Id", "dbo.Products");
-            DropForeignKey("dbo.Products", "Seller_Id", "dbo.Users");
-            DropForeignKey("dbo.Products", "Category_Id", "dbo.Categories");
-            DropForeignKey("dbo.Categories", "ParentCategory_Id", "dbo.Categories");
-            DropForeignKey("dbo.Bids", "Buyer_Id", "dbo.Users");
-            DropIndex("dbo.Ratings", new[] { "RatingUser_Id" });
-            DropIndex("dbo.Ratings", new[] { "RatedUser_Id" });
-            DropIndex("dbo.Ratings", new[] { "Product_Id" });
-            DropIndex("dbo.Categories", new[] { "ParentCategory_Id" });
-            DropIndex("dbo.Products", new[] { "Seller_Id" });
-            DropIndex("dbo.Products", new[] { "Category_Id" });
-            DropIndex("dbo.Bids", new[] { "Product_Id" });
-            DropIndex("dbo.Bids", new[] { "Buyer_Id" });
-            DropTable("dbo.Ratings");
-            DropTable("dbo.Conditions");
-            DropTable("dbo.Categories");
-            DropTable("dbo.Products");
-            DropTable("dbo.Users");
-            DropTable("dbo.Bids");
+            this.DropForeignKey("dbo.Ratings", "RatingUser_Id", "dbo.Users");
+            this.DropForeignKey("dbo.Ratings", "RatedUser_Id", "dbo.Users");
+            this.DropForeignKey("dbo.Ratings", "Product_Id", "dbo.Products");
+            this.DropForeignKey("dbo.Bids", "Product_Id", "dbo.Products");
+            this.DropForeignKey("dbo.Products", "Seller_Id", "dbo.Users");
+            this.DropForeignKey("dbo.Products", "Category_Id", "dbo.Categories");
+            this.DropForeignKey("dbo.Categories", "ParentCategory_Id", "dbo.Categories");
+            this.DropForeignKey("dbo.Bids", "Buyer_Id", "dbo.Users");
+            this.DropIndex("dbo.Ratings", new[] { "RatingUser_Id" });
+            this.DropIndex("dbo.Ratings", new[] { "RatedUser_Id" });
+            this.DropIndex("dbo.Ratings", new[] { "Product_Id" });
+            this.DropIndex("dbo.Categories", new[] { "ParentCategory_Id" });
+            this.DropIndex("dbo.Products", new[] { "Seller_Id" });
+            this.DropIndex("dbo.Products", new[] { "Category_Id" });
+            this.DropIndex("dbo.Bids", new[] { "Product_Id" });
+            this.DropIndex("dbo.Bids", new[] { "Buyer_Id" });
+            this.DropTable("dbo.Ratings");
+            this.DropTable("dbo.Conditions");
+            this.DropTable("dbo.Categories");
+            this.DropTable("dbo.Products");
+            this.DropTable("dbo.Users");
+            this.DropTable("dbo.Bids");
         }
     }
 }

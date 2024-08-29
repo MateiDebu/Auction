@@ -13,14 +13,31 @@ namespace TestDataMapper.TestSqlServerDAO
     using Moq;
     using NUnit.Framework;
 
+    /// <summary>
+    /// The SQLRatingDataServicesTests.
+    /// </summary>
     [TestFixture]
     [ExcludeFromCodeCoverage]
     internal class SQLRatingDataServicesTests
     {
+        /// <summary>
+        /// The mock context.
+        /// </summary>
         private Mock<AuctionContext> mockContext;
+
+        /// <summary>
+        /// The mock database set.
+        /// </summary>
         private Mock<DbSet<Rating>> mockDbSet;
+
+        /// <summary>
+        /// The rating data services.
+        /// </summary>
         private SQLRatingDataServices ratingDataServices;
 
+        /// <summary>
+        /// Sets up.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
@@ -32,14 +49,22 @@ namespace TestDataMapper.TestSqlServerDAO
             this.ratingDataServices = new SQLRatingDataServices(this.mockContext.Object);
         }
 
+        /// <summary>
+        /// Adds the rating should add user to context and save changes.
+        /// </summary>
         [Test]
         public void AddRating_ShouldAddUserToContextAndSaveChanges()
         {
             Rating rating = new Rating(
-                new Product("Aparat foto CANNON", "face poze", new Category("Aparat foto", null), 100, ECurrency.EUR,
-                new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
-                DateTime.Today.AddDays(-10),
-                DateTime.Today.AddDays(-5)),
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
+                    DateTime.Today.AddDays(-10),
+                    DateTime.Today.AddDays(-5)),
                 new User("Vladut", "Andrei", "VladAndrei", "0321123455", "vladandrei@gmail.ro", "Parola12!"),
                 new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
                 5);
@@ -54,14 +79,22 @@ namespace TestDataMapper.TestSqlServerDAO
             Assert.IsTrue(result);
         }
 
+        /// <summary>
+        /// Deletes the rating should remove user from context and save changes.
+        /// </summary>
         [Test]
         public void DeleteRating_ShouldRemoveUserFromContextAndSaveChanges()
         {
             Rating rating = new Rating(
-                new Product("Aparat foto CANNON", "face poze", new Category("Aparat foto", null), 100, ECurrency.EUR,
-                new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
-                DateTime.Today.AddDays(-10),
-                DateTime.Today.AddDays(-5)),
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
+                    DateTime.Today.AddDays(-10),
+                    DateTime.Today.AddDays(-5)),
                 new User("Vladut", "Andrei", "VladAndrei", "0321123455", "vladandrei@gmail.ro", "Parola12!"),
                 new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
                 5);

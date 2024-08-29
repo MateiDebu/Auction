@@ -2,10 +2,10 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-
 namespace DataMapper.Interfaces
 {
+    using DomainModel.Models;
+
     /// <summary>
     /// The category data services.
     /// </summary>
@@ -15,36 +15,41 @@ namespace DataMapper.Interfaces
         /// Adds the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         bool AddCategory(Category category);
+
         /// <summary>
         /// Gets all categories.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list with all categorys.</returns>
         IList<Category> GetAllCategories();
+
         /// <summary>
         /// Gets the category by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a category.</returns>
         Category GetCategoryById(int id);
+
         /// <summary>
         /// Gets the name of the category by.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <returns></returns>
+        /// <returns>a category.</returns>
         Category GetCategoryByName(string name);
+
         /// <summary>
         /// Updates the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         bool UpdateCategory(Category category);
+
         /// <summary>
         /// Deletes the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         bool DeleteCategory(Category category);
     }
 }

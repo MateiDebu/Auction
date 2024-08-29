@@ -2,12 +2,12 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-using System.Data.Entity;
-using System.Diagnostics.CodeAnalysis;
-
 namespace DataMapper
 {
+    using System.Data.Entity;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Models;
+
     /// <summary>
     /// The auction context.
     /// </summary>
@@ -18,8 +18,10 @@ namespace DataMapper
         /// <summary>
         /// Initializes a new instance of the <see cref="AuctionContext"/> class.
         /// </summary>
-        public AuctionContext() : base("AuctionDBConnectionString")
-        {}
+        public AuctionContext()
+            : base("AuctionDBConnectionString")
+        {
+        }
 
         /// <summary>
         /// Gets or sets the products.
@@ -27,14 +29,15 @@ namespace DataMapper
         /// <value>
         /// The products.
         /// </value>
-        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product>? Products { get; set; }
+
         /// <summary>
         /// Gets or sets the categories.
         /// </summary>
         /// <value>
         /// The categories.
         /// </value>
-        public virtual DbSet<Category> Categories{ get; set; }
+        public virtual DbSet<Category>? Categories { get; set; }
 
         /// <summary>
         /// Gets or sets the bids.
@@ -42,28 +45,31 @@ namespace DataMapper
         /// <value>
         /// The bids.
         /// </value>
-        public virtual DbSet<Bid> Bids { get; set; }
+        public virtual DbSet<Bid>? Bids { get; set; }
+
         /// <summary>
         /// Gets or sets the users.
         /// </summary>
         /// <value>
         /// The users.
         /// </value>
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<User>? Users { get; set; }
+
         /// <summary>
         /// Gets or sets the ratings.
         /// </summary>
         /// <value>
         /// The ratings.
         /// </value>
-        public virtual DbSet<Rating> Ratings { get; set; }
+        public virtual DbSet<Rating>? Ratings { get; set; }
+
         /// <summary>
         /// Gets or sets the conditions.
         /// </summary>
         /// <value>
         /// The conditions.
         /// </value>
-        public virtual DbSet<Condition> Conditions { get; set; }
+        public virtual DbSet<Condition>? Conditions { get; set; }
 
         /// <summary>
         /// This method is called when the model for a derived context has been initialized, but
@@ -86,6 +92,5 @@ namespace DataMapper
             modelBuilder.Entity<Rating>().HasRequired(s => s.RatingUser).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<Rating>().HasRequired(s => s.RatedUser).WithMany().WillCascadeOnDelete(false);
         }
-
     }
 }

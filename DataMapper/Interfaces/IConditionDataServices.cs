@@ -2,10 +2,10 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-
 namespace DataMapper.Interfaces
 {
+    using DomainModel.Models;
+
     /// <summary>
     /// The condition data services.
     /// </summary>
@@ -15,61 +15,71 @@ namespace DataMapper.Interfaces
         /// Adds the condition.
         /// </summary>
         /// <param name="condition">The condition.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         bool AddCondition(Condition condition);
+
         /// <summary>
         /// Gets all conditions.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of conditions.</returns>
         IList<Condition> GetAllConditions();
+
         /// <summary>
         /// Gets the condition by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>a category.</returns>
         Condition GetConditionById(int id);
+
         /// <summary>
         /// Gets the name of the condition by.
         /// </summary>
         /// <param name="conditionName">Name of the condition.</param>
-        /// <returns></returns>
+        /// <returns>a category.</returns>
         Condition GetConditionByName(string conditionName);
+
         /// <summary>
         /// Gets the k.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>k.</returns>
         int GetK();
+
         /// <summary>
         /// Gets the m.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>m.</returns>
         int GetM();
+
         /// <summary>
         /// Gets the s.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>s.</returns>
         int GetS();
+
         /// <summary>
         /// Gets the n.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>n.</returns>
         int GetN();
+
         /// <summary>
         /// Gets the t.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>t.</returns>
         int GetT();
+
         /// <summary>
         /// Updates the condition.
         /// </summary>
         /// <param name="condition">The condition.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         bool UpdateCondition(Condition condition);
+
         /// <summary>
         /// Deletes the condition.
         /// </summary>
         /// <param name="condition">The condition.</param>
-        /// <returns></returns>
-        bool DeleteCondition(Condition condition);  
+        /// <returns>bool.</returns>
+        bool DeleteCondition(Condition condition);
     }
 }
