@@ -2,19 +2,19 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.ConditionServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for
     /// <see cref="ConditionServicesImplementation.GetAllConditions()"/>
-    /// <see cref="ConditionServicesImplementation.GetConditionById(int)"/> and 
+    /// <see cref="ConditionServicesImplementation.GetConditionById(int)"/> and
     /// <see cref="ConditionServicesImplementation.GetConditionByName(string)"/> methods.
     /// </summary>
     [TestFixture]
@@ -31,7 +31,6 @@ namespace TestServiceLayer.ConditionServiceTests
 
             var conditionServiceMock = new Mock<IConditionDataServices>();
             conditionServiceMock.Setup(x => x.GetAllConditions()).Returns(conditions);
-            
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);
 
             var expected = conditions;
@@ -56,7 +55,7 @@ namespace TestServiceLayer.ConditionServiceTests
         {
             List<Condition> emptyConditionList = new List<Condition>();
             var conditionServiceMock = new Mock<IConditionDataServices>();
-            conditionServiceMock.Setup(x=>x.GetAllConditions()).Returns(emptyConditionList);
+            conditionServiceMock.Setup(x => x.GetAllConditions()).Returns(emptyConditionList);
 
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);
             Assert.IsEmpty(conditionServices.GetAllConditions());
@@ -91,11 +90,10 @@ namespace TestServiceLayer.ConditionServiceTests
         public void GET_ConditionById_NotFound()
         {
             Condition condition = GetSampleCondition();
-            Condition nullCondition = null;
+            Condition? nullCondition = null;
 
             var conditionServiceMock = new Mock<IConditionDataServices>();
-            conditionServiceMock.Setup(x => x.GetConditionById(condition.Id)).Returns(nullCondition);
-          
+            conditionServiceMock.Setup(x => x.GetConditionById(condition.Id)).Returns(nullCondition!);
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);
 
             Assert.That(conditionServices.GetConditionById(condition.Id), Is.Null);
@@ -130,11 +128,10 @@ namespace TestServiceLayer.ConditionServiceTests
         public void GET_ConditionByName_NotFound()
         {
             Condition condition = GetSampleCondition();
-            Condition nullCondition = null;
+            Condition? nullCondition = null;
 
             var conditionServiceMock = new Mock<IConditionDataServices>();
-            conditionServiceMock.Setup(x => x.GetConditionByName(condition.Name)).Returns(nullCondition);
-            
+            conditionServiceMock.Setup(x => x.GetConditionByName(condition.Name)).Returns(nullCondition!);
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);
 
             Assert.That(conditionServices.GetConditionByName(condition.Name), Is.Null);
@@ -143,7 +140,7 @@ namespace TestServiceLayer.ConditionServiceTests
         /// <summary>
         /// Gets the sample condition.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a condition.</returns>
         private static Condition GetSampleCondition()
         {
             return new Condition("X", "x", 42);
@@ -152,7 +149,7 @@ namespace TestServiceLayer.ConditionServiceTests
         /// <summary>
         /// Gets the sample conditions.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of conditions.</returns>
         private static List<Condition> GetSampleConditions()
         {
             return new List<Condition>

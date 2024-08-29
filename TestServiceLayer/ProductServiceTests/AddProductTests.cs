@@ -2,16 +2,16 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Enums;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.ProductServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="ProductServicesImplementation.AddProduct(Product)"/> method.
     /// </summary>
@@ -25,13 +25,13 @@ namespace TestServiceLayer.ProductServiceTests
         [Test]
         public void ADD_NullProduct()
         {
-            Product nullProduct = null;
+            Product? nullProduct = null;
             var productServiceMock = new Mock<IProductDataServices>();
             var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
 
             var productServices = new ProductServicesImplementation(productServiceMock.Object, userScoreAndLimitsServiceMock.Object);
 
-            Assert.That(productServices.AddProduct(nullProduct), Is.False);
+            Assert.That(productServices.AddProduct(nullProduct!), Is.False);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace TestServiceLayer.ProductServiceTests
         public void ADD_InvalidProduct_Name_Null()
         {
             Product product = new Product(
-                null,
+                null!,
                 "face poze",
                 new Category("Aparat foto", null),
                 100,
@@ -65,7 +65,7 @@ namespace TestServiceLayer.ProductServiceTests
         public void ADD_InvalidProduct_Name_Empty()
         {
             Product product = new Product(
-                String.Empty,
+                string.Empty,
                 "face poze",
                 new Category("Aparat foto", null),
                 100,
@@ -89,7 +89,7 @@ namespace TestServiceLayer.ProductServiceTests
         public void ADD_InvalidProduct_Name_TooLong()
         {
             Product product = new Product(
-                new string('s',251),
+                new string('s', 251),
                 "face poze",
                 new Category("Aparat foto", null),
                 100,
@@ -114,7 +114,7 @@ namespace TestServiceLayer.ProductServiceTests
         {
             Product product = new Product(
                 "Aparat foto Leica",
-                null,
+                null!,
                 new Category("Aparat foto", null),
                 100,
                 ECurrency.EUR,
@@ -129,6 +129,7 @@ namespace TestServiceLayer.ProductServiceTests
 
             Assert.That(productServices.AddProduct(product), Is.False);
         }
+
         /// <summary>
         /// Adds the invalid product description empty.
         /// </summary>
@@ -137,7 +138,7 @@ namespace TestServiceLayer.ProductServiceTests
         {
             Product product = new Product(
                 "Aparat foto Leica",
-                String.Empty,
+                string.Empty,
                 new Category("Aparat foto", null),
                 100,
                 ECurrency.EUR,
@@ -161,7 +162,7 @@ namespace TestServiceLayer.ProductServiceTests
         {
             Product product = new Product(
                 "Aparat foto Leica",
-                new String('s', 501),
+                new string('s', 501),
                 new Category("Aparat foto", null),
                 100,
                 ECurrency.EUR,
@@ -186,7 +187,7 @@ namespace TestServiceLayer.ProductServiceTests
             Product product = new Product(
                 "Aparat foto Leica",
                 "face poze frumoase",
-                null,
+                null!,
                 100,
                 ECurrency.EUR,
                 new User("Matei", "Debu", "MateiDebu", "0770123455", "mateideb@gmail.com", "Parola12!"),
@@ -201,7 +202,6 @@ namespace TestServiceLayer.ProductServiceTests
             Assert.That(productServices.AddProduct(product), Is.False);
         }
 
-
         /// <summary>
         /// Adds the invalid product category name null.
         /// </summary>
@@ -211,7 +211,7 @@ namespace TestServiceLayer.ProductServiceTests
             Product product = new Product(
                 "Aparat foto Leica",
                 "face poze frumoase",
-                new Category(null, null),
+                new Category(null!, null),
                 100,
                 ECurrency.EUR,
                 new User("Matei", "Debu", "MateiDebu", "0770123455", "mateideb@gmail.com", "Parola12!"),
@@ -262,7 +262,7 @@ namespace TestServiceLayer.ProductServiceTests
                new Category("Aparat foto", null),
                100,
                ECurrency.EUR,
-               null,
+               null!,
                DateTime.Today.AddDays(5),
                DateTime.Today.AddDays(10));
 
@@ -471,6 +471,5 @@ namespace TestServiceLayer.ProductServiceTests
 
             Assert.That(productServices.AddProduct(product), Is.True);
         }
-
     }
 }

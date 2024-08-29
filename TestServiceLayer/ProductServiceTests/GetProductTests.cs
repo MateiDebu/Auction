@@ -2,18 +2,18 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Enums;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.ProductServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
-    /// Test class for <see cref="ProductServicesImplementation.GetAllProducts()"/> and 
+    /// Test class for <see cref="ProductServicesImplementation.GetAllProducts()"/> and.
     /// <see cref="ProductServicesImplementation.GetProductById(int)"/> methods.
     /// </summary>
     [TestFixture]
@@ -115,10 +115,10 @@ namespace TestServiceLayer.ProductServiceTests
         public void GET_ProductById_NotFound()
         {
             Product product = GetSampleProduct();
-            Product nullProduct = null;
+            Product? nullProduct = null;
 
             var productServiceMock = new Mock<IProductDataServices>();
-            productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(nullProduct);
+            productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(nullProduct!);
             var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
 
             var productServices = new ProductServicesImplementation(productServiceMock.Object, userScoreAndLimitsServiceMock.Object);
@@ -132,7 +132,7 @@ namespace TestServiceLayer.ProductServiceTests
         /// <summary>
         /// Gets the sample product.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a product.</returns>
         private static Product GetSampleProduct()
         {
             return new Product(
@@ -149,7 +149,7 @@ namespace TestServiceLayer.ProductServiceTests
         /// <summary>
         /// Gets the sample products.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of product.</returns>
         private static List<Product> GetSampleProducts()
         {
             List<Product> products = new List<Product>();

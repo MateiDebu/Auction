@@ -2,16 +2,16 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Enums;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.ProductServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="ProductServicesImplementation.DeleteProduct(Product)"/> method.
     /// </summary>
@@ -25,14 +25,14 @@ namespace TestServiceLayer.ProductServiceTests
         [Test]
         public void DELETE_NullProduct()
         {
-            Product product = null;
+            Product? product = null;
 
             var productServiceMock = new Mock<IProductDataServices>();
             var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
 
             var productService = new ProductServicesImplementation(productServiceMock.Object, userScoreAndLimitsServiceMock.Object);
 
-            Assert.That(productService.DeleteProduct(product), Is.False);
+            Assert.That(productService.DeleteProduct(product!), Is.False);
         }
 
         /// <summary>
@@ -49,12 +49,11 @@ namespace TestServiceLayer.ProductServiceTests
                 ECurrency.EUR,
                 new User("Matei", "Debu", "MateiDebu", "0770453212", "matei@gmail.com", "Matei123!!"),
                 DateTime.Today.AddDays(5),
-                DateTime.Today.AddDays(10)
-                );
-            Product nullProduct = null;
+                DateTime.Today.AddDays(10));
+            Product? nullProduct = null;
 
             var productServiceMock = new Mock<IProductDataServices>();
-            productServiceMock.Setup(x=>x.GetProductById(product.Id)).Returns(nullProduct);
+            productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(nullProduct!);
             var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
 
             var productServices = new ProductServicesImplementation(productServiceMock.Object, userScoreAndLimitsServiceMock.Object);
@@ -76,8 +75,7 @@ namespace TestServiceLayer.ProductServiceTests
                ECurrency.EUR,
                new User("Matei", "Debu", "MateiDebu", "0770453212", "matei@gmail.com", "Matei123!!"),
                DateTime.Today.AddDays(5),
-               DateTime.Today.AddDays(10)
-               );
+               DateTime.Today.AddDays(10));
 
             var productServiceMock = new Mock<IProductDataServices>();
             productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(product);

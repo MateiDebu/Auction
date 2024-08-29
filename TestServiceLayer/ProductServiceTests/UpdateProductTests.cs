@@ -2,17 +2,17 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Enums;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.ProductServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using NUnit.Framework.Internal;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// The class test <see cref="ProductServicesImplementation.UpdateProduct(Product)"/> method.
     /// </summary>
@@ -26,14 +26,14 @@ namespace TestServiceLayer.ProductServiceTests
         [Test]
         public void UPDATE_NullProduct()
         {
-            Product nullProduct = null;
+            Product? nullProduct = null;
 
             var productServiceMock = new Mock<IProductDataServices>();
             var userScoreMock = new Mock<IUserScoreAndLimitsDataServices>();
 
             var productService = new ProductServicesImplementation(productServiceMock.Object, userScoreMock.Object);
 
-            Assert.That(productService.UpdateProduct(nullProduct), Is.False);
+            Assert.That(productService.UpdateProduct(nullProduct!), Is.False);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace TestServiceLayer.ProductServiceTests
         public void UPDATE_InvalidProduct_Name_Null()
         {
             Product product = new Product(
-                null,
+                null!,
                 "face poze",
                 new Category("Aparat foto", null),
                 100,
@@ -51,7 +51,6 @@ namespace TestServiceLayer.ProductServiceTests
                 new User("Matei", "Debu", "MateiDebu", "0770123455", "mateideb@gmail.com", "Parola12!"),
                 DateTime.Today.AddDays(5),
                 DateTime.Today.AddDays(10));
-            
             var productServiceMock = new Mock<IProductDataServices>();
             var userScoreMock = new Mock<IUserScoreAndLimitsDataServices>();
 
@@ -67,7 +66,7 @@ namespace TestServiceLayer.ProductServiceTests
         public void UPDATE_InvalidProduct_Name_Empty()
         {
             Product product = new Product(
-                String.Empty,
+                string.Empty,
                 "face poze",
                 new Category("Aparat foto", null),
                 100,
@@ -91,7 +90,7 @@ namespace TestServiceLayer.ProductServiceTests
         public void UPDATE_InvalidProduct_Name_TooLong()
         {
             Product product = new Product(
-                new String('s',251),
+                new string('s', 251),
                 "face poze",
                 new Category("Aparat foto", null),
                 100,
@@ -116,7 +115,7 @@ namespace TestServiceLayer.ProductServiceTests
         {
             Product product = new Product(
                 "Aparat foto Leica",
-                null,
+                null!,
                 new Category("Aparat foto", null),
                 100,
                 ECurrency.EUR,
@@ -140,7 +139,7 @@ namespace TestServiceLayer.ProductServiceTests
         {
             Product product = new Product(
                 "Aparat foto Leica",
-                String.Empty,
+                string.Empty,
                 new Category("Aparat foto", null),
                 100,
                 ECurrency.EUR,
@@ -164,7 +163,7 @@ namespace TestServiceLayer.ProductServiceTests
         {
             Product product = new Product(
                 "Aparat foto Leica",
-                new String('s',501),
+                new string('s', 501),
                 new Category("Aparat foto", null),
                 100,
                 ECurrency.EUR,
@@ -189,7 +188,7 @@ namespace TestServiceLayer.ProductServiceTests
             Product product = new Product(
                 "Aparat foto Leica",
                 "face poze frumoase",
-                null,
+                null!,
                 100,
                 ECurrency.EUR,
                 new User("Matei", "Debu", "MateiDebu", "0770123455", "mateideb@gmail.com", "Parola12!"),
@@ -213,7 +212,7 @@ namespace TestServiceLayer.ProductServiceTests
             Product product = new Product(
                 "Aparat foto Leica",
                 "face poze frumoase",
-                new Category(null, null),
+                new Category(null!, null),
                 100,
                 ECurrency.EUR,
                 new User("Matei", "Debu", "MateiDebu", "0770123455", "mateideb@gmail.com", "Parola12!"),
@@ -264,7 +263,7 @@ namespace TestServiceLayer.ProductServiceTests
                new Category("Aparat foto", null),
                100,
                ECurrency.EUR,
-               null,
+               null!,
                DateTime.Today.AddDays(5),
                DateTime.Today.AddDays(10));
 
@@ -316,11 +315,11 @@ namespace TestServiceLayer.ProductServiceTests
                DateTime.Today.AddDays(5),
                DateTime.Today.AddDays(10));
 
-            Product nullProduct = null;
+            Product? nullProduct = null;
             var productMock = new Mock<Product>();
             productMock.SetupGet(p => p.Id).Returns(1);
             var productServiceMock = new Mock<IProductDataServices>();
-            productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(nullProduct);
+            productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(nullProduct!);
             productServiceMock.Setup(x => x.UpdateProduct(product)).Returns(false);
             var userScoreMock = new Mock<IUserScoreAndLimitsDataServices>();
 
@@ -345,12 +344,12 @@ namespace TestServiceLayer.ProductServiceTests
               DateTime.Today.AddDays(5),
               DateTime.Today.AddDays(10));
 
-              var productServiceMock = new Mock<IProductDataServices>();
-              productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(product);
-              productServiceMock.Setup(x => x.GetAllProductDescriptions()).Returns(new List<string>() { new string('#', 500), product.Description });
-              productServiceMock.Setup(x => x.UpdateProduct(product)).Returns(true);
-              var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
-              userScoreAndLimitsServiceMock.Setup(x => x.GetConditionalValueByName("L")).Returns(100);
+            var productServiceMock = new Mock<IProductDataServices>();
+            productServiceMock.Setup(x => x.GetProductById(product.Id)).Returns(product);
+            productServiceMock.Setup(x => x.GetAllProductDescriptions()).Returns(new List<string>() { new string('#', 500), product.Description });
+            productServiceMock.Setup(x => x.UpdateProduct(product)).Returns(true);
+            var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
+            userScoreAndLimitsServiceMock.Setup(x => x.GetConditionalValueByName("L")).Returns(100);
 
             var productServices = new ProductServicesImplementation(productServiceMock.Object, userScoreAndLimitsServiceMock.Object);
 

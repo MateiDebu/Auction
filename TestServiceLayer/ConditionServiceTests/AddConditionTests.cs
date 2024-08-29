@@ -2,15 +2,15 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.ConditionServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="ConditionServicesImplementation.AddCondition(Condition)"/> method.
     /// </summary>
@@ -24,12 +24,12 @@ namespace TestServiceLayer.ConditionServiceTests
         [Test]
         public void ADD_NullCondition()
         {
-            Condition nullCondition = null;
+            Condition? nullCondition = null;
             var conditionServiceMock = new Mock<IConditionDataServices>();
 
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);
 
-            Assert.That(conditionServices.AddCondition(nullCondition), Is.False);
+            Assert.That(conditionServices.AddCondition(nullCondition!), Is.False);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace TestServiceLayer.ConditionServiceTests
         [Test]
         public void ADD_InvalidCondition_Name_Null()
         {
-            Condition condition = new Condition(null, "description", 10);
+            Condition condition = new Condition(null!, "description", 10);
             var conditionServiceMock = new Mock<IConditionDataServices>();
 
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);
@@ -55,7 +55,6 @@ namespace TestServiceLayer.ConditionServiceTests
             Condition condition = new Condition(new string('x', 16), "description", 10);
 
             var conditionServiceMock = new Mock<IConditionDataServices>();
-            
 
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);
 
@@ -68,7 +67,7 @@ namespace TestServiceLayer.ConditionServiceTests
         [Test]
         public void ADD_InvalidCondition_Description_Null()
         {
-            Condition condition = new Condition("X", null, 10);
+            Condition condition = new Condition("X", null!, 10);
 
             var conditionServiceMock = new Mock<IConditionDataServices>();
 
@@ -83,7 +82,7 @@ namespace TestServiceLayer.ConditionServiceTests
         [Test]
         public void ADD_InvalidCondition_Description_Empty()
         {
-            Condition condition = new Condition("X", String.Empty, 10);
+            Condition condition = new Condition("X", string.Empty, 10);
 
             var conditionServiceMock = new Mock<IConditionDataServices>();
 
@@ -130,10 +129,10 @@ namespace TestServiceLayer.ConditionServiceTests
         public void ADD_ValidCondition()
         {
             Condition condition = new Condition("X", "x", 42);
-            Condition nullCondition = null;
+            Condition? nullCondition = null;
 
             var conditionServiceMock = new Mock<IConditionDataServices>();
-            conditionServiceMock.Setup(x => x.GetConditionByName(condition.Name)).Returns(nullCondition);
+            conditionServiceMock.Setup(x => x.GetConditionByName(condition.Name)).Returns(nullCondition!);
             conditionServiceMock.Setup(x => x.AddCondition(condition)).Returns(true);
 
             var conditionServices = new ConditionServicesImplementation(conditionServiceMock.Object);

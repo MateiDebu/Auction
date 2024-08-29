@@ -2,15 +2,15 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.ConditionServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="ConditionServicesImplementation.DeleteCondition(Condition)"/> method.
     /// </summary>
@@ -24,12 +24,12 @@ namespace TestServiceLayer.ConditionServiceTests
         [Test]
         public void DELETE_NullCondition()
         {
-            Condition condition = null;
+            Condition? condition = null;
 
             var serviceMock = new Mock<IConditionDataServices>();
             var conditionServices = new ConditionServicesImplementation(serviceMock.Object);
 
-            Assert.That(conditionServices.DeleteCondition(condition), Is.False);
+            Assert.That(conditionServices.DeleteCondition(condition!), Is.False);
         }
 
         /// <summary>
@@ -39,10 +39,10 @@ namespace TestServiceLayer.ConditionServiceTests
         public void DELETE_NoNExistingCondition()
         {
             Condition condition = new Condition("X", "x", 42);
-            Condition nullCondition = null;
+            Condition? nullCondition = null;
 
             var serviceMock = new Mock<IConditionDataServices>();
-            serviceMock.Setup(x => x.GetConditionById(condition.Id)).Returns(nullCondition);
+            serviceMock.Setup(x => x.GetConditionById(condition.Id)).Returns(nullCondition!);
 
             var conditionServices = new ConditionServicesImplementation(serviceMock.Object);
 
