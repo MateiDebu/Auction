@@ -2,13 +2,13 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Enums;
-using System.ComponentModel.DataAnnotations;
-
 namespace DomainModel.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using DomainModel.Enums;
+
     /// <summary>
-    /// 
+    /// The Bid model.
     /// </summary>
     public class Bid
     {

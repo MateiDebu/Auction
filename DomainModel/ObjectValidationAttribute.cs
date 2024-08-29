@@ -2,21 +2,24 @@
 // Debu Matei
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DomainModel
 {
+    using System.ComponentModel.DataAnnotations;
+
+    /// <summary>
+    /// The ObjectValidationAttribute.
+    /// </summary>
+    /// <seealso cref="System.ComponentModel.DataAnnotations.ValidationAttribute" />
     public class ObjectValidationAttribute : ValidationAttribute
     {
-        /// <summary>Checks whether the object is valid or not.</summary>
+        /// <summary>
+        /// Checks whether the object is valid or not.
+        /// </summary>
         /// <param name="value">The value to validate.</param>
         /// <param name="validationContext">The context information about the validation operation.</param>
-        /// <returns>An instance of the <see cref="ValidationResult">ValidationResult</see> class.</returns>
+        /// <returns>
+        /// An instance of the <see cref="ValidationResult">ValidationResult</see> class.
+        /// </returns>
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var context = new ValidationContext(value, serviceProvider: null, items: null);

@@ -2,31 +2,39 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestDomainModel.TestData;
-
 namespace TestDomainModel.ValidationTests
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Models;
+    using NUnit.Framework;
+    using TestDomainModel.TestData;
+
     [TestFixture]
     [ExcludeFromCodeCoverage]
 
-    /// <summary> Test class for <see cref="Category"/> validation </summary>
+    /// <summary>
+    /// Test class for <see cref="Category" /> validation.
+    /// </summary>
     internal class CategoryValidation
     {
+        /// <summary>
+        /// The category test data.
+        /// </summary>
         private CategoryTestData categoryTestData;
+
+        /// <summary>
+        /// The results.
+        /// </summary>
         private List<ValidationResult> results = new List<ValidationResult>();
 
-        /// <summary>Determines whether the given category is valid or not.</summary>
+        /// <summary>
+        /// Determines whether the given category is valid or not.
+        /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns><b>true</b> if the given category is valid; otherwise, <b>false</b>.</returns>
+        /// <returns>
+        ///   <b>true</b> if the given category is valid; otherwise, <b>false</b>.
+        /// </returns>
         public bool IsValidCategory(Category category)
         {
             var context = new ValidationContext(category, serviceProvider: null, items: null);
@@ -36,18 +44,27 @@ namespace TestDomainModel.ValidationTests
             return validationResult;
         }
 
+        /// <summary>
+        /// Called when [time set up].
+        /// </summary>
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             this.categoryTestData = new CategoryTestData();
         }
 
+        /// <summary>
+        /// Sets up.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
             this.results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// Valids the category.
+        /// </summary>
         [Test]
         public void ValidCategory()
         {
@@ -55,6 +72,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results.Count, Is.EqualTo(0));
         }
 
+        /// <summary>
+        /// Invalids the category empty category.
+        /// </summary>
         [Test]
         public void InvalidCategory_EmptyCategory()
         {
@@ -63,6 +83,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogCategoryWithNullName));
         }
 
+        /// <summary>
+        /// Invalids the category name null.
+        /// </summary>
         [Test]
 
         public void InvalidCategory_Name_Null()
@@ -72,6 +95,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogCategoryWithNullName));
         }
 
+        /// <summary>
+        /// Invalids the category name empty.
+        /// </summary>
         [Test]
         public void InvalidCategory_Name_Empty()
         {
@@ -80,6 +106,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogCategoryWithNullName));
         }
 
+        /// <summary>
+        /// Invalids the category name too long.
+        /// </summary>
         [Test]
         public void InvalidCategory_Name_TooLong()
         {
@@ -88,6 +117,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogCategoryWithNameTooLong));
         }
 
+        /// <summary>
+        /// Valids the category parent category null.
+        /// </summary>
         [Test]
         public void ValidCategory_ParentCategory_Null()
         {

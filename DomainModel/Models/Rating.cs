@@ -8,7 +8,7 @@ namespace DomainModel.Models
     using DomainModel.Enums;
 
     /// <summary>
-    /// The rating class.
+    /// The rating model.
     /// </summary>
     public class Rating
     {

@@ -2,15 +2,15 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Enums;
-using DomainModel.Models;
-using NUnit.Framework;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using TestDomainModel.TestData;
-
 namespace TestDomainModel.ValidationTests
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+    using NUnit.Framework;
+    using TestDomainModel.TestData;
+
     /// <summary>
     /// Test class for <see cref="Bid"/> validation.
     /// </summary>
@@ -19,13 +19,23 @@ namespace TestDomainModel.ValidationTests
     internal class BidValidation
     {
         /// <summary>
-        /// The bid test data
+        /// The bid test data.
         /// </summary>
         private BidTestData bidTestData;
+
         /// <summary>
-        /// The results
+        /// The results.
         /// </summary>
         private List<ValidationResult> results = new List<ValidationResult>();
+
+        /// <summary>
+        /// Called when [time set up].
+        /// </summary>
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            this.bidTestData = new BidTestData();
+        }
 
         /// <summary>
         /// Determines whether [is valid bid] [the specified bid].
@@ -41,15 +51,6 @@ namespace TestDomainModel.ValidationTests
             bool validationResult = Validator.TryValidateObject(bid, context, results, true);
             this.results.AddRange(results);
             return validationResult;
-        }
-
-        /// <summary>
-        /// Called when [time set up].
-        /// </summary>
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            this.bidTestData = new BidTestData();
         }
 
         /// <summary>
@@ -803,10 +804,9 @@ namespace TestDomainModel.ValidationTests
                     new User("Popescu", "Vlad", "VladutP", "1234567891", "vlad.pope@hotmail.com", "VladPop123!"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                    new User("Matei", "Debu", new string('a', 31), "0770463121", "mateidebu@yahoo.com", "Matei1234!"),
-                    1000,
-                    ECurrency.EUR
-                    );
+                new User("Matei", "Debu", new string('a', 31), "0770463121", "mateidebu@yahoo.com", "Matei1234!"),
+                1000,
+                ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -831,10 +831,9 @@ namespace TestDomainModel.ValidationTests
                     new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                    new User("Matei", "Debu", "MateiDebu", null, "mateidebu@yahoo.com", "Matei1234!"),
-                    1000,
-                    ECurrency.EUR
-                    );
+                new User("Matei", "Debu", "MateiDebu", null, "mateidebu@yahoo.com", "Matei1234!"),
+                1000,
+                ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -858,10 +857,9 @@ namespace TestDomainModel.ValidationTests
                      new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                      DateTime.Today.AddDays(5),
                      DateTime.Today.AddDays(10)),
-                     new User("Matei", "Debu", "MateiDebu", String.Empty, "mateidebu@yahoo.com", "Matei1234!"),
-                     1000,
-                     ECurrency.EUR
-                     );
+                 new User("Matei", "Debu", "MateiDebu", string.Empty, "mateidebu@yahoo.com", "Matei1234!"),
+                 1000,
+                 ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -886,10 +884,9 @@ namespace TestDomainModel.ValidationTests
                     new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                    new User("Matei", "Debu", "MateiDebu", new string('1', 16), "mateidebu@yahoo.com", "Matei1234!"),
-                    1000,
-                    ECurrency.EUR
-                    );
+                new User("Matei", "Debu", "MateiDebu", new string('1', 16), "mateidebu@yahoo.com", "Matei1234!"),
+                1000,
+                ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -914,17 +911,15 @@ namespace TestDomainModel.ValidationTests
                     new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                     DateTime.Today.AddDays(5),
                     DateTime.Today.AddDays(10)),
-                    new User("Matei", "Debu", "MateiDebu", "aaa", "mateidebu@yahoo.com", "Matei1234!"),
-                    1000,
-                    ECurrency.EUR
-                    );
+                new User("Matei", "Debu", "MateiDebu", "aaa", "mateidebu@yahoo.com", "Matei1234!"),
+                1000,
+                ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
             Assert.IsFalse(Validator.TryValidateObject(bid, context, results, true));
             Assert.That(results.Count, Is.EqualTo(1));
             Assert.That(results[0].ErrorMessage, Is.EqualTo(LogTestData.LogBidWithInvalidBuyer));
-
         }
 
         /// <summary>
@@ -943,10 +938,9 @@ namespace TestDomainModel.ValidationTests
                    new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                    DateTime.Today.AddDays(5),
                    DateTime.Today.AddDays(10)),
-                   new User("Matei", "Debu", "MateiDebu", "123456789102", null, "Matei1234!"),
-                   1000,
-                   ECurrency.EUR
-                   );
+               new User("Matei", "Debu", "MateiDebu", "123456789102", null, "Matei1234!"),
+               1000,
+               ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -971,9 +965,9 @@ namespace TestDomainModel.ValidationTests
                   new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                   DateTime.Today.AddDays(5),
                   DateTime.Today.AddDays(10)),
-                  new User("Matei", "Debu", "MateiDebu", "123456789102", String.Empty, "Matei1234!"),
-                  1000,
-                  ECurrency.EUR
+              new User("Matei", "Debu", "MateiDebu", "123456789102", string.Empty, "Matei1234!"),
+              1000,
+              ECurrency.EUR
                   );
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
@@ -999,10 +993,9 @@ namespace TestDomainModel.ValidationTests
                   new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                   DateTime.Today.AddDays(5),
                   DateTime.Today.AddDays(10)),
-                  new User("Matei", "Debu", "MateiDebu", "123456789102", new string('x', 51), "Matei1234!"),
-                  1000,
-                  ECurrency.EUR
-                  );
+              new User("Matei", "Debu", "MateiDebu", "123456789102", new string('x', 51), "Matei1234!"),
+              1000,
+              ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1027,10 +1020,9 @@ namespace TestDomainModel.ValidationTests
                   new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                   DateTime.Today.AddDays(5),
                   DateTime.Today.AddDays(10)),
-                  new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu.com", "Matei1234!"),
-                  1000,
-                  ECurrency.EUR
-                  );
+              new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu.com", "Matei1234!"),
+              1000,
+              ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1055,10 +1047,9 @@ namespace TestDomainModel.ValidationTests
                   new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                   DateTime.Today.AddDays(5),
                   DateTime.Today.AddDays(10)),
-                  new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", null),
-                  1000,
-                  ECurrency.EUR
-                  );
+              new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", null),
+              1000,
+              ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1083,10 +1074,9 @@ namespace TestDomainModel.ValidationTests
                   new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                   DateTime.Today.AddDays(5),
                   DateTime.Today.AddDays(10)),
-                  new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", String.Empty),
-                  1000,
-                  ECurrency.EUR
-                  );
+              new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", string.Empty),
+              1000,
+              ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1111,10 +1101,9 @@ namespace TestDomainModel.ValidationTests
                  new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                  DateTime.Today.AddDays(5),
                  DateTime.Today.AddDays(10)),
-                 new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "Abc!1"),
-                 1000,
-                 ECurrency.EUR
-                 );
+             new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "Abc!1"),
+             1000,
+             ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1139,10 +1128,9 @@ namespace TestDomainModel.ValidationTests
                 new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                 DateTime.Today.AddDays(5),
                 DateTime.Today.AddDays(10)),
-                new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "Abc!1" + new string('a', 21)),
-                1000,
-                ECurrency.EUR
-                );
+            new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "Abc!1" + new string('a', 21)),
+            1000,
+            ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1167,10 +1155,9 @@ namespace TestDomainModel.ValidationTests
                 new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                 DateTime.Today.AddDays(5),
                 DateTime.Today.AddDays(10)),
-                new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "matei!1234"),
-                1000,
-                ECurrency.EUR
-                );
+            new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "matei!1234"),
+            1000,
+            ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1195,10 +1182,9 @@ namespace TestDomainModel.ValidationTests
                 new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                 DateTime.Today.AddDays(5),
                 DateTime.Today.AddDays(10)),
-                new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEI!1234"),
-                1000,
-                ECurrency.EUR
-                );
+            new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEI!1234"),
+            1000,
+            ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1223,10 +1209,9 @@ namespace TestDomainModel.ValidationTests
                 new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                 DateTime.Today.AddDays(5),
                 DateTime.Today.AddDays(10)),
-                new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEIdebu!"),
-                1000,
-                ECurrency.EUR
-                );
+            new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEIdebu!"),
+            1000,
+            ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1251,10 +1236,9 @@ namespace TestDomainModel.ValidationTests
                 new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                 DateTime.Today.AddDays(5),
                 DateTime.Today.AddDays(10)),
-                new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEIdebu123"),
-                1000,
-                ECurrency.EUR
-                );
+            new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEIdebu123"),
+            1000,
+            ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 
@@ -1279,10 +1263,9 @@ namespace TestDomainModel.ValidationTests
                new User("Andrei", "Vlad", "VladutA", "1234567891", "vlad.andrei@hotmail.com", "VladA123!"),
                DateTime.Today.AddDays(5),
                DateTime.Today.AddDays(10)),
-               new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEIdebu!123"),
-               -1,
-               ECurrency.EUR
-               );
+           new User("Matei", "Debu", "MateiDebu", "123456789102", "mateidebu@yahoo.com", "MATEIdebu!123"),
+           -1,
+           ECurrency.EUR);
             var context = new ValidationContext(bid, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 

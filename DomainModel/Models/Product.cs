@@ -2,13 +2,13 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Enums;
-using System.ComponentModel.DataAnnotations;
-
 namespace DomainModel.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using DomainModel.Enums;
+
     /// <summary>
-    /// 
+    /// The product model.
     /// </summary>
     public class Product
     {
@@ -41,7 +41,8 @@ namespace DomainModel.Models
         /// Initializes a new instance of the <see cref="Product"/> class.
         /// </summary>
         public Product()
-        {}
+        {
+        }
 
         /// <summary>
         /// Gets the identifier.
@@ -58,7 +59,7 @@ namespace DomainModel.Models
         /// The name.
         /// </value>
         [Required(ErrorMessage = "[Name] cannot be null.")]
-        [StringLength(maximumLength:250, MinimumLength = 1, ErrorMessage ="[Name] must be between 1 and 250 characters.")]
+        [StringLength(maximumLength: 250, MinimumLength = 1, ErrorMessage ="[Name] must be between 1 and 250 characters.")]
         public string Name { get; set; }
 
         /// <summary>
@@ -147,7 +148,6 @@ namespace DomainModel.Models
         /// </value>
         [Required(ErrorMessage = "[TerminationDate] cannot be null.")]
 
-        public virtual DateTime  TerminationDate { get; set; }
-
+        public virtual DateTime TerminationDate { get; set; }
     }
 }

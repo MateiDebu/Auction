@@ -2,41 +2,41 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestDomainModel.TestData
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Models;
+
     /// <summary>
-    /// 
+    /// The CategoryTestData class.
     /// </summary>
     [ExcludeFromCodeCoverage]
     internal class CategoryTestData
     {
         /// <summary>
-        /// The valid category name
+        /// The valid category name.
         /// </summary>
         private string validCategoryName = "Aparat foto";
 
         /// <summary>
-        /// The empty category name
+        /// The empty category name.
         /// </summary>
         private string emptyCategoryName = string.Empty;
 
         /// <summary>
-        /// The too long category name
+        /// The too long category name.
         /// </summary>
         private string tooLongCategoryName = new string('x', 101);
 
         /// <summary>
-        /// The valid parent category name
+        /// The valid parent category name.
         /// </summary>
         private string validParentCategoryName = "Aparat foto";
 
         /// <summary>
         /// Gets the valid category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>category.</returns>
         public Category GetValidCategory()
         {
             return new Category(this.validCategoryName, new Category(this.validParentCategoryName, null));
@@ -45,7 +45,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the empty category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>category.</returns>
         public Category GetEmptyCategory()
         {
             return new Category();
@@ -54,7 +54,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the category with null.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>category.</returns>
         public Category GetCategoryWithNullName()
         {
             return new Category(null, new Category(this.validParentCategoryName, null));
@@ -63,7 +63,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the empty name of the category with.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>category.</returns>
         public Category GetCategoryWithEmptyName()
         {
             return new Category(this.emptyCategoryName, new Category(this.validParentCategoryName, null));
@@ -72,7 +72,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the category with name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>category.</returns>
         public Category GetCategoryWithNameTooLong()
         {
             return new Category(this.tooLongCategoryName, new Category(this.validParentCategoryName, null));
@@ -81,7 +81,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the category with null parent.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>category.</returns>
         public Category GetCategoryWithNullParent()
         {
             return new Category(this.validCategoryName, null);

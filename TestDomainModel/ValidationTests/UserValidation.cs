@@ -2,26 +2,38 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestDomainModel.TestData;
-
 namespace TestDomainModel.ValidationTests
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Models;
+    using NUnit.Framework;
+    using TestDomainModel.TestData;
+
+    /// <summary>
+    /// The UserValidation class.
+    /// </summary>
     [TestFixture]
     [ExcludeFromCodeCoverage]
     internal class UserValidation
     {
+        /// <summary>
+        /// The user test data.
+        /// </summary>
         private UserTestData userTestData;
+
+        /// <summary>
+        /// The results.
+        /// </summary>
         private List<ValidationResult> results = new List<ValidationResult>();
 
+        /// <summary>
+        /// Determines whether [is valid user] [the specified user].
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>
+        ///   <c>true</c> if [is valid user] [the specified user]; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsValidUser(User user)
         {
             var context = new ValidationContext(user, serviceProvider: null, items: null);
@@ -31,18 +43,27 @@ namespace TestDomainModel.ValidationTests
             return validationResult;
         }
 
+        /// <summary>
+        /// Called when [time set up].
+        /// </summary>
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             this.userTestData = new UserTestData();
         }
 
+        /// <summary>
+        /// Sets up.
+        /// </summary>
         [SetUp]
         public void SetUp()
         {
             this.results = new List<ValidationResult>();
         }
 
+        /// <summary>
+        /// Valids the user.
+        /// </summary>
         [Test]
         public void ValidUser()
         {
@@ -50,6 +71,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results.Count, Is.EqualTo(0));
         }
 
+        /// <summary>
+        /// Invalids the user empty user.
+        /// </summary>
         [Test]
         public void InvalidUser_EmptyUser()
         {
@@ -63,7 +87,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[5].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithUnknownAccountType));
         }
 
-        /// <summary>Test for invalid user (user with null first name).</summary>
+        /// <summary>
+        /// Test for invalid user (user with null first name).
+        /// </summary>
         [Test]
         public void InvalidUser_FirstName_Null()
         {
@@ -72,7 +98,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullFirstName));
         }
 
-        /// <summary>Test for invalid user (user with empty first name).</summary>
+        /// <summary>
+        /// Test for invalid user (user with empty first name).
+        /// </summary>
         [Test]
         public void InvalidUser_FirstName_Empty()
         {
@@ -81,7 +109,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullFirstName));
         }
 
-        /// <summary>Test for invalid user (user with first name too long).</summary>
+        /// <summary>
+        /// Test for invalid user (user with first name too long).
+        /// </summary>
         [Test]
         public void InvalidUser_FirstName_TooLong()
         {
@@ -90,7 +120,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithFirstNameTooLong));
         }
 
-        /// <summary>Test for invalid user (user with first name that doesn't start with an uppercase letter).</summary>
+        /// <summary>
+        /// Test for invalid user (user with first name that doesn't start with an uppercase letter).
+        /// </summary>
         [Test]
         public void InvalidUser_FirstName_NoUpperCaseLetter()
         {
@@ -99,7 +131,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidFirstName));
         }
 
-        /// <summary>Test for invalid user (user with first name that only has uppercase letters).</summary>
+        /// <summary>
+        /// Test for invalid user (user with first name that only has uppercase letters).
+        /// </summary>
         [Test]
         public void InvalidUser_FirstName_NoLowerCaseLetters()
         {
@@ -108,7 +142,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidFirstName));
         }
 
-        /// <summary>Test for invalid user (user with first name that contains symbols).</summary>
+        /// <summary>
+        /// Test for invalid user (user with first name that contains symbols).
+        /// </summary>
         [Test]
         public void InvalidUser_FirstName_ContainsSymbol()
         {
@@ -117,7 +153,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidFirstName));
         }
 
-        /// <summary>Test for invalid user (user with first name that contains numbers).</summary>
+        /// <summary>
+        /// Test for invalid user (user with first name that contains numbers).
+        /// </summary>
         [Test]
         public void InvalidUser_FirstName_ContainsNumber()
         {
@@ -126,7 +164,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidFirstName));
         }
 
-        /// <summary>Test for invalid user (user with null last name).</summary>
+        /// <summary>
+        /// Test for invalid user (user with null last name).
+        /// </summary>
         [Test]
         public void InvalidUser_LastName_Null()
         {
@@ -135,7 +175,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullLastName));
         }
 
-        /// <summary>Test for invalid user (user with empty last name).</summary>
+        /// <summary>
+        /// Test for invalid user (user with empty last name).
+        /// </summary>
         [Test]
         public void InvalidUser_LastName_Empty()
         {
@@ -144,7 +186,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullLastName));
         }
 
-        /// <summary>Test for invalid user (user with last name too long).</summary>
+        /// <summary>
+        /// Test for invalid user (user with last name too long).
+        /// </summary>
         [Test]
         public void InvalidUser_LastName_TooLong()
         {
@@ -153,17 +197,20 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithLastNameTooLong));
         }
 
-        /// <summary>Test for invalid user (user with last name that doesn't start with an uppercase letter).</summary>
+        /// <summary>
+        /// Test for invalid user (user with last name that doesn't start with an uppercase letter).
+        /// </summary>
         [Test]
         public void InvalidUser_LastName_NoUpperCaseLetter()
         {
             Assert.IsFalse(this.IsValidUser(this.userTestData.GetUserWithNoUppercaseLetterInLastName()));
             Assert.That(this.results.Count, Is.EqualTo(1));
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidLastName));
-
         }
 
-        /// <summary>Test for invalid user (user with last name that only has uppercase letters).</summary>
+        /// <summary>
+        /// Test for invalid user (user with last name that only has uppercase letters).
+        /// </summary>
         [Test]
         public void InvalidUser_LastName_NoLowerCaseLetters()
         {
@@ -172,7 +219,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidLastName));
         }
 
-        /// <summary>Test for invalid user (user with last name that contains symbols).</summary>
+        /// <summary>
+        /// Test for invalid user (user with last name that contains symbols).
+        /// </summary>
         [Test]
         public void InvalidUser_LastName_ContainsSymbol()
         {
@@ -181,7 +230,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidLastName));
         }
 
-        /// <summary>Test for invalid user (user with last name that contains numbers).</summary>
+        /// <summary>
+        /// Test for invalid user (user with last name that contains numbers).
+        /// </summary>
         [Test]
         public void InvalidUser_LastName_ContainsNumber()
         {
@@ -190,7 +241,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidLastName));
         }
 
-        /// <summary>Test for invalid user (user with null username).</summary>
+        /// <summary>
+        /// Test for invalid user (user with null username).
+        /// </summary>
         [Test]
         public void InvalidUser_UserName_Null()
         {
@@ -199,7 +252,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullUserName));
         }
 
-        /// <summary>Test for invalid user (user with empty username).</summary>
+        /// <summary>
+        /// Test for invalid user (user with empty username).
+        /// </summary>
         [Test]
         public void InvalidUser_UserName_Empty()
         {
@@ -208,7 +263,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullUserName));
         }
 
-        /// <summary>Test for invalid user (user with username too long).</summary>
+        /// <summary>
+        /// Test for invalid user (user with username too long).
+        /// </summary>
         [Test]
         public void InvalidUser_UserName_TooLong()
         {
@@ -217,7 +274,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithUserNameTooLong));
         }
 
-        /// <summary>Test for valid user (user with null phone number).</summary>
+        /// <summary>
+        /// Test for valid user (user with null phone number).
+        /// </summary>
         [Test]
         public void ValidUser_PhoneNumber_Null()
         {
@@ -225,7 +284,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results.Count, Is.EqualTo(0));
         }
 
-        /// <summary>Test for invalid user (user with empty phone number).</summary>
+        /// <summary>
+        /// Test for invalid user (user with empty phone number).
+        /// </summary>
         [Test]
         public void InvalidUser_UserValidation_PhoneNumber_Empty()
         {
@@ -235,7 +296,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[1].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithPhoneNumberTooLong));
         }
 
-        /// <summary>Test for invalid user (user with phone number too long).</summary>
+        /// <summary>
+        /// Test for invalid user (user with phone number too long).
+        /// </summary>
         [Test]
         public void InvalidUser_PhoneNumber_TooLong()
         {
@@ -244,7 +307,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithPhoneNumberTooLong));
         }
 
-        /// <summary>Test for invalid user (user with invalid phone number).</summary>
+        /// <summary>
+        /// Test for invalid user (user with invalid phone number).
+        /// </summary>
         [Test]
         public void InvalidUser_PhoneNumber_Invalid()
         {
@@ -253,7 +318,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidPhoneNumber));
         }
 
-        /// <summary>Test for invalid user (user with null email address).</summary>
+        /// <summary>
+        /// Test for invalid user (user with null email address).
+        /// </summary>
         [Test]
         public void InvalidUser_Email_Null()
         {
@@ -262,7 +329,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullEmail));
         }
 
-        /// <summary>Test for invalid user (user with empty email address).</summary>
+        /// <summary>
+        /// Test for invalid user (user with empty email address).
+        /// </summary>
         [Test]
         public void InvalidUser_Email_Empty()
         {
@@ -271,7 +340,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullEmail));
         }
 
-        /// <summary>Test for invalid user (user with email address too long).</summary>
+        /// <summary>
+        /// Test for invalid user (user with email address too long).
+        /// </summary>
         [Test]
         public void InvalidUser_Email_TooLong()
         {
@@ -280,7 +351,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithEmailTooLong));
         }
 
-        /// <summary>Test for invalid user (user with invalid email address).</summary>
+        /// <summary>
+        /// Test for invalid user (user with invalid email address).
+        /// </summary>
         [Test]
         public void InvalidUser_Email_Invalid()
         {
@@ -289,7 +362,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidEmail));
         }
 
-        /// <summary>Test for invalid user (user with null password).</summary>
+        /// <summary>
+        /// Test for invalid user (user with null password).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_Null()
         {
@@ -298,7 +373,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullPassword));
         }
 
-        /// <summary>Test for invalid user (user with empty password).</summary>
+        /// <summary>
+        /// Test for invalid user (user with empty password).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_Empty()
         {
@@ -307,7 +384,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithNullPassword));
         }
 
-        /// <summary>Test for invalid user (user with password too short).</summary>
+        /// <summary>
+        /// Test for invalid user (user with password too short).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_TooShort()
         {
@@ -316,7 +395,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithPasswordTooLongOrTooShort));
         }
 
-        /// <summary>Test for invalid user (user with password too long).</summary>
+        /// <summary>
+        /// Test for invalid user (user with password too long).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_TooLong()
         {
@@ -325,7 +406,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithPasswordTooLongOrTooShort));
         }
 
-        /// <summary>Test for invalid user (user with password that doesn't contain uppercase letters).</summary>
+        /// <summary>
+        /// Test for invalid user (user with password that doesn't contain uppercase letters).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_MissingUpperCaseLetter()
         {
@@ -334,7 +417,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidPassword));
         }
 
-        /// <summary>Test for invalid user (user with password that doesn't contain lowercase letters).</summary>
+        /// <summary>
+        /// Test for invalid user (user with password that doesn't contain lowercase letters).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_MissingLowerCaseLetter()
         {
@@ -343,7 +428,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidPassword));
         }
 
-        /// <summary>Test for invalid user (user with password that doesn't contain numbers).</summary>
+        /// <summary>
+        /// Test for invalid user (user with password that doesn't contain numbers).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_MissingNumber()
         {
@@ -352,7 +439,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidPassword));
         }
 
-        /// <summary>Test for invalid user (user with password that doesn't contain symbols).</summary>
+        /// <summary>
+        /// Test for invalid user (user with password that doesn't contain symbols).
+        /// </summary>
         [Test]
         public void InvalidUser_Password_MissingSymbol()
         {
@@ -361,7 +450,9 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithInvalidPassword));
         }
 
-        /// <summary>Test for invalid user (user with unknown account type).</summary>
+        /// <summary>
+        /// Test for invalid user (user with unknown account type).
+        /// </summary>
         [Test]
         public void InvalidUser_AccountType_Unknown()
         {
@@ -369,6 +460,5 @@ namespace TestDomainModel.ValidationTests
             Assert.That(this.results.Count, Is.EqualTo(1));
             Assert.That(this.results[0].ErrorMessage, Is.EqualTo(LogTestData.LogUserWithUnknownAccountType));
         }
-
     }
 }

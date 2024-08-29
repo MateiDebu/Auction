@@ -2,28 +2,82 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Enums;
-using DomainModel.Models;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestDomainModel.TestData
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+
+    /// <summary>
+    /// The ProductTestData.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     internal class ProductTestData
     {
+        /// <summary>
+        /// The category test data.
+        /// </summary>
         private CategoryTestData categoryTestData = new CategoryTestData();
+
+        /// <summary>
+        /// The user test data.
+        /// </summary>
         private UserTestData userTestData = new UserTestData();
+
+        /// <summary>
+        /// The valid name.
+        /// </summary>
         private string validName = "Aparat foto LEICA";
+
+        /// <summary>
+        /// The valid description.
+        /// </summary>
         private string validDescription = "Are o focalizare foarte rapida.";
+
+        /// <summary>
+        /// The valid starting price.
+        /// </summary>
         private decimal validStartingPrice = 100m;
+
+        /// <summary>
+        /// The valid currency.
+        /// </summary>
         private ECurrency validCurrency = ECurrency.EUR;
+
+        /// <summary>
+        /// The valid start date.
+        /// </summary>
         private DateTime validStartDate = DateTime.Today.AddDays(5);
+
+        /// <summary>
+        /// The valid end date.
+        /// </summary>
         private DateTime validEndDate = DateTime.Today.AddDays(10);
+
+        /// <summary>
+        /// The long name.
+        /// </summary>
         private string longName = new string('x', 251);
+
+        /// <summary>
+        /// The long description.
+        /// </summary>
         private string longDescription = new string('x', 501);
+
+        /// <summary>
+        /// The negative starting price.
+        /// </summary>
         private decimal negativeStartingPrice = -1m;
+
+        /// <summary>
+        /// The invalid end date.
+        /// </summary>
         private DateTime invalidEndDate = DateTime.Today;
 
+        /// <summary>
+        /// Gets the valid product.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetValidProduct()
         {
             return new Product(
@@ -37,11 +91,19 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the empty product.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetEmptyProduct()
         {
             return new Product();
         }
 
+        /// <summary>
+        /// Gets the name of the product with null.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullName()
         {
             return new Product(
@@ -55,6 +117,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the empty name of the product with.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptyName()
         {
             return new Product(
@@ -68,6 +134,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with name too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNameTooLong()
         {
             return new Product(
@@ -81,6 +151,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with null description.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullDescription()
         {
             return new Product(
@@ -94,6 +168,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with empty description.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptyDescription()
         {
             return new Product(
@@ -107,6 +185,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with description too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithDescriptionTooLong()
         {
             return new Product(
@@ -120,6 +202,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with null category.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullCategory()
         {
             return new Product(
@@ -133,6 +219,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the name of the product with null category.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullCategoryName()
         {
             return new Product(
@@ -146,6 +236,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the name of the product with empty category.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptyCategoryName()
         {
             return new Product(
@@ -159,6 +253,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with category name too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithCategoryNameTooLong()
         {
             return new Product(
@@ -172,6 +270,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with negative starting price.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNegativeStartingPrice()
         {
             return new Product(
@@ -185,6 +287,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with null seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullSeller()
         {
             return new Product(
@@ -198,6 +304,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the first name of the product with null seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullSellerFirstName()
         {
             return new Product(
@@ -211,6 +321,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the first name of the product with empty seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptySellerFirstName()
         {
             return new Product(
@@ -224,6 +338,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with seller first name too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSellerFirstNameTooLong()
         {
             return new Product(
@@ -237,6 +355,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the first name of the product with no uppercase letter in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoUppercaseLetterInSellerFirstName()
         {
             return new Product(
@@ -250,6 +372,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the first name of the product with no lowercase letter in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoLowercaseLetterInSellerFirstName()
         {
             return new Product(
@@ -263,6 +389,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the first name of the product with symbol in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSymbolInSellerFirstName()
         {
             return new Product(
@@ -276,6 +406,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the first name of the product with number in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNumberInSellerFirstName()
         {
             return new Product(
@@ -289,6 +423,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the last name of the product with null seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullSellerLastName()
         {
             return new Product(
@@ -302,6 +440,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the last name of the product with empty seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptySellerLastName()
         {
             return new Product(
@@ -315,6 +457,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with seller last name too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSellerLastNameTooLong()
         {
             return new Product(
@@ -328,6 +474,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the last name of the product with no uppercase letter in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoUppercaseLetterInSellerLastName()
         {
             return new Product(
@@ -341,6 +491,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the last name of the product with no lowercase letter in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoLowercaseLetterInSellerLastName()
         {
             return new Product(
@@ -354,6 +508,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the last name of the product with symbol in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSymbolInSellerLastName()
         {
             return new Product(
@@ -367,6 +525,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the last name of the product with number in seller.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNumberInSellerLastName()
         {
             return new Product(
@@ -380,6 +542,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the name of the product with null seller user.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullSellerUserName()
         {
             return new Product(
@@ -393,6 +559,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the name of the product with empty seller user.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptySellerUserName()
         {
             return new Product(
@@ -406,6 +576,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with seller user name too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSellerUserNameTooLong()
         {
             return new Product(
@@ -419,6 +593,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with null seller phone number.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullSellerPhoneNumber()
         {
             return new Product(
@@ -432,6 +610,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with empty seller phone number.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptySellerPhoneNumber()
         {
             return new Product(
@@ -445,6 +627,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with seller phone number too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSellerPhoneNumberTooLong()
         {
             return new Product(
@@ -458,6 +644,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with invalid seller phone number.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithInvalidSellerPhoneNumber()
         {
             return new Product(
@@ -471,6 +661,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with null seller email.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullSellerEmail()
         {
             return new Product(
@@ -484,6 +678,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with empty seller email.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptySellerEmail()
         {
             return new Product(
@@ -497,6 +695,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with seller email too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSellerEmailTooLong()
         {
             return new Product(
@@ -510,6 +712,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with invalid seller email.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithInvalidSellerEmail()
         {
             return new Product(
@@ -523,6 +729,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with null seller password.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNullSellerPassword()
         {
             return new Product(
@@ -536,6 +746,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with empty seller password.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEmptySellerPassword()
         {
             return new Product(
@@ -549,6 +763,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with seller password too short.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSellerPasswordTooShort()
         {
             return new Product(
@@ -562,6 +780,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with seller password too long.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithSellerPasswordTooLong()
         {
             return new Product(
@@ -575,6 +797,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with no uppercase letter in seller password.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoUppercaseLetterInSellerPassword()
         {
             return new Product(
@@ -588,6 +814,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with no lowercase letter in seller password.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoLowercaseLetterInSellerPassword()
         {
             return new Product(
@@ -601,6 +831,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with no number in seller password.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoNumberInSellerPassword()
         {
             return new Product(
@@ -614,6 +848,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with no symbol in seller password.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithNoSymbolInSellerPassword()
         {
             return new Product(
@@ -627,6 +865,10 @@ namespace TestDomainModel.TestData
                 this.validEndDate);
         }
 
+        /// <summary>
+        /// Gets the product with end date before start date.
+        /// </summary>
+        /// <returns>product.</returns>
         public Product GetProductWithEndDateBeforeStartDate()
         {
             return new Product(

@@ -2,14 +2,14 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
-
 namespace DomainModel.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
+    using DomainModel.Enums;
+
     /// <summary>
-    /// 
+    /// The user model class.
     /// </summary>
     public class User
     {
@@ -24,13 +24,13 @@ namespace DomainModel.Models
         /// <param name="password">The password.</param>
         public User(string firstName, string lastName, string userName, string phoneNumber, string email, string password)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            UserName = userName;
-            PhoneNumber = phoneNumber;
-            Email = email;
-            Password = password;
-            AccountType = EAccountType.New;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.UserName = userName;
+            this.PhoneNumber = phoneNumber;
+            this.Email = email;
+            this.Password = password;
+            this.AccountType = EAccountType.New;
         }
 
         /// <summary>
@@ -38,11 +38,10 @@ namespace DomainModel.Models
         /// </summary>
         public User()
         {
-
         }
 
         /// <summary>
-        /// Gets the identifier.
+        /// Gets or sets the identifier.
         /// </summary>
         /// <value>
         /// The identifier.
@@ -56,7 +55,7 @@ namespace DomainModel.Models
         /// The first name.
         /// </value>
         [Required(ErrorMessage = "[FirstName] cannot be null.")]
-        [StringLength(maximumLength:15, MinimumLength = 1, ErrorMessage = "[FirstName] must be between 1 and 15 characters.")]
+        [StringLength(maximumLength: 15, MinimumLength = 1, ErrorMessage = "[FirstName] must be between 1 and 15 characters.")]
         [RegularExpression(@"[A-Z][a-z]+", ErrorMessage = "[FirstName] must be a valid firstname.")]
 
         public virtual string FirstName { get; set; }
@@ -79,7 +78,7 @@ namespace DomainModel.Models
         /// The name of the user.
         /// </value>
         [Required(ErrorMessage = "[UserName] cannot be null.")]
-        [StringLength(maximumLength:30, MinimumLength = 1, ErrorMessage = "[UserName] must be between 1 and 30 characters.")]
+        [StringLength(maximumLength: 30, MinimumLength = 1, ErrorMessage = "[UserName] must be between 1 and 30 characters.")]
         public virtual string UserName { get; set; }
 
         /// <summary>
@@ -89,7 +88,7 @@ namespace DomainModel.Models
         /// The phone number.
         /// </value>
         [Phone(ErrorMessage = "[PhoneNumber] is not a valid phone number.")]
-        [StringLength(maximumLength:15, MinimumLength = 1, ErrorMessage = "[PhoneNumber] must have between 1 and 15 digits.")]
+        [StringLength(maximumLength: 15, MinimumLength = 1, ErrorMessage = "[PhoneNumber] must have between 1 and 15 digits.")]
         public virtual string? PhoneNumber { get; set; }
 
         /// <summary>
@@ -129,7 +128,7 @@ namespace DomainModel.Models
         /// </summary>
         /// <param name="password">The password.</param>
         /// <param name="context">The context.</param>
-        /// <returns></returns>
+        /// <returns>true or null.</returns>
         public static ValidationResult? IsValidPassword(string password, ValidationContext context)
         {
             Regex hasNumber = new Regex(@"[0-9]+");
@@ -147,7 +146,7 @@ namespace DomainModel.Models
         /// </summary>
         /// <param name="accountType">Type of the account.</param>
         /// <param name="context">The context.</param>
-        /// <returns></returns>
+        /// <returns>succes or null.</returns>
         public static ValidationResult? IsValidAccountType(EAccountType accountType, ValidationContext context)
         {
             return (accountType != EAccountType.Unknown) ? ValidationResult.Success : new ValidationResult(null);

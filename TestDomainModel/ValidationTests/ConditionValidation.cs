@@ -2,14 +2,14 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-using NUnit.Framework;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using TestDomainModel.TestData;
-
 namespace TestDomainModel.ValidationTests
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Models;
+    using NUnit.Framework;
+    using TestDomainModel.TestData;
+
     /// <summary>
     /// Test class for <see cref="Condition"/> validation.
     /// </summary>
@@ -18,11 +18,12 @@ namespace TestDomainModel.ValidationTests
     internal class ConditionValidation
     {
         /// <summary>
-        /// The condition test data
+        /// The condition test data.
         /// </summary>
         private ConditionTestData conditionTestData;
+
         /// <summary>
-        /// The results
+        /// The results.
         /// </summary>
         private List<ValidationResult> results = new List<ValidationResult>();
 

@@ -2,25 +2,28 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DomainModel
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Models;
+
+    /// <summary>
+    /// The EndDataAflterDataAttribute.
+    /// </summary>
+    /// <seealso cref="System.ComponentModel.DataAnnotations.ValidationAttribute" />
     [ExcludeFromCodeCoverage]
     public class EndDateAfterStartDateAttribute : ValidationAttribute
     {
-        /// <summary>Checks whether the endDate is after the startDate or not.</summary>
+        /// <summary>
+        /// Checks whether the endDate is after the startDate or not.
+        /// </summary>
         /// <param name="value">The value to validate.</param>
         /// <param name="validationContext">The context information about the validation operation.</param>
-        /// <returns>An instance of the <see cref="ValidationResult">ValidationResult</see> class.</returns>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        /// <returns>
+        /// An instance of the <see cref="ValidationResult">ValidationResult</see> class.
+        /// </returns>
+        protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
         {
             DateTime endDate = (DateTime)value;
             Product product = (Product)validationContext.ObjectInstance;

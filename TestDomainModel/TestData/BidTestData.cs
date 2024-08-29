@@ -2,39 +2,42 @@
 // Debu Matei
 // </copyright>
 
-using DomainModel.Enums;
-using DomainModel.Models;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestDomainModel.TestData
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+
     /// <summary>
-    /// 
+    /// The BidTestData class.
     /// </summary>
     [ExcludeFromCodeCoverage]
     internal class BidTestData
     {
         /// <summary>
-        /// The product test data
+        /// The product test data.
         /// </summary>
         private ProductTestData productTestData = new ProductTestData();
+
         /// <summary>
-        /// The user test data
+        /// The user test data.
         /// </summary>
         private UserTestData userTestData = new UserTestData();
+
         /// <summary>
-        /// The valid amount
+        /// The valid amount.
         /// </summary>
         private decimal validAmount = 1000m;
+
         /// <summary>
-        /// The valid currency
+        /// The valid currency.
         /// </summary>
         private ECurrency validCurrency = ECurrency.EUR;
 
         /// <summary>
         /// Gets the valid bid.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a new bid.</returns>
         public Bid GetValidBid()
         {
             return new Bid(
@@ -47,7 +50,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the empty bid.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetEmptyBid()
         {
             return new Bid();
@@ -56,7 +59,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null product.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidWithNullProduct()
         {
             return new Bid(
@@ -69,7 +72,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with null product.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidWithNullProductName()
         {
             return new Bid(
@@ -82,7 +85,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with empty product.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidWithEmptyProductName()
         {
             return new Bid(
@@ -95,7 +98,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidWithProductNameTooLong()
         {
             return new Bid(
@@ -108,7 +111,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null product description.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidWithNullProductDescription()
         {
             return new Bid(
@@ -121,7 +124,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with empty product description.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidWithEmptyProductDescription()
         {
             return new Bid(
@@ -134,7 +137,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product description too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         public Bid GetBidWithProductDescriptionTooLong()
         {
             return new Bid(
@@ -147,7 +150,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null product category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductCategory()
         {
             return new Bid(
@@ -160,7 +163,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with null product category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductCategoryName()
         {
             return new Bid(
@@ -173,7 +176,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with empty product category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyProductCategoryName()
         {
             return new Bid(
@@ -186,7 +189,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product category name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductCategoryNameTooLong()
         {
             return new Bid(
@@ -199,7 +202,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with negative product starting price.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNegativeProductStartingPrice()
         {
             return new Bid(
@@ -212,7 +215,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductSeller()
         {
             return new Bid(
@@ -225,7 +228,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with null product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductSellerFirstName()
         {
             return new Bid(
@@ -238,7 +241,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with empty product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyProductSellerFirstName()
         {
             return new Bid(
@@ -251,7 +254,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product seller first name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductSellerFirstNameTooLong()
         {
             return new Bid(
@@ -264,7 +267,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with no uppercase in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoUppercaseInProductSellerFirstName()
         {
             return new Bid(
@@ -277,7 +280,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with no lowercase in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoLowercaseInProductSellerFirstName()
         {
             return new Bid(
@@ -290,7 +293,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with symbol in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithSymbolInProductSellerFirstName()
         {
             return new Bid(
@@ -303,7 +306,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with number in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNumberInProductSellerFirstName()
         {
             return new Bid(
@@ -316,7 +319,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with null product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductSellerLastName()
         {
             return new Bid(
@@ -329,7 +332,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with empty product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyProductSellerLastName()
         {
             return new Bid(
@@ -342,7 +345,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product seller last name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductSellerLastNameTooLong()
         {
             return new Bid(
@@ -355,7 +358,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with no uppercase letter in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoUppercaseLetterInProductSellerLastName()
         {
             return new Bid(
@@ -368,7 +371,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with no lowercase letter in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoLowercaseLetterInProductSellerLastName()
         {
             return new Bid(
@@ -381,7 +384,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with symbol in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithSymbolInProductSellerLastName()
         {
             return new Bid(
@@ -394,7 +397,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with number in product seller.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNumberInProductSellerLastName()
         {
             return new Bid(
@@ -407,7 +410,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with null product seller user.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductSellerUserName()
         {
             return new Bid(
@@ -420,7 +423,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with empty product seller user.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyProductSellerUserName()
         {
             return new Bid(
@@ -433,7 +436,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product seller user name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductSellerUserNameTooLong()
         {
             return new Bid(
@@ -446,7 +449,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null product seller phone number.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductSellerPhoneNumber()
         {
             return new Bid(
@@ -459,7 +462,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with empty product seller phone number.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyProductSellerPhoneNumber()
         {
             return new Bid(
@@ -472,7 +475,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product seller phone number too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductSellerPhoneNumberTooLong()
         {
             return new Bid(
@@ -485,7 +488,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with invalid product seller phone number.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithInvalidProductSellerPhoneNumber()
         {
             return new Bid(
@@ -498,7 +501,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null product seller email.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductSellerEmail()
         {
             return new Bid(
@@ -511,7 +514,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with empty product seller email.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyProductSellerEmail()
         {
             return new Bid(
@@ -524,7 +527,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product seller email too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductSellerEmailTooLong()
         {
             return new Bid(
@@ -537,7 +540,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with invalid product seller email.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithInvalidProductSellerEmail()
         {
             return new Bid(
@@ -550,7 +553,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null product seller password.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullProductSellerPassword()
         {
             return new Bid(
@@ -563,7 +566,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with empty product seller password.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyProductSellerPassword()
         {
             return new Bid(
@@ -576,7 +579,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product seller password too short.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductSellerPasswordTooShort()
         {
             return new Bid(
@@ -589,7 +592,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with product seller password too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithProductSellerPasswordTooLong()
         {
             return new Bid(
@@ -602,7 +605,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with no uppercase letter in product seller password.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoUppercaseLetterInProductSellerPassword()
         {
             return new Bid(
@@ -615,7 +618,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with no lowercase letter in product seller password.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoLowercaseLetterInProductSellerPassword()
         {
             return new Bid(
@@ -628,7 +631,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with no number in product seller password.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoNumberInProductSellerPassword()
         {
             return new Bid(
@@ -641,7 +644,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with no symbol in product seller password.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoSymbolInProductSellerPassword()
         {
             return new Bid(
@@ -654,7 +657,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with end date before start date.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEndDateBeforeStartDate()
         {
             return new Bid(
@@ -667,7 +670,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with null buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullBuyer()
         {
             return new Bid(
@@ -680,7 +683,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with null buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullBuyerFirstName()
         {
             return new Bid(
@@ -693,7 +696,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with empty buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyBuyerFirstName()
         {
             return new Bid(
@@ -706,7 +709,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with buyer first name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithBuyerFirstNameTooLong()
         {
             return new Bid(
@@ -719,7 +722,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with no uppercase letter in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoUppercaseLetterInBuyerFirstName()
         {
             return new Bid(
@@ -732,7 +735,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with no lowercase letter in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoLowercaseLetterInBuyerFirstName()
         {
             return new Bid(
@@ -745,7 +748,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with symbol in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithSymbolInBuyerFirstName()
         {
             return new Bid(
@@ -758,7 +761,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the first name of the bid with number in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNumberInBuyerFirstName()
         {
             return new Bid(
@@ -771,7 +774,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with null buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullBuyerLastName()
         {
             return new Bid(
@@ -784,7 +787,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with empty buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyBuyerLastName()
         {
             return new Bid(
@@ -797,7 +800,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the bid with buyer last name too long.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithBuyerLastNameTooLong()
         {
             return new Bid(
@@ -810,7 +813,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with no uppercase letter in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoUppercaseLetterInBuyerLastName()
         {
             return new Bid(
@@ -823,7 +826,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with no lowercase letter in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNoLowercaseLetterInBuyerLastName()
         {
             return new Bid(
@@ -836,7 +839,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with symbol in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithSymbolInBuyerLastName()
         {
             return new Bid(
@@ -849,7 +852,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the last name of the bid with number in buyer.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNumberInBuyerLastName()
         {
             return new Bid(
@@ -862,7 +865,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with null buyer user.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithNullBuyerUserName()
         {
             return new Bid(
@@ -875,7 +878,7 @@ namespace TestDomainModel.TestData
         /// <summary>
         /// Gets the name of the bid with empty buyer user.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bid.</returns>
         public Bid GetBidWithEmptyBuyerUserName()
         {
             return new Bid(

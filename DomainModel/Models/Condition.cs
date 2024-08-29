@@ -2,10 +2,10 @@
 // Debu Matei
 // </copyright>
 
-using System.ComponentModel.DataAnnotations;
-
 namespace DomainModel.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     /// <summary>The Condition model.</summary>
     public class Condition
     {
