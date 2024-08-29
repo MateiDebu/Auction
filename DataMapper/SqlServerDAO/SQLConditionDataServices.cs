@@ -18,9 +18,10 @@ namespace DataMapper.SqlServerDAO
     public class SQLConditionDataServices : IConditionDataServices
     {
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(Environment.MachineName);
+
         /// <inheritdoc/>
         public bool AddCondition(Condition condition)
         {
@@ -28,12 +29,19 @@ namespace DataMapper.SqlServerDAO
             {
                 try
                 {
-                    context.Conditions.Add(condition);
-                    context.SaveChanges();
+                    if (context.Conditions != null)
+                    {
+                        context.Conditions.Add(condition);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The conditions are null.");
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Logger.Error("Error while adding new condition: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while adding new condition: " + exception.Message.ToString());
                     return false;
                 }
             }
@@ -49,7 +57,14 @@ namespace DataMapper.SqlServerDAO
 
             using (AuctionContext context = new AuctionContext())
             {
-                conditions = context.Conditions.OrderBy((condition) => condition.Id).ToList();
+                if (context.Conditions != null)
+                {
+                    conditions = context.Conditions.OrderBy((condition) => condition.Id).ToList();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Conditions are null.");
+                }
             }
 
             return conditions;
@@ -58,27 +73,41 @@ namespace DataMapper.SqlServerDAO
         /// <inheritdoc/>
         public Condition GetConditionById(int id)
         {
-            Condition condition = null;
+            Condition? condition = null;
 
             using (AuctionContext context = new AuctionContext())
             {
-                condition = context.Conditions.Where((condition) => condition.Id == id).FirstOrDefault();
+                if (context.Conditions != null)
+                {
+                    condition = context.Conditions.Where((condition) => condition.Id == id).FirstOrDefault();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Conditions are null");
+                }
             }
 
-            return condition;
+            return condition!;
         }
 
         /// <inheritdoc/>
         public Condition GetConditionByName(string name)
         {
-            Condition condition = null;
+            Condition? condition = null;
 
             using (AuctionContext context = new AuctionContext())
             {
-                condition = context.Conditions.Where((condition) => condition.Name == name).FirstOrDefault();
+                if (context.Conditions != null)
+                {
+                    condition = context.Conditions.Where((condition) => condition.Name == name).FirstOrDefault();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The conditions are null");
+                }
             }
 
-            return condition;
+            return condition!;
         }
 
         /// <inheritdoc/>
@@ -163,13 +192,20 @@ namespace DataMapper.SqlServerDAO
             {
                 try
                 {
-                    context.Conditions.Attach(condition);
-                    context.Entry(condition).State = EntityState.Modified;
-                    context.SaveChanges();
+                    if (context.Conditions != null)
+                    {
+                        context.Conditions.Attach(condition);
+                        context.Entry(condition).State = EntityState.Modified;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The Conditions are null");
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Logger.Error("Error while updating condition: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while updating condition: " + exception.Message.ToString());
                     return false;
                 }
             }
@@ -185,13 +221,20 @@ namespace DataMapper.SqlServerDAO
             {
                 try
                 {
-                    context.Conditions.Attach(condition);
-                    context.Conditions.Remove(condition);
-                    context.SaveChanges();
+                    if (context.Conditions != null)
+                    {
+                        context.Conditions.Attach(condition);
+                        context.Conditions.Remove(condition);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The Conditions are null");
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Logger.Error("Error while deleting condition: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while deleting condition: " + exception.Message.ToString());
                     return false;
                 }
             }
@@ -199,6 +242,5 @@ namespace DataMapper.SqlServerDAO
             Logger.Info("Condition deleted successfully!");
             return true;
         }
-
     }
 }

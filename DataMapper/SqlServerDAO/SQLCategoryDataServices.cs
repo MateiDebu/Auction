@@ -18,31 +18,38 @@ namespace DataMapper.SqlServerDAO
     public class SQLCategoryDataServices : ICategoryDataServices
     {
         /// <summary>
-        /// The logger
+        /// The logger.
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger(Environment.MachineName);
+
         /// <summary>
         /// Adds the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool AddCategory(Category category)
         {
             using (AuctionContext context = new AuctionContext())
             {
                 try
                 {
-                    if(category.ParentCategory != null)
+                    if (context.Categories != null && category.ParentCategory != null)
                     {
                         context.Categories.Attach(category.ParentCategory);
+                        context.Categories.Add(category);
+                        context.SaveChanges();
                     }
-                    context.Categories.Add(category);
-                    context.SaveChanges();
-                }catch(Exception exception)
+                    else
+                    {
+                        throw new InvalidOperationException("The categories is null.");
+                    }
+                }
+                catch (Exception exception)
                 {
-                    Logger.Error("Error while adding new category: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while adding new category: " + exception.Message.ToString());
                     return false;
                 }
+
                 Logger.Info("Category added successfully!");
                 return true;
             }
@@ -52,23 +59,31 @@ namespace DataMapper.SqlServerDAO
         /// Deletes the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool DeleteCategory(Category category)
         {
             using (AuctionContext context = new AuctionContext())
             {
                 try
                 {
-                    context.Categories.Attach(category);
-                    context.Categories.Remove(category);
-                    context.SaveChanges();
+                    if (context.Categories != null)
+                    {
+                        context.Categories.Attach(category);
+                        context.Categories.Remove(category);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The categories is null.");
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Logger.Error("Error while deleting category: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while deleting category: " + exception.Message.ToString());
                     return false;
                 }
             }
+
             Logger.Info("Category deleted successfully!");
             return true;
         }
@@ -76,15 +91,23 @@ namespace DataMapper.SqlServerDAO
         /// <summary>
         /// Gets all categories.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list with all categories.</returns>
         public IList<Category> GetAllCategories()
         {
             IList<Category> categories = new List<Category>();
 
-            using(AuctionContext context = new AuctionContext())
+            using (AuctionContext context = new AuctionContext())
             {
-                categories = context.Categories.Include("ParentCategory").OrderBy((category) => category.Id).ToList();
+                if (context.Categories != null)
+                {
+                    categories = context.Categories.Include("ParentCategory").OrderBy((category) => category.Id).ToList();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The categories is null.");
+                }
             }
+
             return categories;
         }
 
@@ -92,49 +115,73 @@ namespace DataMapper.SqlServerDAO
         /// Gets the category by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns>A category.</returns>
         public Category GetCategoryById(int id)
         {
-            Category category = null;
+            Category? category = null;
             using (AuctionContext context = new AuctionContext())
             {
-                category = context.Categories.Include("ParentCategory").Where((category) => category.Id == id).FirstOrDefault();
+                if (context.Categories != null)
+                {
+                    category = context.Categories.Include("ParentCategory").Where((category) => category.Id == id).FirstOrDefault();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The categories is null.");
+                }
             }
-            return category;
+
+            return category!;
         }
 
         /// <summary>
         /// Gets the name of the category by.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <returns></returns>
+        /// <returns>a category.</returns>
         public Category GetCategoryByName(string name)
         {
-            Category category = null;
-            using(AuctionContext context = new AuctionContext())
+            Category? category = null;
+            using (AuctionContext context = new AuctionContext())
             {
-                category = context.Categories.Include("ParentCategory").Where((category) => category.Name == name).FirstOrDefault();
+                if (context.Categories != null)
+                {
+                    category = context.Categories.Include("ParentCategory").Where((category) => category.Name == name).FirstOrDefault();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The categories is null.");
+                }
             }
-            return category;
+
+            return category!;
         }
 
         /// <summary>
         /// Updates the category.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <returns></returns>
+        /// <returns>bool.</returns>
         public bool UpdateCategory(Category category)
         {
-            using(AuctionContext context = new AuctionContext())
+            using (AuctionContext context = new AuctionContext())
             {
                 try
                 {
-                    context.Categories.Attach(category);
-                    context.Entry(category).State = EntityState.Modified;
-                    context.SaveChanges();
-                }catch(Exception exception)
+                    if (context.Categories != null)
+                    {
+                        context.Categories.Attach(category);
+                        context.Entry(category).State = EntityState.Modified;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The categories is null.");
+                    }
+                }
+                catch (Exception exception)
                 {
-                    Logger.Error("Error while updating a category: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while updating a category: " + exception.Message.ToString());
                     return false;
                 }
             }

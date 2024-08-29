@@ -15,7 +15,7 @@ namespace DataMapper.SqlServerDAO
     /// </summary>
     /// <seealso cref="DataMapper.Interfaces.IProductDataServices" />
     [ExcludeFromCodeCoverage]
-    public class SQLProductDataServices: IProductDataServices
+    public class SQLProductDataServices : IProductDataServices
     {
         /// <summary>
         /// The logger.
@@ -34,15 +34,21 @@ namespace DataMapper.SqlServerDAO
                 try
                 {
                     product.TerminationDate = product.EndDate;
-
-                    context.Categories.Attach(product.Category);
-                    context.Users.Attach(product.Seller);
-                    context.Products.Add(product);
-                    context.SaveChanges();
+                    if (context.Categories != null && context.Users != null && context.Products != null)
+                    {
+                        context.Categories.Attach(product.Category);
+                        context.Users.Attach(product.Seller);
+                        context.Products.Add(product);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The categories, users or products are null");
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Logger.Error("Error while adding new product: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while adding new product: " + exception.Message.ToString());
                     return false;
                 }
             }
@@ -62,13 +68,20 @@ namespace DataMapper.SqlServerDAO
             {
                 try
                 {
-                    context.Products.Attach(product);
-                    context.Products.Remove(product);
-                    context.SaveChanges();
+                    if (context.Products != null)
+                    {
+                        context.Products.Attach(product);
+                        context.Products.Remove(product);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The products is null.");
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Logger.Error("Error while deleting product: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Error("Error while deleting product: " + exception.Message.ToString());
                     return false;
                 }
             }
@@ -87,7 +100,14 @@ namespace DataMapper.SqlServerDAO
 
             using (AuctionContext context = new AuctionContext())
             {
-                productDescriptions = context.Products.Select((product) => product.Description).ToList();
+                if (context.Products != null)
+                {
+                    productDescriptions = context.Products.Select((product) => product.Description).ToList();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The products is null.");
+                }
             }
 
             return productDescriptions;
@@ -103,7 +123,14 @@ namespace DataMapper.SqlServerDAO
 
             using (AuctionContext context = new AuctionContext())
             {
-                products = context.Products.Include("Category").OrderBy((product) => product.Id).ToList();
+                if (context.Products != null)
+                {
+                    products = context.Products.Include("Category").OrderBy((product) => product.Id).ToList();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Products is null.");
+                }
             }
 
             return products;
@@ -120,7 +147,14 @@ namespace DataMapper.SqlServerDAO
 
             using (AuctionContext context = new AuctionContext())
             {
-                noOfActiveAndFutureAuctions = context.Products.Include("Seller").Where((product) => product.Seller.Id == id && product.TerminationDate > DateTime.Now).Count();
+                if (context.Products != null)
+                {
+                    noOfActiveAndFutureAuctions = context.Products.Include("Seller").Where((product) => product.Seller.Id == id && product.TerminationDate > DateTime.Now).Count();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Products is null.");
+                }
             }
 
             return noOfActiveAndFutureAuctions;
@@ -140,7 +174,14 @@ namespace DataMapper.SqlServerDAO
 
             using (AuctionContext context = new AuctionContext())
             {
-                noOfActiveAuctionsInIntervalInCategory = context.Products.Include("Category").Where((product) => product.Category.Id == category.Id).Count();
+                if (context.Products != null)
+                {
+                    noOfActiveAuctionsInIntervalInCategory = context.Products.Include("Category").Where((product) => product.Category.Id == category.Id).Count();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Products is null.");
+                }
             }
 
             return noOfActiveAuctionsInIntervalInCategory;
@@ -159,7 +200,14 @@ namespace DataMapper.SqlServerDAO
 
             using (AuctionContext context = new AuctionContext())
             {
-                noOfActiveAuctionsInInterval = context.Products.Where((product) => product.Seller.Id == id && newStart <= product.TerminationDate && product.StartDate <= newEnd).Count();
+                if (context.Products != null)
+                {
+                    noOfActiveAuctionsInInterval = context.Products.Where((product) => product.Seller.Id == id && newStart <= product.TerminationDate && product.StartDate <= newEnd).Count();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Products is null.");
+                }
             }
 
             return noOfActiveAuctionsInInterval;
@@ -175,11 +223,17 @@ namespace DataMapper.SqlServerDAO
             Product? product = null;
             using (AuctionContext context = new AuctionContext())
             {
-                product = context.Products.Include("Category").Include("Seller").Where((product) => product.Id == id).FirstOrDefault();
+                if (context.Products != null)
+                {
+                    product = context.Products.Include("Category").Include("Seller").Where((product) => product.Id == id).FirstOrDefault();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Products is null");
+                }
             }
 
-            return product;
-
+            return product!;
         }
 
         /// <summary>
@@ -193,13 +247,20 @@ namespace DataMapper.SqlServerDAO
             {
                 try
                 {
-                    context.Products.Attach(product);
-                    context.Entry(product).State = EntityState.Modified;
-                    context.SaveChanges();
+                    if (context.Products != null)
+                    {
+                        context.Products.Attach(product);
+                        context.Entry(product).State = EntityState.Modified;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("The Products is null.");
+                    }
                 }
                 catch (Exception exception)
                 {
-                    Logger.Warn("Error while updating product: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                    Logger.Warn("Error while updating product: " + exception.Message.ToString());
                     return false;
                 }
             }
