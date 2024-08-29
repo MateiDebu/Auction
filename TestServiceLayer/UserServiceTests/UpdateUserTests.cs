@@ -24,11 +24,11 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_NullUser()
         {
-            User user = null;
+            User? user = null;
             var userServiceMock = new Mock<IUserDataServices>();
             var userService = new UserServicesImplementation(userServiceMock.Object);
 
-            Assert.IsFalse(userService.UpdateUser(user));
+            Assert.IsFalse(userService.UpdateUser(user!));
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_InvalidUser_FirstName_Null()
         {
-            User user = new User(null, "Debu", "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
+            User user = new User(null!, "Debu", "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
@@ -109,7 +109,6 @@ namespace TestServiceLayer.UserServiceTests
             Assert.IsFalse(userServices.UpdateUser(user));
         }
 
-
         /// <summary>
         /// Adds the invalid user first name contains number.
         /// </summary>
@@ -129,7 +128,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_InvalidUser_LastName_Null()
         {
-            User user = new User("Matei12", null, "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
+            User user = new User("Matei12", null!, "MateiDebu", "0770123456", "mateidebu@yahoo.com", "Matei!123");
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
@@ -220,7 +219,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_InvalidUser_UserName_Null()
         {
-            User user = new User("Matei", "Matei", null, "0770123456", "mateidebu@yahoo.com", "Matei!123");
+            User user = new User("Matei", "Matei", null!, "0770123456", "mateidebu@yahoo.com", "Matei!123");
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
@@ -259,7 +258,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_ValidUser_PhoneNumber_Null()
         {
-            User user = new User("Matei", "Matei", "MateiDebu1", null, "mateidebu@yahoo.com", "Matei!123");
+            User user = new User("Matei", "Matei", "MateiDebu1", null!, "mateidebu@yahoo.com", "Matei!123");
 
             var userServiceMock = new Mock<IUserDataServices>();
             userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(user);
@@ -315,7 +314,7 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void UPDATE_InvalidUser_Password_Null()
         {
-            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", null);
+            User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", null!);
             var userServiceMock = new Mock<IUserDataServices>();
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
@@ -407,10 +406,10 @@ namespace TestServiceLayer.UserServiceTests
         public void UPDATE_NonExistingUser()
         {
             User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", "aaAAa2a!");
-            User nullUser = null;
+            User? nullUser = null;
 
             var userServiceMock = new Mock<IUserDataServices>();
-            userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(nullUser);
+            userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(nullUser!);
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 

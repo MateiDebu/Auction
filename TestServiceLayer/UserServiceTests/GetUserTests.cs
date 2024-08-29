@@ -99,10 +99,10 @@ namespace TestServiceLayer.UserServiceTests
         public void GET_UserById_NotFound()
         {
             User user = GetSampleUser();
-            User nullUser = null;
+            User? nullUser = null;
 
             var userServiceMock = new Mock<IUserDataServices>();
-            userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(nullUser);
+            userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(nullUser!);
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             Assert.IsNull(userServices.GetUserById(user.Id));
@@ -140,10 +140,10 @@ namespace TestServiceLayer.UserServiceTests
         public void GET_UserByEmailAndPassword_NotFound()
         {
             User user = GetSampleUser();
-            User nullUser = null;
+            User? nullUser = null;
 
             var userServiceMock = new Mock<IUserDataServices>();
-            userServiceMock.Setup(x => x.GetUserByEmailAndPassword(user.Email, user.Password)).Returns(nullUser);
+            userServiceMock.Setup(x => x.GetUserByEmailAndPassword(user.Email, user.Password)).Returns(nullUser!);
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
             Assert.IsNull(userServices.GetUserByEmailAndPassword(user.Email, user.Password));
@@ -167,8 +167,8 @@ namespace TestServiceLayer.UserServiceTests
             return new List<User>
             {
                 new User("Matei", "Debu", "MateiDebu12", "0770463123", "mateidebu@yahoo.com", "Matei12!"),
-                new User("Vadut", "Andrei", "Valdut3", null, "vld@yahoo.com", "Andrei12!"),
-                new User("Popescu", "Ana", "Ana12A",null, "anau@yahoo.com", "Parola!12"),
+                new User("Vadut", "Andrei", "Valdut3", null!, "vld@yahoo.com", "Andrei12!"),
+                new User("Popescu", "Ana", "Ana12A", null!, "anau@yahoo.com", "Parola!12"),
             };
         }
     }

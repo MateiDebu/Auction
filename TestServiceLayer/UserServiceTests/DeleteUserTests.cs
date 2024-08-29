@@ -24,13 +24,13 @@ namespace TestServiceLayer.UserServiceTests
         [Test]
         public void DELETE_NullUser()
         {
-            User user = null;
+            User? user = null;
 
             var userServiceMock = new Mock<IUserDataServices>();
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 
-            Assert.IsFalse(userServices.DeleteUser(user));
+            Assert.IsFalse(userServices.DeleteUser(user!));
         }
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace TestServiceLayer.UserServiceTests
         public void DELETE_ValidUser_NonExistingUser()
         {
             User user = new User("Matei", "Matei", "MateiDebu1", "0123456789", "mateidebu@yahoo.com", "aaAAaaaa1!");
-            User nullUser = null;
+            User? nullUser = null;
 
             var userServiceMock = new Mock<IUserDataServices>();
-            userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(nullUser);
+            userServiceMock.Setup(x => x.GetUserById(user.Id)).Returns(nullUser!);
 
             var userServices = new UserServicesImplementation(userServiceMock.Object);
 

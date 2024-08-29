@@ -38,6 +38,11 @@ namespace DomainModel.Models
         /// </summary>
         public User()
         {
+            this.FirstName = string.Empty;
+            this.LastName = string.Empty;
+            this.UserName = string.Empty;
+            this.Email = string.Empty;
+            this.Password = string.Empty;
         }
 
         /// <summary>
