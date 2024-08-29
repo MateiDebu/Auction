@@ -2,18 +2,18 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.CategoryServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
-    /// Test class for 
-    /// <see cref="CategoryServicesImplementation.GetAllCategories()"/> 
+    /// Test class for GetCategoryTests.
+    /// <see cref="CategoryServicesImplementation.GetAllCategories()"/>
     /// <see cref="CategoryServicesImplementation.GetCategoryById(int)"/> and
     /// <see cref="CategoryServicesImplementation.GetCategoryByName(string)"/> methods.
     /// </summary>
@@ -38,7 +38,7 @@ namespace TestServiceLayer.CategoryServiceTests
             var actual = categoryServices.GetAllCategories();
             Assert.That(actual.Count, Is.EqualTo(expected.Count));
 
-            for(int i = 0; i < expected.Count; i++)
+            for (int i = 0; i < expected.Count; i++)
             {
                 Assert.That(actual[i].Id, Is.EqualTo(expected[i].Id));
                 Assert.That(actual[i].Name, Is.EqualTo(expected[i].Name));
@@ -55,7 +55,7 @@ namespace TestServiceLayer.CategoryServiceTests
             List<Category> emptyCategoryList = new List<Category>();
 
             var serviceMock = new Mock<ICategoryDataServices>();
-            serviceMock.Setup(x=>x.GetAllCategories()).Returns(emptyCategoryList);
+            serviceMock.Setup(x => x.GetAllCategories()).Returns(emptyCategoryList);
 
             var categoryServices = new CategoryServicesImplementation(serviceMock.Object);
 
@@ -72,7 +72,6 @@ namespace TestServiceLayer.CategoryServiceTests
 
             var serviceMock = new Mock<ICategoryDataServices>();
             serviceMock.Setup(x => x.GetCategoryById(category.Id)).Returns(category);
-           
 
             var categoryServices = new CategoryServicesImplementation(serviceMock.Object);
 
@@ -91,11 +90,10 @@ namespace TestServiceLayer.CategoryServiceTests
         public void GET_CategoryById_NotFound()
         {
             Category category = GetSampleCategory();
-            Category nullCategory = null;
+            Category? nullCategory = null;
 
             var serviceMock = new Mock<ICategoryDataServices>();
-            serviceMock.Setup(x => x.GetCategoryById(category.Id)).Returns(nullCategory);
-            
+            serviceMock.Setup(x => x.GetCategoryById(category.Id)).Returns(nullCategory!);
 
             var categoryServices = new CategoryServicesImplementation(serviceMock.Object);
 
@@ -133,10 +131,10 @@ namespace TestServiceLayer.CategoryServiceTests
         public void GET_CategoryByName_NotFound()
         {
             Category category = GetSampleCategory();
-            Category nullCategory = null;
+            Category? nullCategory = null;
 
             var serviceMock = new Mock<ICategoryDataServices>();
-            serviceMock.Setup(x => x.GetCategoryByName(category.Name)).Returns(nullCategory);
+            serviceMock.Setup(x => x.GetCategoryByName(category.Name)).Returns(nullCategory!);
 
             var categoryServices = new CategoryServicesImplementation(serviceMock.Object);
 
@@ -149,7 +147,7 @@ namespace TestServiceLayer.CategoryServiceTests
         /// <summary>
         /// Gets the sample category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a category.</returns>
         private static Category GetSampleCategory()
         {
             return new Category("Aparat foto", null);
@@ -158,7 +156,7 @@ namespace TestServiceLayer.CategoryServiceTests
         /// <summary>
         /// Gets the sample categories.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of category.</returns>
         private static List<Category> GetSampleCategories()
         {
             return new List<Category>

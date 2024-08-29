@@ -2,23 +2,22 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Enums;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.BidServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
-    /// Test class for 
+    /// Test class for GetBidTests.
     /// <see cref="BidServicesImplementation.GetAllBids()"/>
-    /// <see cref="BidServicesImplementation.GetBidById(int)"/> and 
+    /// <see cref="BidServicesImplementation.GetBidById(int)"/> and
     /// <see cref="BidServicesImplementation.GetBidsByProductId(int)"/> methods.
     /// </summary>
-    
     [TestFixture]
     [ExcludeFromCodeCoverage]
     internal class GetBidTests
@@ -87,8 +86,6 @@ namespace TestServiceLayer.BidServiceTests
             var bidServices = new BidServicesImplementation(bidServiceMock.Object, userScore.Object);
 
             Assert.IsEmpty(bidServices.GetAllBids());
-
-
         }
 
         /// <summary>
@@ -143,10 +140,10 @@ namespace TestServiceLayer.BidServiceTests
         public void GET_BidById_NotFound()
         {
             Bid bid = GetSampleBid();
-            Bid nullBid = null;
+            Bid? nullBid = null;
 
             var bidServiceMock = new Mock<IBidDataServices>();
-            bidServiceMock.Setup(x => x.GetBidById(bid.Id)).Returns(nullBid);
+            bidServiceMock.Setup(x => x.GetBidById(bid.Id)).Returns(nullBid!);
             var userScore = new Mock<IUserScoreAndLimitsDataServices>();
 
             var bidServices = new BidServicesImplementation(bidServiceMock.Object, userScore.Object);
@@ -161,9 +158,8 @@ namespace TestServiceLayer.BidServiceTests
         {
             Bid bid = GetSampleBid();
             IList<Bid> bids = GetSampleBids();
-            
             var bidServiceMock = new Mock<IBidDataServices>();
-            bidServiceMock.Setup(x=>x.GetBidsByProductId(bid.Product.Id)).Returns(bids);
+            bidServiceMock.Setup(x => x.GetBidsByProductId(bid.Product.Id)).Returns(bids);
             var userScore = new Mock<IUserScoreAndLimitsDataServices>();
 
             var bidServices = new BidServicesImplementation(bidServiceMock.Object, userScore.Object);
@@ -173,9 +169,8 @@ namespace TestServiceLayer.BidServiceTests
 
             Assert.That(actual.Count, Is.EqualTo(expected.Count));
 
-            for(int i = 0; i < expected.Count; i++)
+            for (int i = 0; i < expected.Count; i++)
             {
-
                 Assert.That(actual[i].Id, Is.EqualTo(expected[i].Id));
                 Assert.That(actual[i].DateAndTime, Is.EqualTo(expected[i].DateAndTime));
 
@@ -227,7 +222,7 @@ namespace TestServiceLayer.BidServiceTests
         /// <summary>
         /// Gets the sample bid.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a bid.</returns>
         private static Bid GetSampleBid()
         {
             return new Bid(
@@ -236,20 +231,19 @@ namespace TestServiceLayer.BidServiceTests
                     "face poze",
                     new Category("Aparat foto", null),
                     100,
-                    ECurrency.EUR, 
-                    new User("Matei", "Debu", "MateiDebu","0770432566", "mateide@yahoo.com", "Parola12!"),
+                    ECurrency.EUR,
+                    new User("Matei", "Debu", "MateiDebu", "0770432566", "mateide@yahoo.com", "Parola12!"),
                     DateTime.Today.AddDays(-5),
                     DateTime.Today.AddDays(5)),
                 new User("Vladut", "Andrei", "AndVlad", "0892122344", "vlad@hormail.com", "Parola32!"),
                 1000,
-                ECurrency.EUR
-                );
+                ECurrency.EUR);
         }
 
         /// <summary>
         /// Gets the sample bids.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of bids.</returns>
         private static List<Bid> GetSampleBids()
         {
             return new List<Bid>
@@ -261,13 +255,12 @@ namespace TestServiceLayer.BidServiceTests
                     new Category("Aparat foto", null),
                     100,
                     ECurrency.EUR,
-                    new User("Matei", "Debu", "MateiDebu","0770432566", "mateide@yahoo.com", "Parola12!"),
+                    new User("Matei", "Debu", "MateiDebu", "0770432566", "mateide@yahoo.com", "Parola12!"),
                     DateTime.Today.AddDays(-5),
                     DateTime.Today.AddDays(5)),
                 new User("Vladut", "Andrei", "AndVlad", "0892122344", "vlad@hormail.com", "Parola32!"),
                 1000,
-                ECurrency.EUR
-                ),
+                ECurrency.EUR),
                 new Bid(
                 new Product(
                     "Aparat foto Canon",
@@ -275,13 +268,12 @@ namespace TestServiceLayer.BidServiceTests
                     new Category("Aparat foto", null),
                     10,
                     ECurrency.EUR,
-                    new User("Matei", "Debu", "MateiDebu","0770432566", "mateide@yahoo.com", "Parola12!"),
+                    new User("Matei", "Debu", "MateiDebu", "0770432566", "mateide@yahoo.com", "Parola12!"),
                     DateTime.Today.AddDays(-5),
                     DateTime.Today.AddDays(5)),
                 new User("Vladut", "Andrei", "AndVlad", "0892122344", "vlad@hormail.com", "Parola32!"),
                 100,
-                ECurrency.EUR
-                ),
+                ECurrency.EUR),
             };
         }
     }

@@ -2,15 +2,15 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.CategoryServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// The class for <see cref="CategoryServicesImplementation.AddCategory(Category)"/> method.
     /// </summary>
@@ -24,12 +24,12 @@ namespace TestServiceLayer.CategoryServiceTests
         [Test]
         public void ADD_NullCategory()
         {
-            Category category = null;
+            Category? category = null;
             var serviceMock = new Mock<ICategoryDataServices>();
 
             var categoryServices = new CategoryServicesImplementation(serviceMock.Object);
 
-            Assert.That(categoryServices.AddCategory(category), Is.False);
+            Assert.That(categoryServices.AddCategory(category!), Is.False);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace TestServiceLayer.CategoryServiceTests
         [Test]
         public void ADD_InvalidCategory_Name_Null()
         {
-            Category category = new Category(null, new Category("Telefon, Electronice mici", null));
+            Category category = new Category(null!, new Category("Telefon, Electronice mici", null));
 
             var serviceMock = new Mock<ICategoryDataServices>();
 
@@ -53,7 +53,7 @@ namespace TestServiceLayer.CategoryServiceTests
         [Test]
         public void ADD_InvalidCategory_Name_Empty()
         {
-            Category category = new Category(String.Empty, new Category("Telefon, Electronice mici", null));
+            Category category = new Category(string.Empty, new Category("Telefon, Electronice mici", null));
 
             var serviceMock = new Mock<ICategoryDataServices>();
 
@@ -68,7 +68,7 @@ namespace TestServiceLayer.CategoryServiceTests
         [Test]
         public void ADD_InvalidCategory_Name_TooLong()
         {
-            Category category = new Category(new String('a', 101), new Category("Telefon, Electronice mici", null));
+            Category category = new Category(new string('a', 101), new Category("Telefon, Electronice mici", null));
 
             var serviceMock = new Mock<ICategoryDataServices>();
 
@@ -103,12 +103,9 @@ namespace TestServiceLayer.CategoryServiceTests
 
             var serviceMock = new Mock<ICategoryDataServices>();
             serviceMock.Setup(x => x.GetCategoryByName(category.Name)).Returns(category);
-           
-
             var categoryServices = new CategoryServicesImplementation(serviceMock.Object);
 
             Assert.That(categoryServices.AddCategory(category), Is.False);
-            
         }
 
         /// <summary>
@@ -118,12 +115,11 @@ namespace TestServiceLayer.CategoryServiceTests
         public void ADD_ValidCategory()
         {
             Category category = new Category("Aparat foto", null);
-            Category nullCategory = null;
+            Category? nullCategory = null;
 
             var serviceMock = new Mock<ICategoryDataServices>();
-            serviceMock.Setup(x => x.GetCategoryByName(category.Name)).Returns(nullCategory);
+            serviceMock.Setup(x => x.GetCategoryByName(category.Name)).Returns(nullCategory!);
             serviceMock.Setup(x => x.AddCategory(category)).Returns(true);
-           
             var categoryServices = new CategoryServicesImplementation(serviceMock.Object);
 
             Assert.That(categoryServices.AddCategory(category), Is.True);

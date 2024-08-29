@@ -2,16 +2,16 @@
 // Debu Matei
 // </copyright>
 
-using DataMapper.Interfaces;
-using DomainModel.Enums;
-using DomainModel.Models;
-using Moq;
-using NUnit.Framework;
-using ServiceLayer.Implementation;
-using System.Diagnostics.CodeAnalysis;
-
 namespace TestServiceLayer.BidServiceTests
 {
+    using System.Diagnostics.CodeAnalysis;
+    using DataMapper.Interfaces;
+    using DomainModel.Enums;
+    using DomainModel.Models;
+    using Moq;
+    using NUnit.Framework;
+    using ServiceLayer.Implementation;
+
     /// <summary>
     /// Test class for <see cref="BidServicesImplementation.AddBid(Bid)"/> method.
     /// </summary>
@@ -25,13 +25,13 @@ namespace TestServiceLayer.BidServiceTests
         [Test]
         public void ADD_NullBid()
         {
-            Bid bid = null;
+            Bid? bid = null;
             var bidServiceMock = new Mock<IBidDataServices>();
             var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
 
             var bidServices = new BidServicesImplementation(bidServiceMock.Object, userScoreAndLimitsServiceMock.Object);
 
-            Assert.That(bidServices.AddBid(bid), Is.False);
+            Assert.That(bidServices.AddBid(bid!), Is.False);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace TestServiceLayer.BidServiceTests
         public void ADD_InvalidBid_InvalidProduct_NullProduct()
         {
             Bid bid = new Bid(
-                null,
+                null!,
                 new User("Matei", "Debu", "MateiDebu", "0770231566", "mateide@yahoo.com", "Parola!12"),
                 100,
                 ECurrency.EUR);
@@ -62,7 +62,7 @@ namespace TestServiceLayer.BidServiceTests
         {
             Bid bid = new Bid(
                 new Product(
-                    null,
+                    null!,
                     "face poze",
                     new Category("Aparat foto", null),
                     100,
@@ -90,7 +90,7 @@ namespace TestServiceLayer.BidServiceTests
         {
             Bid bid = new Bid(
                 new Product(
-                    String.Empty,
+                    string.Empty,
                     "face poze",
                     new Category("Aparat foto", null),
                     100,
@@ -116,7 +116,6 @@ namespace TestServiceLayer.BidServiceTests
         [Test]
         public void ADD_InvalidBid_NullBuyer()
         {
-
             Bid bid = new Bid(
                 new Product(
                     "Aparat foto Leica",
@@ -127,7 +126,7 @@ namespace TestServiceLayer.BidServiceTests
                     new User("Vladut", "Andrei", "AndreiVlad", "0899122487", "vladand@hotmail.com", "P@rola123"),
                     DateTime.Today.AddDays(-5),
                     DateTime.Today.AddDays(5)),
-                null,
+                null!,
                 1000,
                 ECurrency.EUR);
 
@@ -197,9 +196,9 @@ namespace TestServiceLayer.BidServiceTests
             Assert.IsFalse(bidServices.AddBid(bid));
         }
 
-        //[Test]
-        //public void ADD_ValidBid_TooManyBids()
-        //{
+        // [Test]
+        // public void ADD_ValidBid_TooManyBids()
+        // {
         //    Bid bid = new Bid(
         //       new Product(
         //           "Aparat foto Leica",
@@ -214,15 +213,15 @@ namespace TestServiceLayer.BidServiceTests
         //       1000,
         //       ECurrency.EUR);
 
-        //    var bidServiceMock = new Mock<IBidDataServices>();
+        // var bidServiceMock = new Mock<IBidDataServices>();
         //    bidServiceMock.Setup(x => x.GetNoOfActiveBidsByUserId(bid.Buyer.Id)).Returns(11);
         //    var userScoreAndLimitsServiceMock = new Mock<IUserScoreAndLimitsDataServices>();
         //    userScoreAndLimitsServiceMock.Setup(x => x.GetUserLimitsByUserId(bid.Buyer.Id)).Returns(11);
 
-        //    var bidServices = new BidServicesImplementation(bidServiceMock.Object, userScoreAndLimitsServiceMock.Object);
+        // var bidServices = new BidServicesImplementation(bidServiceMock.Object, userScoreAndLimitsServiceMock.Object);
 
-        //    Assert.That(bidServices.AddBid(bid), Is.False);
-        //}
+        // Assert.That(bidServices.AddBid(bid), Is.False);
+        // }
 
         /// <summary>
         /// Adds the valid bid auction hasnt started.
@@ -240,7 +239,7 @@ namespace TestServiceLayer.BidServiceTests
                    new User("Vladut", "Andrei", "AndreiVlad", "0899122487", "vladand@hotmail.com", "P@rola123"),
                    DateTime.Today.AddDays(5),
                    DateTime.Today.AddDays(10)),
-              new User("Matei", "Debu", "MateiDebu", "0770231566", "mateide@yahoo.com", "Parola!12"),
+               new User("Matei", "Debu", "MateiDebu", "0770231566", "mateide@yahoo.com", "Parola!12"),
                100,
                ECurrency.EUR);
 
