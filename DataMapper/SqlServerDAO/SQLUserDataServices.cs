@@ -84,27 +84,33 @@ namespace DataMapper.SqlServerDAO
         /// <inheritdoc/>
         public User GetUserById(int id)
         {
+            User? user = null;
             if (this.context.Users != null)
             {
-                return this.context.Users.Where((user) => user.Id == id).FirstOrDefault();
+                user = this.context.Users.Where((user) => user.Id == id).FirstOrDefault();
             }
             else
             {
                 throw new InvalidOperationException("The Users is null.");
             }
+
+            return user!;
         }
 
         /// <inheritdoc/>
         public User GetUserByEmailAndPassword(string email, string password)
         {
+            User? user = null;
             if (this.context.Users != null)
             {
-                return this.context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
+                user = this.context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
             }
             else
             {
                 throw new InvalidOperationException("The Users is null.");
             }
+
+            return user!;
         }
 
         /// <inheritdoc/>
