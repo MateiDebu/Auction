@@ -20,7 +20,7 @@ namespace DataMapper
         /// </summary>
         static DAOFactoryMethod()
         {
-            string currentDataProvider = ConfigurationManager.AppSettings["dataProvider"];
+            string? currentDataProvider = ConfigurationManager.AppSettings["dataProvider"];
             CurrentDAOFactory = string.IsNullOrWhiteSpace(currentDataProvider)
                 ? null
                 : currentDataProvider.ToLower(culture: CultureInfo.CurrentCulture).Trim() switch
@@ -36,6 +36,6 @@ namespace DataMapper
         /// <value>
         /// The current DAO factory.
         /// </value>
-        public static IDAOFactory CurrentDAOFactory { get; private set; }
+        public static IDAOFactory? CurrentDAOFactory { get; private set; }
     }
 }

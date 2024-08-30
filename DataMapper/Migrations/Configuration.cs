@@ -9,7 +9,6 @@ namespace DataMapper.Migrations
     /// <summary>
     /// The Configuration class.
     /// </summary>
-    /// <seealso cref="System.Data.Entity.Migrations.DbMigrationsConfiguration&lt;DataMapper.AuctionContext&gt;" />
     internal sealed class Configuration : DbMigrationsConfiguration<DataMapper.AuctionContext>
     {
         /// <summary>

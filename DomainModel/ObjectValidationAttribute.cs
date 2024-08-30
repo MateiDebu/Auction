@@ -20,8 +20,13 @@ namespace DomainModel
         /// <returns>
         /// An instance of the <see cref="ValidationResult">ValidationResult</see> class.
         /// </returns>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
+            if (value == null)
+            {
+                return new ValidationResult(null);
+            }
+
             var context = new ValidationContext(value, serviceProvider: null, items: null);
             var results = new List<ValidationResult>();
 

@@ -10,10 +10,9 @@ namespace TestDomainModel.ValidationTests
     using NUnit.Framework;
     using TestDomainModel.TestData;
 
+    /// <summary>Test class for <see cref="Category" /> validation.</summary>
     [TestFixture]
     [ExcludeFromCodeCoverage]
-
-    /// <summary>Test class for <see cref="Category" /> validation.</summary>
     internal class CategoryValidation
     {
         /// <summary>

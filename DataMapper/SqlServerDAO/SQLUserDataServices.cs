@@ -23,7 +23,7 @@ namespace DataMapper.SqlServerDAO
         /// <summary>
         /// The logger.
         /// </summary>
-        private readonly AuctionContext? context;
+        private readonly AuctionContext context;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SQLUserDataServices"/> class.
@@ -45,36 +45,66 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                this.context.Users.Add(user);
-                this.context.SaveChanges();
-                Logger.Info("User added successfully!");
-                return true;
+                if (this.context.Users != null)
+                {
+                    this.context.Users.Add(user);
+                    this.context.SaveChanges();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Users is null.");
+                }
             }
             catch (Exception exception)
             {
                 Logger.Error("Error while adding new user: " + exception.Message + " " + exception.InnerException);
                 return false;
             }
+
+            Logger.Info("User added successfully!");
+            return true;
         }
 
         /// <inheritdoc/>
         public IList<User> GetAllUsers()
         {
             IList<User> users = new List<User>();
-            users = this.context.Users.OrderBy((user) => user.Id).ToList();
+            if (this.context.Users != null)
+            {
+                users = this.context.Users.OrderBy((user) => user.Id).ToList();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Users is null.");
+            }
+
             return users;
         }
 
         /// <inheritdoc/>
         public User GetUserById(int id)
         {
-            return this.context.Users.Where((user) => user.Id == id).FirstOrDefault();
+            if (this.context.Users != null)
+            {
+                return this.context.Users.Where((user) => user.Id == id).FirstOrDefault();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Users is null.");
+            }
         }
 
         /// <inheritdoc/>
         public User GetUserByEmailAndPassword(string email, string password)
         {
-            return this.context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
+            if (this.context.Users != null)
+            {
+                return this.context.Users.Where((user) => user.Email == email && user.Password == password).FirstOrDefault();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Users is null.");
+            }
         }
 
         /// <inheritdoc/>
@@ -122,17 +152,25 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                this.context.Users.Attach(user);
-                this.context.Entry(user).State = EntityState.Modified;
-                this.context.SaveChanges();
-                Logger.Info("User updated successfully!");
-                return true;
+                if (this.context.Users != null)
+                {
+                    this.context.Users.Attach(user);
+                    this.context.Entry(user).State = EntityState.Modified;
+                    this.context.SaveChanges();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Users is null.");
+                }
             }
             catch (Exception exception)
             {
-                Logger.Warn("Error while updating user: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                Logger.Warn("Error while updating user: " + exception.Message.ToString());
                 return false;
             }
+
+            Logger.Info("User updated successfully!");
+            return true;
         }
 
         /// <inheritdoc/>
@@ -140,17 +178,25 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                this.context.Users.Attach(user);
-                this.context.Users.Remove(user);
-                this.context.SaveChanges();
-                Logger.Info("User deleted successfully!");
-                return true;
+                if (this.context.Users != null)
+                {
+                    this.context.Users.Attach(user);
+                    this.context.Users.Remove(user);
+                    this.context.SaveChanges();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Users is null.");
+                }
             }
             catch (Exception exception)
             {
-                Logger.Warn("Error while deleting user: " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                Logger.Warn("Error while deleting user: " + exception.Message.ToString());
                 return false;
             }
+
+            Logger.Info("User deleted successfully!");
+            return true;
         }
     }
 }

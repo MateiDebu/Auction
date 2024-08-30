@@ -28,7 +28,7 @@ namespace DataMapper.SqlServerDAO
         /// Initializes a new instance of the <see cref="SQLRatingDataServices"/> class.
         /// </summary>
         /// <param name="context">context.</param>
-        public SQLRatingDataServices(AuctionContext context = null)
+        public SQLRatingDataServices(AuctionContext? context = null)
         {
             this.context = context ?? new AuctionContext();
         }
@@ -42,16 +42,24 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                this.context.Ratings.Add(rating);
-                this.context.SaveChanges();
-                Logger.Info("Rating added successfully!");
-                return true;
+                if (this.context.Ratings != null)
+                {
+                    this.context.Ratings.Add(rating);
+                    this.context.SaveChanges();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Ratings is null.");
+                }
             }
             catch (Exception exception)
             {
-                Logger.Error("Error while adding new rating. " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                Logger.Error("Error while adding new rating. " + exception.Message.ToString());
                 return false;
             }
+
+            Logger.Info("Rating added successfully!");
+            return true;
         }
 
         /// <summary>
@@ -63,17 +71,25 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                this.context.Ratings.Attach(rating);
-                this.context.Ratings.Remove(rating);
-                this.context.SaveChanges();
-                Logger.Info("Rating deleted successfully!");
-                return true;
+                if (this.context.Ratings != null)
+                {
+                    this.context.Ratings.Attach(rating);
+                    this.context.Ratings.Remove(rating);
+                    this.context.SaveChanges();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Ratings is null.");
+                }
             }
             catch (Exception exception)
             {
-                Logger.Error("Error while deleting rating. " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                Logger.Error("Error while deleting rating. " + exception.Message.ToString());
                 return false;
             }
+
+            Logger.Info("Rating deleted successfully!");
+            return true;
         }
 
         /// <summary>
@@ -83,7 +99,15 @@ namespace DataMapper.SqlServerDAO
         public IList<Rating> GetAllRatings()
         {
             IList<Rating> ratings = new List<Rating>();
-            ratings = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").OrderBy((rating) => rating.Id).ToList();
+            if (this.context.Ratings != null)
+            {
+                ratings = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").OrderBy((rating) => rating.Id).ToList();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Ratings is null.");
+            }
+
             return ratings;
         }
 
@@ -94,9 +118,18 @@ namespace DataMapper.SqlServerDAO
         /// <returns>rating.</returns>
         public Rating GetRatingById(int id)
         {
-            Rating rating = null;
-            rating = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").Where((rating) => rating.Id == id).FirstOrDefault();
-            return rating;
+            Rating? rating = null;
+
+            if (this.context.Ratings != null)
+            {
+                rating = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").Where((rating) => rating.Id == id).FirstOrDefault();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Ratings is null.");
+            }
+
+            return rating!;
         }
 
         /// <summary>
@@ -108,7 +141,14 @@ namespace DataMapper.SqlServerDAO
         {
             IList<Rating> ratings = new List<Rating>();
 
-            ratings = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").Where((rating) => rating.RatedUser.Id == id).OrderByDescending((rating) => rating.DateAndTime).ToList();
+            if (this.context.Ratings != null)
+            {
+                ratings = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").Where((rating) => rating.RatedUser.Id == id).OrderByDescending((rating) => rating.DateAndTime).ToList();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Ratings is null.");
+            }
 
             return ratings;
         }
@@ -121,11 +161,18 @@ namespace DataMapper.SqlServerDAO
         /// <returns>a rating.</returns>
         public Rating GetRatingByUserIdAndProductId(int userId, int productId)
         {
-            Rating rating = null;
+            Rating? rating = null;
 
-            rating = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").Where((rating) => rating.RatingUser.Id == userId && rating.Product.Id == productId).FirstOrDefault();
+            if (this.context.Ratings != null)
+            {
+                rating = this.context.Ratings.Include("Product").Include("RatingUser").Include("RatedUser").Where((rating) => rating.RatingUser.Id == userId && rating.Product.Id == productId).FirstOrDefault();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Ratings is null.");
+            }
 
-            return rating;
+            return rating!;
         }
 
         /// <summary>
@@ -135,9 +182,15 @@ namespace DataMapper.SqlServerDAO
         /// <returns>null or winning user.</returns>
         public User GetWinningBidUserByProductId(int id)
         {
-            Bid winningBid = null;
-
-            winningBid = this.context.Bids.Include("Buyer").Include("Product").Include("Product.Seller").Where((bid) => bid.Product.Id == id).OrderByDescending((bid) => bid.DateAndTime).FirstOrDefault();
+            Bid? winningBid = null;
+            if (this.context.Bids != null)
+            {
+                winningBid = this.context.Bids.Include("Buyer").Include("Product").Include("Product.Seller").Where((bid) => bid.Product.Id == id).OrderByDescending((bid) => bid.DateAndTime).FirstOrDefault();
+            }
+            else
+            {
+                throw new InvalidOperationException("The Bids is null.");
+            }
 
             if (winningBid != null)
             {
@@ -145,7 +198,7 @@ namespace DataMapper.SqlServerDAO
             }
             else
             {
-                return null;
+                return null!;
             }
         }
 
@@ -158,17 +211,25 @@ namespace DataMapper.SqlServerDAO
         {
             try
             {
-                this.context.Ratings.Attach(rating);
-                this.context.Entry(rating).State = EntityState.Modified;
-                this.context.SaveChanges();
-                Logger.Info("Rating updated successfully!");
-                return true;
+                if (this.context.Ratings != null)
+                {
+                    this.context.Ratings.Attach(rating);
+                    this.context.Entry(rating).State = EntityState.Modified;
+                    this.context.SaveChanges();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Ratings is null.");
+                }
             }
             catch (Exception exception)
             {
-                Logger.Error("Error while updating rating. " + exception.Message.ToString() + " " + exception.InnerException.ToString());
+                Logger.Error("Error while updating rating. " + exception.Message.ToString());
                 return false;
             }
+
+            Logger.Info("Rating updated successfully!");
+            return true;
         }
     }
 }

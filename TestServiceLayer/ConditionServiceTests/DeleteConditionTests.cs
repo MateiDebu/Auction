@@ -12,7 +12,7 @@ namespace TestServiceLayer.ConditionServiceTests
     using ServiceLayer.Implementation;
 
     /// <summary>
-    /// Test class for <see cref="ConditionServicesImplementation.DeleteCondition(Condition)"/> method.
+    /// Test class for ConditionServicesImplementation.DeleteCondition(Condition) method.
     /// </summary>
     [TestFixture]
     [ExcludeFromCodeCoverage]

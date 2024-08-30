@@ -12,7 +12,7 @@ namespace TestServiceLayer.ConditionServiceTests
     using ServiceLayer.Implementation;
 
     /// <summary>
-    /// Test class for <see cref="ConditionServicesImplementation.AddCondition(Condition)"/> method.
+    /// Test class for ConditionServicesImplementation.AddCondition(Condition) method.
     /// </summary>
     [TestFixture]
     [ExcludeFromCodeCoverage]

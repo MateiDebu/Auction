@@ -23,8 +23,13 @@ namespace DomainModel
         /// <returns>
         /// An instance of the <see cref="ValidationResult">ValidationResult</see> class.
         /// </returns>
-        protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
+            if (value == null)
+            {
+                return new ValidationResult("End date is required.");
+            }
+
             DateTime endDate = (DateTime)value;
             Product product = (Product)validationContext.ObjectInstance;
 

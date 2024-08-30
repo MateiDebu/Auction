@@ -1,5 +1,5 @@
 ﻿// <copyright file="AssemblyInfo.cs" company="Transilvania University of Brasov">
-// Matei Adrian
+// Debu Matei
 // </copyright>
 
 using System.Runtime.InteropServices;
