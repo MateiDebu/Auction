@@ -18,7 +18,7 @@ namespace DomainModel.Models
         /// <param name="ratingUser">The user that is giving the rating.</param>
         /// <param name="ratedUser">The user that is given the rating.</param>
         /// <param name="grade">The grade given to the RatedUser by the RatingUser.</param>
-        public Rating(Product product, User ratingUser, User ratedUser, int grade)
+        public Rating(Product product, User ratingUser, User ratedUser, double grade)
         {
             this.DateAndTime = DateTime.Now;
             this.Product = product;
@@ -92,6 +92,6 @@ namespace DomainModel.Models
         /// </value>
         [Required(ErrorMessage = "[Grade] cannot be null.")]
         [Range(0, 10, ErrorMessage = "[Grade] must be between 0 and 10.")]
-        public virtual int Grade { get; set; }
+        public virtual double Grade { get; set; }
     }
 }

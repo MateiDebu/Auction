@@ -94,30 +94,41 @@ namespace DataMapper.SqlServerDAO
         /// <returns>a score.</returns>
         public double GetUserScoreByUserId(int id)
         {
-            int n = 5, s = 10;
-            List<int> grades = new List<int>();
+            int numberOfRatings = 0;
+            double scoreByRatingUsers = 0;
+            double s = InitialScore;
             using (AuctionContext context = new AuctionContext())
             {
-                n = this.GetConditionalValueByName("N");
-                s = this.GetConditionalValueByName("S");
                 if (context.Ratings != null)
                 {
-                    grades = context.Ratings.Where((rating) => rating.RatedUser.Id == id).OrderByDescending((rating) => rating.DateAndTime).Select((rating) => rating.Grade).Take(n).ToList();
+                    numberOfRatings = context.Ratings.Where(user => user.RatedUser.Id == id).Count();
+                    scoreByRatingUsers = context.Ratings.Where(user => user.RatedUser.Id == id).Select(rating => rating.Grade).Sum();
+                }
+                else
+                {
+                    throw new InvalidOperationException("The Ratings is null.");
+                }
+
+                if (numberOfRatings == 0)
+                {
+                    return s;
+                }
+                else
+                {
+                    double incrementTotal = numberOfRatings * IncrementScore;
+
+                    s += incrementTotal + scoreByRatingUsers;
+
+                    if (s >= 0 && s <= 10)
+                    {
+                        return s;
+                    }
+                    else
+                    {
+                        return InitialScore;
+                    }
                 }
             }
-
-            if (n == -1)
-            {
-                n = 5;
-            }
-
-            if (s == -1)
-            {
-                s = InitialScore;
-            }
-
-            double averageScore = grades.Any() ? grades.Average() : InitialScore;
-            return Math.Clamp(averageScore, MinScore, MaxScore);
         }
     }
 }

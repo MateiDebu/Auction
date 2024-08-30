@@ -156,5 +156,38 @@ namespace TestServiceLayer.RatingServiceTests
 
             Assert.That(ratingServices.AddRating(rating), Is.False);
         }
+
+        /// <summary>Adds the invalid rating grade change exceeds allowed range.</summary>
+        [Test]
+        public void ADD_InvalidRating_GradeChangeExceedsAllowedRange()
+        {
+            var existingRating = new Rating(
+                new Product(
+                    "Aparat foto CANNON",
+                    "face poze",
+                    new Category("Aparat foto", null),
+                    100,
+                    ECurrency.EUR,
+                    new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
+                    DateTime.Today.AddDays(-10),
+                    DateTime.Today.AddDays(-5)),
+                new User("Vladut", "Andrei", "VladAndrei", "0321123455", "vladandrei@gmail.ro", "Parola12!"),
+                new User("Matei", "Debu", "MateiDebu", "0770564321", "mateidebu@yahoo.com", "Parola12!"),
+                6);
+
+            var newRating = new Rating(
+                existingRating.Product,
+                existingRating.RatingUser,
+                existingRating.RatedUser,
+                6.2);
+
+            var ratingServiceMock = new Mock<IRatingDataServices>();
+            ratingServiceMock.Setup(x => x.GetRatingByUserIdAndProductId(newRating.RatingUser.Id, newRating.Product.Id))
+                             .Returns(existingRating);
+
+            var ratingServices = new RatingServicesImplementation(ratingServiceMock.Object);
+
+            Assert.That(ratingServices.AddRating(newRating), Is.False);
+        }
     }
 }

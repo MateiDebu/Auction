@@ -78,6 +78,17 @@ namespace ServiceLayer.Implementation
                 return false;
             }
 
+            var existingRating = this.ratingDataServices.GetRatingByUserIdAndProductId(rating.RatingUser.Id, rating.Product.Id);
+            if (existingRating != null)
+            {
+                const double MaxChange = 0.1;
+                if (Math.Abs(rating.Grade - existingRating.Grade) > MaxChange)
+                {
+                    this.logger.Warn("The grade change is beyond the allowed range of +- 0.1");
+                    return false;
+                }
+            }
+
             return this.ratingDataServices.AddRating(rating);
         }
 
