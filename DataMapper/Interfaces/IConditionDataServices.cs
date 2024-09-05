@@ -41,31 +41,31 @@ namespace DataMapper.Interfaces
         /// <summary>
         /// Gets the k.
         /// </summary>
-        /// <returns>k.</returns>
+        /// <returns>Maxim number of active auctions.</returns>
         int GetK();
 
         /// <summary>
         /// Gets the m.
         /// </summary>
-        /// <returns>m.</returns>
+        /// <returns>Maxim number of active auctions in one category.</returns>
         int GetM();
 
         /// <summary>
         /// Gets the s.
         /// </summary>
-        /// <returns>s.</returns>
+        /// <returns>Maxim score.</returns>
         int GetS();
 
         /// <summary>
         /// Gets the n.
         /// </summary>
-        /// <returns>n.</returns>
+        /// <returns>Number of ratings used to calculate user score.</returns>
         int GetN();
 
         /// <summary>
         /// Gets the t.
         /// </summary>
-        /// <returns>t.</returns>
+        /// <returns>Maxim number of auctions/auctioned products.</returns>
         int GetT();
 
         /// <summary>

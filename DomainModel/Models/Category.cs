@@ -28,9 +28,9 @@ namespace DomainModel.Models
             // this.Name = string.Empty;
         }
 
-        /// <summary>Gets the identifier.</summary>
+        /// <summary>Gets or sets the identifier.</summary>
         /// <value>The identifier.</value>
-        public virtual int Id { get; private set; }
+        public virtual int Id { get; set; }
 
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>
