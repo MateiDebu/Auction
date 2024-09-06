@@ -14,7 +14,6 @@ namespace DataMapper.SqlServerDAO
     /// The category data services.
     /// </summary>
     /// <seealso cref="DataMapper.Interfaces.ICategoryDataServices" />
-    [ExcludeFromCodeCoverage]
     public class SQLCategoryDataServices : ICategoryDataServices
     {
         /// <summary>

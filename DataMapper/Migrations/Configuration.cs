@@ -5,10 +5,12 @@
 namespace DataMapper.Migrations
 {
     using System.Data.Entity.Migrations;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// The Configuration class.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     internal sealed class Configuration : DbMigrationsConfiguration<DataMapper.AuctionContext>
     {
         /// <summary>

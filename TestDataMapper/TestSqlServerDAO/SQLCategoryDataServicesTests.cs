@@ -6,6 +6,7 @@ namespace TestDataMapper.TestSqlServerDAO
 {
     using System.Data.Entity;
     using System.Diagnostics.CodeAnalysis;
+    using System.Security.Cryptography.X509Certificates;
     using DataMapper;
     using DataMapper.SqlServerDAO;
     using DomainModel.Models;

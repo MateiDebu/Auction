@@ -6,12 +6,14 @@ namespace DataMapper.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// The AddBataBase class.
     /// </summary>
     /// <seealso cref="System.Data.Entity.Migrations.DbMigration" />
     /// <seealso cref="System.Data.Entity.Migrations.Infrastructure.IMigrationMetadata" />
+    [ExcludeFromCodeCoverage]
     public partial class AddDataBase : DbMigration
     {
         /// <summary>
