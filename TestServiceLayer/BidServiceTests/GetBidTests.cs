@@ -222,7 +222,7 @@ namespace TestServiceLayer.BidServiceTests
         /// <summary>
         /// Gets the sample bid.
         /// </summary>
-        /// <returns>a bid.</returns>
+        /// <returns>An example of bid.</returns>
         private static Bid GetSampleBid()
         {
             return new Bid(
@@ -243,7 +243,7 @@ namespace TestServiceLayer.BidServiceTests
         /// <summary>
         /// Gets the sample bids.
         /// </summary>
-        /// <returns>a list of bids.</returns>
+        /// <returns>A list of bids.</returns>
         private static List<Bid> GetSampleBids()
         {
             return new List<Bid>

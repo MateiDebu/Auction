@@ -70,11 +70,7 @@ namespace DataMapper.SqlServerDAO
         {
             double userScore = this.GetUserScoreByUserId(id);
             int s = this.GetConditionalValueByName("S");
-            double a = Math.Floor(s / 2.0);
-
-            double b = s;
-            double c = 1;
-            double d = this.GetConditionalValueByName("T");
+            int coef = 3;
 
             if (userScore < s)
             {
@@ -82,8 +78,8 @@ namespace DataMapper.SqlServerDAO
             }
             else
             {
-                double fx = c + ((d - c) / (b - a) * (userScore - a));
-                return Math.Round(fx);
+                double limit = coef * (userScore - s);
+                return Math.Round(limit);
             }
         }
 
@@ -91,7 +87,7 @@ namespace DataMapper.SqlServerDAO
         /// Gets the user score by user identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>a score.</returns>
+        /// <returns>Return the user scor.</returns>
         public double GetUserScoreByUserId(int id)
         {
             int numberOfRatings = 0;
