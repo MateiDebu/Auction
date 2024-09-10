@@ -19,7 +19,7 @@ namespace DataMapper
         /// Initializes a new instance of the <see cref="AuctionContext"/> class.
         /// </summary>
         public AuctionContext()
-            : base("AuctionDBConnectionString")
+            : base("AuctionDbConnectionString")
         {
         }
 
